@@ -1,5 +1,6 @@
 #! /bin/sh
 
+chmod u+w -R debug
 rm -rf autom4te.cache configure COPYING depcomp INSTALL install-sh Makefile.in \
 	missing aclocal.m4 debug ltmain.sh config.guess config.sub config.log \
 	config.status Makefile libtool 2> /dev/null
@@ -18,11 +19,11 @@ aclocal && \
 autoconf && \
 automake --add-missing
 
+mkdir debug
+cd debug
 if test "$TARGET" == "dist"; then
-	./configure && make dist-bzip2
+	../configure && make dist-bzip2
 else
-	mkdir debug && \
-	cd debug && \
 	CXXFLAGS="-Wall -O0 -g3" ../configure --enable-debug=full \
 		--prefix=$HOME/testinstalls && make && make check
 fi
