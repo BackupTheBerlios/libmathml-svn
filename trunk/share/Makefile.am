@@ -1418,4 +1418,12 @@ libmathml/testsuite/TortureTests/Complexity/complex1.mml \
 libmathml/testsuite/TortureTests/Complexity/complex2.mml \
 libmathml/testsuite/TortureTests/Complexity/complex3.mml \
 libmathml/testsuite/TortureTests/Complexity/complex4.mml \
-libmathml/testsuite/TortureTests/Complexity/simplePres.mml
+libmathml/testsuite/TortureTests/Complexity/simplePres.mml \
+libmathml/xsltml/README \
+libmathml/xsltml/tables.xsl \
+libmathml/xsltml/cmarkup.xsl \
+libmathml/xsltml/mmltex.xsl \
+libmathml/xsltml/scripts.xsl \
+libmathml/xsltml/entities.xsl \
+libmathml/xsltml/tokens.xsl \
+libmathml/xsltml/glayout.xsl
