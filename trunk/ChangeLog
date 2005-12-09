@@ -1,0 +1,6 @@
+0.4.1
+- addes nodist_*_SOURCES to Makefile.am files
+0.4.0
+- This is the initial commit of libmathml.
+- The code should compile on most unix machines.
+

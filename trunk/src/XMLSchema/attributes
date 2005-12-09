@@ -1,0 +1,5 @@
+attribute
+ simpleType | type
+
+simpleType
+ restriction | list | union
