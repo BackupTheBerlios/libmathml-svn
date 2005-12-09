@@ -69,7 +69,6 @@ appDir() {
 	return appprefix;
 }
 
-
 MathMLEdit::MathMLEdit(const wxString& title)
 	: wxFrame(0, -1, title) {
 
