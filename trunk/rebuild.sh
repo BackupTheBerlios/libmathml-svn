@@ -18,7 +18,7 @@ aclocal && \
 autoconf && \
 automake --add-missing
 
-if [ $TARGET == "dist" ]; then
+if test "$TARGET" == "dist"; then
 	./configure && make dist-bzip2
 else
 	mkdir debug && \
