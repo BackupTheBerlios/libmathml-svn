@@ -12,71 +12,71 @@ std::map<DOMString, short> MMLmoDict::postrefs;
    order of preference: infix, postfix, prefix; */
 void
 MMLmoDict::lookupOperator(const DOMString &op, const MMLAttribute **a) {
-    if (!ready) {
-        init();
-    }
-    std::map<DOMString, short>::const_iterator i;
+	if (!ready) {
+		init();
+	}
+	std::map<DOMString, short>::const_iterator i;
         i = inrefs.find(op);
         if (i != inrefs.end()) {
-        setIn(a, i->second);
-    } else {
-        i = postrefs.find(op);
-        if (i != postrefs.end()) {
-            setPost(a, i->second);
-        } else {
-            i = prerefs.find(op);
-            if (i != prerefs.end()) {
-                setPre(a, i->second);
-            }
-        }
-    }
+		setIn(a, i->second);
+	} else {
+		i = postrefs.find(op);
+		if (i != postrefs.end()) {
+			setPost(a, i->second);
+		} else {
+			i = prerefs.find(op);
+			if (i != prerefs.end()) {
+				setPre(a, i->second);
+			}
+		}
+	}
 }
 void
 MMLmoDict::setPre(const MMLAttribute **a, short row) {
-    for (short i=0; i<presize; ++i) {
-        a[prepos[i]] = pre[row][i];
-    }
+	for (short i=0; i<presize; ++i) {
+		a[prepos[i]] = pre[row][i];
+	}
 }
 void
 MMLmoDict::setIn(const MMLAttribute **a, short row) {
-    for (short i=0; i<insize; ++i) {
-        a[inpos[i]] = in[row][i];
-    }
+	for (short i=0; i<insize; ++i) {
+		a[inpos[i]] = in[row][i];
+	}
 }
 void
 MMLmoDict::setPost(const MMLAttribute **a, short row) {
-    for (short i=0; i<postsize; ++i) {
-        a[postpos[i]] = post[row][i];
-    }
+	for (short i=0; i<postsize; ++i) {
+		a[postpos[i]] = post[row][i];
+	}
 }
 void
 MMLmoDict::init() {
-    ready = true;
-    for (short i=0; i<50; ++i) {
-        DOMString op = presyms[i];
-        op.resolveEntities();
-        prerefs.insert(std::pair<DOMString, short>(op, i));
-    }
-    for (short i=0; i<254; ++i) {
-        DOMString op = insyms[i];
-        op.resolveEntities();
-        inrefs.insert(std::pair<DOMString, short>(op, i));
-    }
-    for (short i=0; i<47; ++i) {
-        DOMString op = postsyms[i];
-        op.resolveEntities();
-        postrefs.insert(std::pair<DOMString, short>(op, i));
-    }
+	ready = true;
+	for (short i=0; i<50; ++i) {
+		DOMString op = presyms[i];
+		op.resolveEntities();
+		prerefs.insert(std::pair<DOMString, short>(op, i));
+	}
+	for (short i=0; i<254; ++i) {
+		DOMString op = insyms[i];
+		op.resolveEntities();
+		inrefs.insert(std::pair<DOMString, short>(op, i));
+	}
+	for (short i=0; i<47; ++i) {
+		DOMString op = postsyms[i];
+		op.resolveEntities();
+		postrefs.insert(std::pair<DOMString, short>(op, i));
+	}
 }
-const MMLbool MMLmoDict::a0_0(true);
-const MMLh_unit MMLmoDict::a1_0(DOMString("verythickmathspace"));
-const MMLh_unit MMLmoDict::a1_1(DOMString("verythinmathspace"));
-const MMLh_unit MMLmoDict::a1_2(DOMString("veryverythinmathspace"));
-const MMLh_unit MMLmoDict::a1_3(DOMString("0"));
-const MMLh_unit MMLmoDict::a1_4(DOMString("mediummathspace"));
-const MMLh_unit MMLmoDict::a1_5(DOMString("thickmathspace"));
-const MMLh_unit MMLmoDict::a1_6(DOMString("thinmathspace"));
-const MMLh_unit MMLmoDict::a1_7(DOMString("0em"));
+const MMLbool MMLmoDict::a0_0(true, false);
+const MMLh_unit MMLmoDict::a1_0(DOMString("verythickmathspace"), false);
+const MMLh_unit MMLmoDict::a1_1(DOMString("verythinmathspace"), false);
+const MMLh_unit MMLmoDict::a1_2(DOMString("veryverythinmathspace"), false);
+const MMLh_unit MMLmoDict::a1_3(DOMString("0"), false);
+const MMLh_unit MMLmoDict::a1_4(DOMString("mediummathspace"), false);
+const MMLh_unit MMLmoDict::a1_5(DOMString("thickmathspace"), false);
+const MMLh_unit MMLmoDict::a1_6(DOMString("thinmathspace"), false);
+const MMLh_unit MMLmoDict::a1_7(DOMString("0em"), false);
 const short MMLmoDict::prepos[6] = {
 moFENCE, moLARGEOP, moLSPACE, moMOVABLELIMITS, moRSPACE, moSTRETCHY, 
 };

@@ -158,7 +158,7 @@ foreach (keys %typvals) {
 		if ($typ ne "bool") {
 			$val = "DOMString(\"$val\")";
 		}
-		print FH "const MML$typ MMLmoDict::$n($val);\n";
+		print FH "const MML$typ MMLmoDict::$n($val, false);\n";
 	}
 }
 
