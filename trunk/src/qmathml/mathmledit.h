@@ -35,8 +35,8 @@ private slots:
 private:
     QTextEdit *qte;
     QLabel *ql;
-//    MathMLView *mv;
-    MathMLView2 *mv;
+    MathMLView *mv;
+    MathMLView2 *mv2;
     CursorInfo *cursorinfo;
     QComboBox *familylist, *stylelist, *sizelist, *zoomlist;
     QLabel *sizelabel, *zoomlabel;

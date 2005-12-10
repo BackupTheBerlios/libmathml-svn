@@ -1,6 +1,8 @@
 #include "mathmledit.h"
 #include "mathmlview.h"
+#ifdef HAVE_CAIRO
 #include "mathmlview2.h"
+#endif
 #include "cursorinfo.h"
 #include "mmlreader.h"
 #include "latexloader.h"
@@ -44,7 +46,7 @@ MathMLEdit::MathMLEdit(QWidget *parent, Qt::WFlags f)
     layout->addLayout(hl);
 //  hl->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
     /* add the most important widget: the one for viewing the mathml */
-    mv = new MathMLView2(this);
+    mv = new MathMLView(this);
     hl->addWidget(mv);
     connect(mv, SIGNAL(cursorChanged()), cursorinfo, SLOT(cursorChanged()));
 

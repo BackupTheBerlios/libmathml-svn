@@ -93,6 +93,9 @@ AC_MSG_RESULT([$have_cairo])
 AC_SUBST(CAIRO_CFLAGS)
 AC_SUBST(CAIRO_LIBS)
 AM_CONDITIONAL(HAVE_CAIRO, test "$have_cairo" = "yes")
+if test "$have_cairo" = "yes"; then
+	AC_DEFINE(HAVE_CAIRO)
+fi
 
 # configure gtkmm
 PKG_CHECK_MODULES(GTKMM, gtkmm-2.4 >= 2.8, have_gtk="yes", have_gtk="no")
