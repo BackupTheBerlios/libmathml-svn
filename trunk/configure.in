@@ -1,4 +1,4 @@
-AC_INIT(libmathml, 0.4.0)
+AC_INIT(libmathml, 0.4.1)
 AC_CONFIG_SRCDIR(src/mathml/mathml.h) 
 
 # use libtool
