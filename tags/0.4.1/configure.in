@@ -1,0 +1,123 @@
+AC_INIT(libmathml, 0.4.1)
+AC_CONFIG_SRCDIR(src/mathml/mathml.h) 
+
+# use libtool
+AC_PROG_LIBTOOL
+
+AM_INIT_AUTOMAKE([1.9 tar-ustar])
+
+AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
+if test "x$PKG_CONFIG" = "xno"; then
+        AC_MSG_ERROR(You have to install pkg-config to compile inkscape.)
+fi
+
+
+# check if gtk gui should be used
+AC_ARG_WITH(gtk, [  --with-gtk              use GTK GUI toolkit ])
+if test "$with_gtk" = "yes" -o "$enable_gtk" = "yes" ; then
+  if test "$withval" = "no" ; then
+    with_gtk="no"
+  else
+    with_gtk="yes"
+    with_wx="no"
+  fi
+fi
+
+# check if wxWidgets gui should be used
+AC_ARG_WITH(wx, [  --with-wx               use wxWidgets GUI toolkit])
+if test "$with_wx" = "yes" -o "$enable_wx" = "yes" ; then
+  if test "$withval" = "no" ; then
+    with_wx="no"
+  else
+    with_wx="yes"
+  fi
+fi
+
+# use the wx macro for checking the wxwidgets install
+AM_OPTIONS_WXCONFIG
+AM_PATH_WXCONFIG(2.8.0, wxWin=1)
+AM_CONDITIONAL(HAVE_WX, test "$with_wx" = "yes" -a "$wxWin" == 1)
+
+# check if Qt gui should be used
+AC_ARG_WITH(qt, [  --with-qt               use Qt GUI toolkit ])
+if test "$with_qt" = "yes" -o "$enable_qt" = "yes" ; then 
+  if test "$withval" = "no" ; then
+    with_qt="no"
+  else
+    with_qt="yes"
+  fi
+fi
+
+# configure QT
+QT_REQUIRED_VERSION=4.0.0
+if test "$with_qt" = "yes"; then
+    # Qt has split over multiple libraries, so we must check
+    # for the all the modules we need
+    PKG_CHECK_MODULES(QT, QtGui >= $QT_REQUIRED_VERSION
+	QtXml >= $QT_REQUIRED_VERSION, have_qt="yes", have_qt="no")
+    # of the modules are there set up the variable QT_CXXFLAGS and QT_LIBS
+    if test "$have_qt" = "yes"; then
+        QT_INCLUDE_DIR=$($PKG_CONFIG --variable=includedir QtGui)
+        EXTRA_QT_INCLUDE_DIR="$QT_INCLUDE_DIR/Qt"
+        AC_CHECK_FILE([$QT_INCLUDE_DIR/QWidget],
+            AC_MSG_NOTICE([No extra QT_INCLUDE_DIR needed]),
+        AC_CHECK_FILE([$EXTRA_QT_INCLUDE_DIR/QWidget],
+            QT_CXXFLAGS="$QT_CXXFLAGS -I$EXTRA_QT_INCLUDE_DIR",
+            AC_MSG_WARN([QWidget not found])))
+        AC_MSG_NOTICE([Set QT_CXXFLAGS... $QT_CXXFLAGS])
+        AC_MSG_NOTICE([Set QT_LIBS... $QT_LIBS])
+        AC_CHECK_PROG(MOC, [moc], [moc])
+	AC_SUBST(QT_CXXFLAGS)
+	AC_SUBST(QT_LIBS)
+    else 
+        AC_MSG_ERROR([
+	The QtGui library >= [$QT_REQUIRED_VERSION] could not be found.
+        ])
+    fi
+fi
+AM_CONDITIONAL(HAVE_QT, test "$have_qt" = "yes")
+
+# configure libxml2
+PKG_CHECK_MODULES(XML2, libxml-2.0 >= 2.6.0, have_libxml="yes",
+	have_libxml="no")
+AC_MSG_RESULT([$have_libxml])
+AC_SUBST(XML2_CFLAGS)
+AC_SUBST(XML2_LIBS)
+AC_MSG_NOTICE([Set XML2_CFLAGS... $XML2_CFLAGS])
+AC_MSG_NOTICE([Set XML2_LIBS... $XML2_LIBS])
+AM_CONDITIONAL(HAVE_XML2, test "$have_libxml" = "yes")
+
+# configure cairo
+PKG_CHECK_MODULES(CAIRO, cairo >= 1.0.0, have_cairo="yes", have_cairo="no")
+AC_MSG_RESULT([$have_cairo])
+AC_SUBST(CAIRO_CFLAGS)
+AC_SUBST(CAIRO_LIBS)
+AM_CONDITIONAL(HAVE_CAIRO, test "$have_cairo" = "yes")
+if test "$have_cairo" = "yes"; then
+	AC_DEFINE(HAVE_CAIRO)
+fi
+
+# configure gtkmm
+PKG_CHECK_MODULES(GTKMM, gtkmm-2.4 >= 2.8, have_gtk="yes", have_gtk="no")
+AC_MSG_RESULT([$have_gtk])
+AC_SUBST(GTKMM_CFLAGS)
+AC_SUBST(GTKMM_LIBS)
+AM_CONDITIONAL(HAVE_GTK, test "$have_gtk" = "yes")
+
+
+AC_PROG_CXX
+
+AC_OUTPUT(Makefile \
+	src/Makefile \
+	src/mathml/Makefile \
+	src/XMLSchema/Makefile \
+	src/tests/Makefile \
+	src/qmathml/Makefile \
+	src/qmathml/fontmetrics/Makefile \
+	src/qmathml/cairowidget/Makefile \
+	src/libxmlbuilder/Makefile \
+	src/cairomathml/Makefile \
+	src/gtkmathml/Makefile \
+	src/wxmathml/Makefile \
+	share/Makefile
+)

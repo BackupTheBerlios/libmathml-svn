@@ -1,0 +1,10 @@
+0.4.1
+- addes nodist_*_SOURCES to Makefile.am files
+- changed the code formatting to use only spaces and no tabs
+- fixed the rendering of the comparative preview with Latex
+- set the QMMLPainter to the default painter for the Qt demo app
+- fixed some Makefile.am for cases where no cairo is installed
+0.4.0
+- This is the initial commit of libmathml.
+- The code should compile on most unix machines.
+
