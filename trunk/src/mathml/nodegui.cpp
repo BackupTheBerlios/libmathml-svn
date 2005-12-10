@@ -22,5 +22,5 @@
 
 void
 NodeGUI::resetCoords() {
-	x = y = width = ascent = descent = 0;
+    x = y = width = ascent = descent = 0;
 }

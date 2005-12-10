@@ -25,16 +25,16 @@
 #include <cassert>
 
 BPInfo::BPInfo(QWidget *parent)
-	: QGroupBox(parent) {
+    : QGroupBox(parent) {
     QVBoxLayout *layout = new QVBoxLayout();
     setLayout(layout);
-	setAlignment(Qt::Vertical);
-	setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-	nodeName = new QLabel;
+    setAlignment(Qt::Vertical);
+    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    nodeName = new QLabel;
     layout->addWidget(nodeName);
 }
 void
 BPInfo::setBoundPoint(const BoundPoint &bp) {
-	assert(bp.container());
-	nodeName->setText(bp.container()->nodeName());
+    assert(bp.container());
+    nodeName->setText(bp.container()->nodeName());
 }

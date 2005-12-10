@@ -6,800 +6,800 @@ typedef unsigned int uint;
 #include "mathtypes.h"
 namespace MML {
 enum AttributeType {
-	BOOL_T, DOMSTRING_T, FLOAT_T, H_UNIT_T, INT_T, MATHCOLOR_T, 
-	MATHVARIANT_T, V_UNIT_T
+    BOOL_T, DOMSTRING_T, FLOAT_T, H_UNIT_T, INT_T, MATHCOLOR_T, 
+    MATHVARIANT_T, V_UNIT_T
 };
 enum Attribute {
-	ACCENT, ACCENTUNDER, ACTIONTYPE, ALIGN, ALIGNMENTSCOPE, ALT, ALTIMG, 
-	ALTTEXT, BACKGROUND, BASE, BASELINE, BEVELLED, CLASS, CLOSE, CLOSURE, 
-	COLOR, COLUMNALIGN, COLUMNLINES, COLUMNSPACING, COLUMNSPAN, 
-	COLUMNWIDTH, DEFINITIONURL, DENOMALIGN, DEPTH, DISPLAY, DISPLAYSTYLE, 
-	EDGE, ENCODING, EQUALCOLUMNS, EQUALROWS, FENCE, FONTFAMILY, FORM, 
-	FRAME, FRAMESPACING, GROUPALIGN, HEIGHT, ID, INDEX, LARGEOP, LINEBREAK, 
-	LINETHICKNESS, LQUOTE, LSPACE, MACROS, MATHBACKGROUND, MATHCOLOR, 
-	MATHSIZE, MATHVARIANT, MAXSIZE, MEDIUMMATHSPACE, MINLABELSPACING, 
-	MINSIZE, MOVABLELIMITS, NAME, NARGS, NOTATION, NUMALIGN, OCCURRENCE, 
-	OPEN, ORDER, OVERFLOW, ROWALIGN, ROWLINES, ROWSPACING, ROWSPAN, RQUOTE, 
-	RSPACE, SCOPE, SCRIPTLEVEL, SCRIPTMINSIZE, SCRIPTSIZEMULTIPLIER, 
-	SELECTION, SEPARATOR, SEPARATORS, SIDE, STRETCHY, STYLE, 
-	SUBSCRIPTSHIFT, SUPERSCRIPTSHIFT, SYMMETRIC, THICKMATHSPACE, 
-	THINMATHSPACE, TYPE, VERYTHICKMATHSPACE, VERYTHINMATHSPACE, 
-	VERYVERYTHICKMATHSPACE, VERYVERYTHINMATHSPACE, WIDTH, XLINK_HREF, XREF
+    ACCENT, ACCENTUNDER, ACTIONTYPE, ALIGN, ALIGNMENTSCOPE, ALT, ALTIMG, 
+    ALTTEXT, BACKGROUND, BASE, BASELINE, BEVELLED, CLASS, CLOSE, CLOSURE, 
+    COLOR, COLUMNALIGN, COLUMNLINES, COLUMNSPACING, COLUMNSPAN, 
+    COLUMNWIDTH, DEFINITIONURL, DENOMALIGN, DEPTH, DISPLAY, DISPLAYSTYLE, 
+    EDGE, ENCODING, EQUALCOLUMNS, EQUALROWS, FENCE, FONTFAMILY, FORM, 
+    FRAME, FRAMESPACING, GROUPALIGN, HEIGHT, ID, INDEX, LARGEOP, LINEBREAK, 
+    LINETHICKNESS, LQUOTE, LSPACE, MACROS, MATHBACKGROUND, MATHCOLOR, 
+    MATHSIZE, MATHVARIANT, MAXSIZE, MEDIUMMATHSPACE, MINLABELSPACING, 
+    MINSIZE, MOVABLELIMITS, NAME, NARGS, NOTATION, NUMALIGN, OCCURRENCE, 
+    OPEN, ORDER, OVERFLOW, ROWALIGN, ROWLINES, ROWSPACING, ROWSPAN, RQUOTE, 
+    RSPACE, SCOPE, SCRIPTLEVEL, SCRIPTMINSIZE, SCRIPTSIZEMULTIPLIER, 
+    SELECTION, SEPARATOR, SEPARATORS, SIDE, STRETCHY, STYLE, 
+    SUBSCRIPTSHIFT, SUPERSCRIPTSHIFT, SYMMETRIC, THICKMATHSPACE, 
+    THINMATHSPACE, TYPE, VERYTHICKMATHSPACE, VERYTHINMATHSPACE, 
+    VERYVERYTHICKMATHSPACE, VERYVERYTHINMATHSPACE, WIDTH, XLINK_HREF, XREF
 };
 }
 class MMLAttribute {
 public:
-	virtual ~MMLAttribute() {}
-	bool cleanup;
+    virtual ~MMLAttribute() {}
+    bool cleanup;
 };
 class MMLDOMString : public MMLAttribute {
 public:
-	MMLDOMString(DOMString, bool c=true);
-	DOMString value;
+    MMLDOMString(DOMString, bool c=true);
+    DOMString value;
 };
 class MMLMathColor : public MMLAttribute {
 public:
-	MMLMathColor(MathColor, bool c=true);
-	MathColor value;
+    MMLMathColor(MathColor, bool c=true);
+    MathColor value;
 };
 class MMLMathVariant : public MMLAttribute {
 public:
-	MMLMathVariant(MathVariant, bool c=true);
-	MathVariant value;
+    MMLMathVariant(MathVariant, bool c=true);
+    MathVariant value;
 };
 class MMLbool : public MMLAttribute {
 public:
-	MMLbool(bool, bool c=true);
-	bool value;
+    MMLbool(bool, bool c=true);
+    bool value;
 };
 class MMLfloat : public MMLAttribute {
 public:
-	MMLfloat(float, bool c=true);
-	float value;
+    MMLfloat(float, bool c=true);
+    float value;
 };
 class MMLh_unit : public MMLAttribute {
 public:
-	MMLh_unit(h_unit, bool c=true);
-	h_unit value;
+    MMLh_unit(h_unit, bool c=true);
+    h_unit value;
 };
 class MMLint : public MMLAttribute {
 public:
-	MMLint(int, bool c=true);
-	int value;
+    MMLint(int, bool c=true);
+    int value;
 };
 class MMLv_unit : public MMLAttribute {
 public:
-	MMLv_unit(v_unit, bool c=true);
-	v_unit value;
+    MMLv_unit(v_unit, bool c=true);
+    v_unit value;
 };
 namespace MML {
 enum absAtt {
-	absCLASS, absDEFINITIONURL, absENCODING, absID, absSTYLE, 
-	absXLINK_HREF, absXREF
+    absCLASS, absDEFINITIONURL, absENCODING, absID, absSTYLE, 
+    absXLINK_HREF, absXREF
 };
 enum andAtt {
-	andCLASS, andDEFINITIONURL, andENCODING, andID, andSTYLE, 
-	andXLINK_HREF, andXREF
+    andCLASS, andDEFINITIONURL, andENCODING, andID, andSTYLE, 
+    andXLINK_HREF, andXREF
 };
 enum annotationAtt {
-	annotationCLASS, annotationENCODING, annotationID, annotationSTYLE, 
-	annotationXLINK_HREF, annotationXREF
+    annotationCLASS, annotationENCODING, annotationID, annotationSTYLE, 
+    annotationXLINK_HREF, annotationXREF
 };
 enum annotation_xmlAtt {
-	annotation_xmlCLASS, annotation_xmlENCODING, annotation_xmlID, 
-	annotation_xmlSTYLE, annotation_xmlXLINK_HREF, annotation_xmlXREF
+    annotation_xmlCLASS, annotation_xmlENCODING, annotation_xmlID, 
+    annotation_xmlSTYLE, annotation_xmlXLINK_HREF, annotation_xmlXREF
 };
 enum applyAtt {
-	applyCLASS, applyID, applySTYLE, applyXLINK_HREF, applyXREF
+    applyCLASS, applyID, applySTYLE, applyXLINK_HREF, applyXREF
 };
 enum approxAtt {
-	approxCLASS, approxDEFINITIONURL, approxENCODING, approxID, 
-	approxSTYLE, approxXLINK_HREF, approxXREF
+    approxCLASS, approxDEFINITIONURL, approxENCODING, approxID, 
+    approxSTYLE, approxXLINK_HREF, approxXREF
 };
 enum arccosAtt {
-	arccosCLASS, arccosDEFINITIONURL, arccosENCODING, arccosID, 
-	arccosSTYLE, arccosXLINK_HREF, arccosXREF
+    arccosCLASS, arccosDEFINITIONURL, arccosENCODING, arccosID, 
+    arccosSTYLE, arccosXLINK_HREF, arccosXREF
 };
 enum arccoshAtt {
-	arccoshCLASS, arccoshDEFINITIONURL, arccoshENCODING, arccoshID, 
-	arccoshSTYLE, arccoshXLINK_HREF, arccoshXREF
+    arccoshCLASS, arccoshDEFINITIONURL, arccoshENCODING, arccoshID, 
+    arccoshSTYLE, arccoshXLINK_HREF, arccoshXREF
 };
 enum arccotAtt {
-	arccotCLASS, arccotDEFINITIONURL, arccotENCODING, arccotID, 
-	arccotSTYLE, arccotXLINK_HREF, arccotXREF
+    arccotCLASS, arccotDEFINITIONURL, arccotENCODING, arccotID, 
+    arccotSTYLE, arccotXLINK_HREF, arccotXREF
 };
 enum arccothAtt {
-	arccothCLASS, arccothDEFINITIONURL, arccothENCODING, arccothID, 
-	arccothSTYLE, arccothXLINK_HREF, arccothXREF
+    arccothCLASS, arccothDEFINITIONURL, arccothENCODING, arccothID, 
+    arccothSTYLE, arccothXLINK_HREF, arccothXREF
 };
 enum arccscAtt {
-	arccscCLASS, arccscDEFINITIONURL, arccscENCODING, arccscID, 
-	arccscSTYLE, arccscXLINK_HREF, arccscXREF
+    arccscCLASS, arccscDEFINITIONURL, arccscENCODING, arccscID, 
+    arccscSTYLE, arccscXLINK_HREF, arccscXREF
 };
 enum arccschAtt {
-	arccschCLASS, arccschDEFINITIONURL, arccschENCODING, arccschID, 
-	arccschSTYLE, arccschXLINK_HREF, arccschXREF
+    arccschCLASS, arccschDEFINITIONURL, arccschENCODING, arccschID, 
+    arccschSTYLE, arccschXLINK_HREF, arccschXREF
 };
 enum arcsecAtt {
-	arcsecCLASS, arcsecDEFINITIONURL, arcsecENCODING, arcsecID, 
-	arcsecSTYLE, arcsecXLINK_HREF, arcsecXREF
+    arcsecCLASS, arcsecDEFINITIONURL, arcsecENCODING, arcsecID, 
+    arcsecSTYLE, arcsecXLINK_HREF, arcsecXREF
 };
 enum arcsechAtt {
-	arcsechCLASS, arcsechDEFINITIONURL, arcsechENCODING, arcsechID, 
-	arcsechSTYLE, arcsechXLINK_HREF, arcsechXREF
+    arcsechCLASS, arcsechDEFINITIONURL, arcsechENCODING, arcsechID, 
+    arcsechSTYLE, arcsechXLINK_HREF, arcsechXREF
 };
 enum arcsinAtt {
-	arcsinCLASS, arcsinDEFINITIONURL, arcsinENCODING, arcsinID, 
-	arcsinSTYLE, arcsinXLINK_HREF, arcsinXREF
+    arcsinCLASS, arcsinDEFINITIONURL, arcsinENCODING, arcsinID, 
+    arcsinSTYLE, arcsinXLINK_HREF, arcsinXREF
 };
 enum arcsinhAtt {
-	arcsinhCLASS, arcsinhDEFINITIONURL, arcsinhENCODING, arcsinhID, 
-	arcsinhSTYLE, arcsinhXLINK_HREF, arcsinhXREF
+    arcsinhCLASS, arcsinhDEFINITIONURL, arcsinhENCODING, arcsinhID, 
+    arcsinhSTYLE, arcsinhXLINK_HREF, arcsinhXREF
 };
 enum arctanAtt {
-	arctanCLASS, arctanDEFINITIONURL, arctanENCODING, arctanID, 
-	arctanSTYLE, arctanXLINK_HREF, arctanXREF
+    arctanCLASS, arctanDEFINITIONURL, arctanENCODING, arctanID, 
+    arctanSTYLE, arctanXLINK_HREF, arctanXREF
 };
 enum arctanhAtt {
-	arctanhCLASS, arctanhDEFINITIONURL, arctanhENCODING, arctanhID, 
-	arctanhSTYLE, arctanhXLINK_HREF, arctanhXREF
+    arctanhCLASS, arctanhDEFINITIONURL, arctanhENCODING, arctanhID, 
+    arctanhSTYLE, arctanhXLINK_HREF, arctanhXREF
 };
 enum argAtt {
-	argCLASS, argDEFINITIONURL, argENCODING, argID, argSTYLE, 
-	argXLINK_HREF, argXREF
+    argCLASS, argDEFINITIONURL, argENCODING, argID, argSTYLE, 
+    argXLINK_HREF, argXREF
 };
 enum bvarAtt {
-	bvarCLASS, bvarID, bvarSTYLE, bvarXLINK_HREF, bvarXREF
+    bvarCLASS, bvarID, bvarSTYLE, bvarXLINK_HREF, bvarXREF
 };
 enum cardAtt {
-	cardCLASS, cardDEFINITIONURL, cardENCODING, cardID, cardSTYLE, 
-	cardXLINK_HREF, cardXREF
+    cardCLASS, cardDEFINITIONURL, cardENCODING, cardID, cardSTYLE, 
+    cardXLINK_HREF, cardXREF
 };
 enum cartesianproductAtt {
-	cartesianproductCLASS, cartesianproductDEFINITIONURL, 
-	cartesianproductENCODING, cartesianproductID, cartesianproductSTYLE, 
-	cartesianproductXLINK_HREF, cartesianproductXREF
+    cartesianproductCLASS, cartesianproductDEFINITIONURL, 
+    cartesianproductENCODING, cartesianproductID, cartesianproductSTYLE, 
+    cartesianproductXLINK_HREF, cartesianproductXREF
 };
 enum ceilingAtt {
-	ceilingCLASS, ceilingDEFINITIONURL, ceilingENCODING, ceilingID, 
-	ceilingSTYLE, ceilingXLINK_HREF, ceilingXREF
+    ceilingCLASS, ceilingDEFINITIONURL, ceilingENCODING, ceilingID, 
+    ceilingSTYLE, ceilingXLINK_HREF, ceilingXREF
 };
 enum ciAtt {
-	ciCLASS, ciDEFINITIONURL, ciENCODING, ciID, ciSTYLE, ciTYPE, 
-	ciXLINK_HREF, ciXREF
+    ciCLASS, ciDEFINITIONURL, ciENCODING, ciID, ciSTYLE, ciTYPE, 
+    ciXLINK_HREF, ciXREF
 };
 enum cnAtt {
-	cnBASE, cnCLASS, cnDEFINITIONURL, cnENCODING, cnID, cnSTYLE, cnTYPE, 
-	cnXLINK_HREF, cnXREF
+    cnBASE, cnCLASS, cnDEFINITIONURL, cnENCODING, cnID, cnSTYLE, cnTYPE, 
+    cnXLINK_HREF, cnXREF
 };
 enum codomainAtt {
-	codomainCLASS, codomainDEFINITIONURL, codomainENCODING, codomainID, 
-	codomainSTYLE, codomainXLINK_HREF, codomainXREF
+    codomainCLASS, codomainDEFINITIONURL, codomainENCODING, codomainID, 
+    codomainSTYLE, codomainXLINK_HREF, codomainXREF
 };
 enum complexesAtt {
-	complexesCLASS, complexesDEFINITIONURL, complexesENCODING, complexesID, 
-	complexesSTYLE, complexesXLINK_HREF, complexesXREF
+    complexesCLASS, complexesDEFINITIONURL, complexesENCODING, complexesID, 
+    complexesSTYLE, complexesXLINK_HREF, complexesXREF
 };
 enum composeAtt {
-	composeCLASS, composeDEFINITIONURL, composeENCODING, composeID, 
-	composeSTYLE, composeXLINK_HREF, composeXREF
+    composeCLASS, composeDEFINITIONURL, composeENCODING, composeID, 
+    composeSTYLE, composeXLINK_HREF, composeXREF
 };
 enum conditionAtt {
-	conditionDEFINITIONURL, conditionENCODING
+    conditionDEFINITIONURL, conditionENCODING
 };
 enum conjugateAtt {
-	conjugateCLASS, conjugateDEFINITIONURL, conjugateENCODING, conjugateID, 
-	conjugateSTYLE, conjugateXLINK_HREF, conjugateXREF
+    conjugateCLASS, conjugateDEFINITIONURL, conjugateENCODING, conjugateID, 
+    conjugateSTYLE, conjugateXLINK_HREF, conjugateXREF
 };
 enum cosAtt {
-	cosCLASS, cosDEFINITIONURL, cosENCODING, cosID, cosSTYLE, 
-	cosXLINK_HREF, cosXREF
+    cosCLASS, cosDEFINITIONURL, cosENCODING, cosID, cosSTYLE, 
+    cosXLINK_HREF, cosXREF
 };
 enum coshAtt {
-	coshCLASS, coshDEFINITIONURL, coshENCODING, coshID, coshSTYLE, 
-	coshXLINK_HREF, coshXREF
+    coshCLASS, coshDEFINITIONURL, coshENCODING, coshID, coshSTYLE, 
+    coshXLINK_HREF, coshXREF
 };
 enum cotAtt {
-	cotCLASS, cotDEFINITIONURL, cotENCODING, cotID, cotSTYLE, 
-	cotXLINK_HREF, cotXREF
+    cotCLASS, cotDEFINITIONURL, cotENCODING, cotID, cotSTYLE, 
+    cotXLINK_HREF, cotXREF
 };
 enum cothAtt {
-	cothCLASS, cothDEFINITIONURL, cothENCODING, cothID, cothSTYLE, 
-	cothXLINK_HREF, cothXREF
+    cothCLASS, cothDEFINITIONURL, cothENCODING, cothID, cothSTYLE, 
+    cothXLINK_HREF, cothXREF
 };
 enum cscAtt {
-	cscCLASS, cscDEFINITIONURL, cscENCODING, cscID, cscSTYLE, 
-	cscXLINK_HREF, cscXREF
+    cscCLASS, cscDEFINITIONURL, cscENCODING, cscID, cscSTYLE, 
+    cscXLINK_HREF, cscXREF
 };
 enum cschAtt {
-	cschCLASS, cschDEFINITIONURL, cschENCODING, cschID, cschSTYLE, 
-	cschXLINK_HREF, cschXREF
+    cschCLASS, cschDEFINITIONURL, cschENCODING, cschID, cschSTYLE, 
+    cschXLINK_HREF, cschXREF
 };
 enum csymbolAtt {
-	csymbolCLASS, csymbolDEFINITIONURL, csymbolENCODING, csymbolID, 
-	csymbolSTYLE, csymbolXLINK_HREF, csymbolXREF
+    csymbolCLASS, csymbolDEFINITIONURL, csymbolENCODING, csymbolID, 
+    csymbolSTYLE, csymbolXLINK_HREF, csymbolXREF
 };
 enum curlAtt {
-	curlCLASS, curlDEFINITIONURL, curlENCODING, curlID, curlSTYLE, 
-	curlXLINK_HREF, curlXREF
+    curlCLASS, curlDEFINITIONURL, curlENCODING, curlID, curlSTYLE, 
+    curlXLINK_HREF, curlXREF
 };
 enum declareAtt {
-	declareDEFINITIONURL, declareENCODING, declareNARGS, declareOCCURRENCE, 
-	declareSCOPE, declareTYPE
+    declareDEFINITIONURL, declareENCODING, declareNARGS, declareOCCURRENCE, 
+    declareSCOPE, declareTYPE
 };
 enum degreeAtt {
-	degreeCLASS, degreeID, degreeSTYLE, degreeXLINK_HREF, degreeXREF
+    degreeCLASS, degreeID, degreeSTYLE, degreeXLINK_HREF, degreeXREF
 };
 enum determinantAtt {
-	determinantCLASS, determinantDEFINITIONURL, determinantENCODING, 
-	determinantID, determinantSTYLE, determinantXLINK_HREF, 
-	determinantXREF
+    determinantCLASS, determinantDEFINITIONURL, determinantENCODING, 
+    determinantID, determinantSTYLE, determinantXLINK_HREF, 
+    determinantXREF
 };
 enum diffAtt {
-	diffCLASS, diffDEFINITIONURL, diffENCODING, diffID, diffSTYLE, 
-	diffXLINK_HREF, diffXREF
+    diffCLASS, diffDEFINITIONURL, diffENCODING, diffID, diffSTYLE, 
+    diffXLINK_HREF, diffXREF
 };
 enum divergenceAtt {
-	divergenceCLASS, divergenceDEFINITIONURL, divergenceENCODING, 
-	divergenceID, divergenceSTYLE, divergenceXLINK_HREF, divergenceXREF
+    divergenceCLASS, divergenceDEFINITIONURL, divergenceENCODING, 
+    divergenceID, divergenceSTYLE, divergenceXLINK_HREF, divergenceXREF
 };
 enum divideAtt {
-	divideCLASS, divideDEFINITIONURL, divideENCODING, divideID, 
-	divideSTYLE, divideXLINK_HREF, divideXREF
+    divideCLASS, divideDEFINITIONURL, divideENCODING, divideID, 
+    divideSTYLE, divideXLINK_HREF, divideXREF
 };
 enum domainAtt {
-	domainCLASS, domainDEFINITIONURL, domainENCODING, domainID, 
-	domainSTYLE, domainXLINK_HREF, domainXREF
+    domainCLASS, domainDEFINITIONURL, domainENCODING, domainID, 
+    domainSTYLE, domainXLINK_HREF, domainXREF
 };
 enum domainofapplicationAtt {
-	domainofapplicationCLASS, domainofapplicationDEFINITIONURL, 
-	domainofapplicationENCODING, domainofapplicationID, 
-	domainofapplicationSTYLE, domainofapplicationXLINK_HREF, 
-	domainofapplicationXREF
+    domainofapplicationCLASS, domainofapplicationDEFINITIONURL, 
+    domainofapplicationENCODING, domainofapplicationID, 
+    domainofapplicationSTYLE, domainofapplicationXLINK_HREF, 
+    domainofapplicationXREF
 };
 enum emptysetAtt {
-	emptysetCLASS, emptysetDEFINITIONURL, emptysetENCODING, emptysetID, 
-	emptysetSTYLE, emptysetXLINK_HREF, emptysetXREF
+    emptysetCLASS, emptysetDEFINITIONURL, emptysetENCODING, emptysetID, 
+    emptysetSTYLE, emptysetXLINK_HREF, emptysetXREF
 };
 enum eqAtt {
-	eqCLASS, eqDEFINITIONURL, eqENCODING, eqID, eqSTYLE, eqXLINK_HREF, 
-	eqXREF
+    eqCLASS, eqDEFINITIONURL, eqENCODING, eqID, eqSTYLE, eqXLINK_HREF, 
+    eqXREF
 };
 enum equivalentAtt {
-	equivalentCLASS, equivalentDEFINITIONURL, equivalentENCODING, 
-	equivalentID, equivalentSTYLE, equivalentXLINK_HREF, equivalentXREF
+    equivalentCLASS, equivalentDEFINITIONURL, equivalentENCODING, 
+    equivalentID, equivalentSTYLE, equivalentXLINK_HREF, equivalentXREF
 };
 enum eulergammaAtt {
-	eulergammaCLASS, eulergammaDEFINITIONURL, eulergammaENCODING, 
-	eulergammaID, eulergammaSTYLE, eulergammaXLINK_HREF, eulergammaXREF
+    eulergammaCLASS, eulergammaDEFINITIONURL, eulergammaENCODING, 
+    eulergammaID, eulergammaSTYLE, eulergammaXLINK_HREF, eulergammaXREF
 };
 enum existsAtt {
-	existsCLASS, existsDEFINITIONURL, existsENCODING, existsID, 
-	existsSTYLE, existsXLINK_HREF, existsXREF
+    existsCLASS, existsDEFINITIONURL, existsENCODING, existsID, 
+    existsSTYLE, existsXLINK_HREF, existsXREF
 };
 enum expAtt {
-	expCLASS, expDEFINITIONURL, expENCODING, expID, expSTYLE, 
-	expXLINK_HREF, expXREF
+    expCLASS, expDEFINITIONURL, expENCODING, expID, expSTYLE, 
+    expXLINK_HREF, expXREF
 };
 enum exponentialeAtt {
-	exponentialeCLASS, exponentialeDEFINITIONURL, exponentialeENCODING, 
-	exponentialeID, exponentialeSTYLE, exponentialeXLINK_HREF, 
-	exponentialeXREF
+    exponentialeCLASS, exponentialeDEFINITIONURL, exponentialeENCODING, 
+    exponentialeID, exponentialeSTYLE, exponentialeXLINK_HREF, 
+    exponentialeXREF
 };
 enum factorialAtt {
-	factorialCLASS, factorialDEFINITIONURL, factorialENCODING, factorialID, 
-	factorialSTYLE, factorialXLINK_HREF, factorialXREF
+    factorialCLASS, factorialDEFINITIONURL, factorialENCODING, factorialID, 
+    factorialSTYLE, factorialXLINK_HREF, factorialXREF
 };
 enum factorofAtt {
-	factorofCLASS, factorofDEFINITIONURL, factorofENCODING, factorofID, 
-	factorofSTYLE, factorofXLINK_HREF, factorofXREF
+    factorofCLASS, factorofDEFINITIONURL, factorofENCODING, factorofID, 
+    factorofSTYLE, factorofXLINK_HREF, factorofXREF
 };
 enum falseAtt {
-	falseCLASS, falseDEFINITIONURL, falseENCODING, falseID, falseSTYLE, 
-	falseXLINK_HREF, falseXREF
+    falseCLASS, falseDEFINITIONURL, falseENCODING, falseID, falseSTYLE, 
+    falseXLINK_HREF, falseXREF
 };
 enum floorAtt {
-	floorCLASS, floorDEFINITIONURL, floorENCODING, floorID, floorSTYLE, 
-	floorXLINK_HREF, floorXREF
+    floorCLASS, floorDEFINITIONURL, floorENCODING, floorID, floorSTYLE, 
+    floorXLINK_HREF, floorXREF
 };
 enum forallAtt {
-	forallCLASS, forallDEFINITIONURL, forallENCODING, forallID, 
-	forallSTYLE, forallXLINK_HREF, forallXREF
+    forallCLASS, forallDEFINITIONURL, forallENCODING, forallID, 
+    forallSTYLE, forallXLINK_HREF, forallXREF
 };
 enum gcdAtt {
-	gcdCLASS, gcdDEFINITIONURL, gcdENCODING, gcdID, gcdSTYLE, 
-	gcdXLINK_HREF, gcdXREF
+    gcdCLASS, gcdDEFINITIONURL, gcdENCODING, gcdID, gcdSTYLE, 
+    gcdXLINK_HREF, gcdXREF
 };
 enum geqAtt {
-	geqCLASS, geqDEFINITIONURL, geqENCODING, geqID, geqSTYLE, 
-	geqXLINK_HREF, geqXREF
+    geqCLASS, geqDEFINITIONURL, geqENCODING, geqID, geqSTYLE, 
+    geqXLINK_HREF, geqXREF
 };
 enum gradAtt {
-	gradCLASS, gradDEFINITIONURL, gradENCODING, gradID, gradSTYLE, 
-	gradXLINK_HREF, gradXREF
+    gradCLASS, gradDEFINITIONURL, gradENCODING, gradID, gradSTYLE, 
+    gradXLINK_HREF, gradXREF
 };
 enum gtAtt {
-	gtCLASS, gtDEFINITIONURL, gtENCODING, gtID, gtSTYLE, gtXLINK_HREF, 
-	gtXREF
+    gtCLASS, gtDEFINITIONURL, gtENCODING, gtID, gtSTYLE, gtXLINK_HREF, 
+    gtXREF
 };
 enum identAtt {
-	identCLASS, identDEFINITIONURL, identENCODING, identID, identSTYLE, 
-	identXLINK_HREF, identXREF
+    identCLASS, identDEFINITIONURL, identENCODING, identID, identSTYLE, 
+    identXLINK_HREF, identXREF
 };
 enum imageAtt {
-	imageCLASS, imageDEFINITIONURL, imageENCODING, imageID, imageSTYLE, 
-	imageXLINK_HREF, imageXREF
+    imageCLASS, imageDEFINITIONURL, imageENCODING, imageID, imageSTYLE, 
+    imageXLINK_HREF, imageXREF
 };
 enum imaginaryAtt {
-	imaginaryCLASS, imaginaryDEFINITIONURL, imaginaryENCODING, imaginaryID, 
-	imaginarySTYLE, imaginaryXLINK_HREF, imaginaryXREF
+    imaginaryCLASS, imaginaryDEFINITIONURL, imaginaryENCODING, imaginaryID, 
+    imaginarySTYLE, imaginaryXLINK_HREF, imaginaryXREF
 };
 enum imaginaryiAtt {
-	imaginaryiCLASS, imaginaryiDEFINITIONURL, imaginaryiENCODING, 
-	imaginaryiID, imaginaryiSTYLE, imaginaryiXLINK_HREF, imaginaryiXREF
+    imaginaryiCLASS, imaginaryiDEFINITIONURL, imaginaryiENCODING, 
+    imaginaryiID, imaginaryiSTYLE, imaginaryiXLINK_HREF, imaginaryiXREF
 };
 enum impliesAtt {
-	impliesCLASS, impliesDEFINITIONURL, impliesENCODING, impliesID, 
-	impliesSTYLE, impliesXLINK_HREF, impliesXREF
+    impliesCLASS, impliesDEFINITIONURL, impliesENCODING, impliesID, 
+    impliesSTYLE, impliesXLINK_HREF, impliesXREF
 };
 enum inAtt {
-	inCLASS, inDEFINITIONURL, inENCODING, inID, inSTYLE, inXLINK_HREF, 
-	inXREF
+    inCLASS, inDEFINITIONURL, inENCODING, inID, inSTYLE, inXLINK_HREF, 
+    inXREF
 };
 enum infinityAtt {
-	infinityCLASS, infinityDEFINITIONURL, infinityENCODING, infinityID, 
-	infinitySTYLE, infinityXLINK_HREF, infinityXREF
+    infinityCLASS, infinityDEFINITIONURL, infinityENCODING, infinityID, 
+    infinitySTYLE, infinityXLINK_HREF, infinityXREF
 };
 enum intAtt {
-	intCLASS, intDEFINITIONURL, intENCODING, intID, intSTYLE, 
-	intXLINK_HREF, intXREF
+    intCLASS, intDEFINITIONURL, intENCODING, intID, intSTYLE, 
+    intXLINK_HREF, intXREF
 };
 enum integersAtt {
-	integersCLASS, integersDEFINITIONURL, integersENCODING, integersID, 
-	integersSTYLE, integersXLINK_HREF, integersXREF
+    integersCLASS, integersDEFINITIONURL, integersENCODING, integersID, 
+    integersSTYLE, integersXLINK_HREF, integersXREF
 };
 enum intersectAtt {
-	intersectCLASS, intersectDEFINITIONURL, intersectENCODING, intersectID, 
-	intersectSTYLE, intersectXLINK_HREF, intersectXREF
+    intersectCLASS, intersectDEFINITIONURL, intersectENCODING, intersectID, 
+    intersectSTYLE, intersectXLINK_HREF, intersectXREF
 };
 enum intervalAtt {
-	intervalCLASS, intervalCLOSURE, intervalID, intervalSTYLE, 
-	intervalXLINK_HREF, intervalXREF
+    intervalCLASS, intervalCLOSURE, intervalID, intervalSTYLE, 
+    intervalXLINK_HREF, intervalXREF
 };
 enum inverseAtt {
-	inverseCLASS, inverseDEFINITIONURL, inverseENCODING, inverseID, 
-	inverseSTYLE, inverseXLINK_HREF, inverseXREF
+    inverseCLASS, inverseDEFINITIONURL, inverseENCODING, inverseID, 
+    inverseSTYLE, inverseXLINK_HREF, inverseXREF
 };
 enum lambdaAtt {
-	lambdaCLASS, lambdaID, lambdaSTYLE, lambdaXLINK_HREF, lambdaXREF
+    lambdaCLASS, lambdaID, lambdaSTYLE, lambdaXLINK_HREF, lambdaXREF
 };
 enum laplacianAtt {
-	laplacianCLASS, laplacianDEFINITIONURL, laplacianENCODING, laplacianID, 
-	laplacianSTYLE, laplacianXLINK_HREF, laplacianXREF
+    laplacianCLASS, laplacianDEFINITIONURL, laplacianENCODING, laplacianID, 
+    laplacianSTYLE, laplacianXLINK_HREF, laplacianXREF
 };
 enum lcmAtt {
-	lcmCLASS, lcmDEFINITIONURL, lcmENCODING, lcmID, lcmSTYLE, 
-	lcmXLINK_HREF, lcmXREF
+    lcmCLASS, lcmDEFINITIONURL, lcmENCODING, lcmID, lcmSTYLE, 
+    lcmXLINK_HREF, lcmXREF
 };
 enum leqAtt {
-	leqCLASS, leqDEFINITIONURL, leqENCODING, leqID, leqSTYLE, 
-	leqXLINK_HREF, leqXREF
+    leqCLASS, leqDEFINITIONURL, leqENCODING, leqID, leqSTYLE, 
+    leqXLINK_HREF, leqXREF
 };
 enum limitAtt {
-	limitCLASS, limitDEFINITIONURL, limitENCODING, limitID, limitSTYLE, 
-	limitXLINK_HREF, limitXREF
+    limitCLASS, limitDEFINITIONURL, limitENCODING, limitID, limitSTYLE, 
+    limitXLINK_HREF, limitXREF
 };
 enum listAtt {
-	listCLASS, listID, listORDER, listSTYLE, listXLINK_HREF, listXREF
+    listCLASS, listID, listORDER, listSTYLE, listXLINK_HREF, listXREF
 };
 enum lnAtt {
-	lnCLASS, lnDEFINITIONURL, lnENCODING, lnID, lnSTYLE, lnXLINK_HREF, 
-	lnXREF
+    lnCLASS, lnDEFINITIONURL, lnENCODING, lnID, lnSTYLE, lnXLINK_HREF, 
+    lnXREF
 };
 enum logAtt {
-	logCLASS, logDEFINITIONURL, logENCODING, logID, logSTYLE, 
-	logXLINK_HREF, logXREF
+    logCLASS, logDEFINITIONURL, logENCODING, logID, logSTYLE, 
+    logXLINK_HREF, logXREF
 };
 enum logbaseAtt {
-	logbaseCLASS, logbaseID, logbaseSTYLE, logbaseXLINK_HREF, logbaseXREF
+    logbaseCLASS, logbaseID, logbaseSTYLE, logbaseXLINK_HREF, logbaseXREF
 };
 enum lowlimitAtt {
-	lowlimitCLASS, lowlimitDEFINITIONURL, lowlimitENCODING, lowlimitID, 
-	lowlimitSTYLE, lowlimitXLINK_HREF, lowlimitXREF
+    lowlimitCLASS, lowlimitDEFINITIONURL, lowlimitENCODING, lowlimitID, 
+    lowlimitSTYLE, lowlimitXLINK_HREF, lowlimitXREF
 };
 enum ltAtt {
-	ltCLASS, ltDEFINITIONURL, ltENCODING, ltID, ltSTYLE, ltXLINK_HREF, 
-	ltXREF
+    ltCLASS, ltDEFINITIONURL, ltENCODING, ltID, ltSTYLE, ltXLINK_HREF, 
+    ltXREF
 };
 enum mactionAtt {
-	mactionACTIONTYPE, mactionCLASS, mactionID, mactionSELECTION, 
-	mactionSTYLE, mactionXLINK_HREF, mactionXREF
+    mactionACTIONTYPE, mactionCLASS, mactionID, mactionSELECTION, 
+    mactionSTYLE, mactionXLINK_HREF, mactionXREF
 };
 enum maligngroupAtt {
-	maligngroupCLASS, maligngroupGROUPALIGN, maligngroupID, 
-	maligngroupSTYLE, maligngroupXLINK_HREF, maligngroupXREF
+    maligngroupCLASS, maligngroupGROUPALIGN, maligngroupID, 
+    maligngroupSTYLE, maligngroupXLINK_HREF, maligngroupXREF
 };
 enum malignmarkAtt {
-	malignmarkCLASS, malignmarkEDGE, malignmarkID, malignmarkSTYLE, 
-	malignmarkXLINK_HREF, malignmarkXREF
+    malignmarkCLASS, malignmarkEDGE, malignmarkID, malignmarkSTYLE, 
+    malignmarkXLINK_HREF, malignmarkXREF
 };
 enum mathAtt {
-	mathALTIMG, mathALTTEXT, mathBASELINE, mathCLASS, mathDISPLAY, 
-	mathHEIGHT, mathID, mathMACROS, mathNAME, mathOVERFLOW, mathSTYLE, 
-	mathTYPE, mathWIDTH, mathXLINK_HREF, mathXREF
+    mathALTIMG, mathALTTEXT, mathBASELINE, mathCLASS, mathDISPLAY, 
+    mathHEIGHT, mathID, mathMACROS, mathNAME, mathOVERFLOW, mathSTYLE, 
+    mathTYPE, mathWIDTH, mathXLINK_HREF, mathXREF
 };
 enum matrixAtt {
-	matrixCLASS, matrixID, matrixSTYLE, matrixXLINK_HREF, matrixXREF
+    matrixCLASS, matrixID, matrixSTYLE, matrixXLINK_HREF, matrixXREF
 };
 enum matrixrowAtt {
-	matrixrowCLASS, matrixrowID, matrixrowSTYLE, matrixrowXLINK_HREF, 
-	matrixrowXREF
+    matrixrowCLASS, matrixrowID, matrixrowSTYLE, matrixrowXLINK_HREF, 
+    matrixrowXREF
 };
 enum maxAtt {
-	maxCLASS, maxDEFINITIONURL, maxENCODING, maxID, maxSTYLE, 
-	maxXLINK_HREF, maxXREF
+    maxCLASS, maxDEFINITIONURL, maxENCODING, maxID, maxSTYLE, 
+    maxXLINK_HREF, maxXREF
 };
 enum meanAtt {
-	meanCLASS, meanDEFINITIONURL, meanENCODING, meanID, meanSTYLE, 
-	meanXLINK_HREF, meanXREF
+    meanCLASS, meanDEFINITIONURL, meanENCODING, meanID, meanSTYLE, 
+    meanXLINK_HREF, meanXREF
 };
 enum medianAtt {
-	medianCLASS, medianDEFINITIONURL, medianENCODING, medianID, 
-	medianSTYLE, medianXLINK_HREF, medianXREF
+    medianCLASS, medianDEFINITIONURL, medianENCODING, medianID, 
+    medianSTYLE, medianXLINK_HREF, medianXREF
 };
 enum mencloseAtt {
-	mencloseCLASS, mencloseID, mencloseNOTATION, mencloseSTYLE, 
-	mencloseXLINK_HREF, mencloseXREF
+    mencloseCLASS, mencloseID, mencloseNOTATION, mencloseSTYLE, 
+    mencloseXLINK_HREF, mencloseXREF
 };
 enum merrorAtt {
-	merrorCLASS, merrorID, merrorSTYLE, merrorXLINK_HREF, merrorXREF
+    merrorCLASS, merrorID, merrorSTYLE, merrorXLINK_HREF, merrorXREF
 };
 enum mfencedAtt {
-	mfencedCLASS, mfencedCLOSE, mfencedID, mfencedOPEN, mfencedSEPARATORS, 
-	mfencedSTYLE, mfencedXLINK_HREF, mfencedXREF
+    mfencedCLASS, mfencedCLOSE, mfencedID, mfencedOPEN, mfencedSEPARATORS, 
+    mfencedSTYLE, mfencedXLINK_HREF, mfencedXREF
 };
 enum mfracAtt {
-	mfracBEVELLED, mfracCLASS, mfracDENOMALIGN, mfracID, 
-	mfracLINETHICKNESS, mfracNUMALIGN, mfracSTYLE, mfracXLINK_HREF, 
-	mfracXREF
+    mfracBEVELLED, mfracCLASS, mfracDENOMALIGN, mfracID, 
+    mfracLINETHICKNESS, mfracNUMALIGN, mfracSTYLE, mfracXLINK_HREF, 
+    mfracXREF
 };
 enum mglyphAtt {
-	mglyphALT, mglyphFONTFAMILY, mglyphINDEX
+    mglyphALT, mglyphFONTFAMILY, mglyphINDEX
 };
 enum miAtt {
-	miCLASS, miID, miMATHBACKGROUND, miMATHCOLOR, miMATHSIZE, 
-	miMATHVARIANT, miSTYLE, miXLINK_HREF, miXREF
+    miCLASS, miID, miMATHBACKGROUND, miMATHCOLOR, miMATHSIZE, 
+    miMATHVARIANT, miSTYLE, miXLINK_HREF, miXREF
 };
 enum minAtt {
-	minCLASS, minDEFINITIONURL, minENCODING, minID, minSTYLE, 
-	minXLINK_HREF, minXREF
+    minCLASS, minDEFINITIONURL, minENCODING, minID, minSTYLE, 
+    minXLINK_HREF, minXREF
 };
 enum minusAtt {
-	minusCLASS, minusDEFINITIONURL, minusENCODING, minusID, minusSTYLE, 
-	minusXLINK_HREF, minusXREF
+    minusCLASS, minusDEFINITIONURL, minusENCODING, minusID, minusSTYLE, 
+    minusXLINK_HREF, minusXREF
 };
 enum mlabeledtrAtt {
-	mlabeledtrCLASS, mlabeledtrCOLUMNALIGN, mlabeledtrGROUPALIGN, 
-	mlabeledtrID, mlabeledtrROWALIGN, mlabeledtrSTYLE, 
-	mlabeledtrXLINK_HREF, mlabeledtrXREF
+    mlabeledtrCLASS, mlabeledtrCOLUMNALIGN, mlabeledtrGROUPALIGN, 
+    mlabeledtrID, mlabeledtrROWALIGN, mlabeledtrSTYLE, 
+    mlabeledtrXLINK_HREF, mlabeledtrXREF
 };
 enum mmultiscriptsAtt {
-	mmultiscriptsCLASS, mmultiscriptsID, mmultiscriptsSTYLE, 
-	mmultiscriptsXLINK_HREF, mmultiscriptsXREF
+    mmultiscriptsCLASS, mmultiscriptsID, mmultiscriptsSTYLE, 
+    mmultiscriptsXLINK_HREF, mmultiscriptsXREF
 };
 enum mnAtt {
-	mnCLASS, mnID, mnMATHBACKGROUND, mnMATHCOLOR, mnMATHSIZE, 
-	mnMATHVARIANT, mnSTYLE, mnXLINK_HREF, mnXREF
+    mnCLASS, mnID, mnMATHBACKGROUND, mnMATHCOLOR, mnMATHSIZE, 
+    mnMATHVARIANT, mnSTYLE, mnXLINK_HREF, mnXREF
 };
 enum moAtt {
-	moACCENT, moCLASS, moFENCE, moFORM, moID, moLARGEOP, moLSPACE, 
-	moMATHBACKGROUND, moMATHCOLOR, moMATHSIZE, moMATHVARIANT, moMAXSIZE, 
-	moMINSIZE, moMOVABLELIMITS, moRSPACE, moSEPARATOR, moSTRETCHY, moSTYLE, 
-	moSYMMETRIC, moXLINK_HREF, moXREF
+    moACCENT, moCLASS, moFENCE, moFORM, moID, moLARGEOP, moLSPACE, 
+    moMATHBACKGROUND, moMATHCOLOR, moMATHSIZE, moMATHVARIANT, moMAXSIZE, 
+    moMINSIZE, moMOVABLELIMITS, moRSPACE, moSEPARATOR, moSTRETCHY, moSTYLE, 
+    moSYMMETRIC, moXLINK_HREF, moXREF
 };
 enum modeAtt {
-	modeCLASS, modeDEFINITIONURL, modeENCODING, modeID, modeSTYLE, 
-	modeXLINK_HREF, modeXREF
+    modeCLASS, modeDEFINITIONURL, modeENCODING, modeID, modeSTYLE, 
+    modeXLINK_HREF, modeXREF
 };
 enum momentAtt {
-	momentCLASS, momentDEFINITIONURL, momentENCODING, momentID, 
-	momentSTYLE, momentXLINK_HREF, momentXREF
+    momentCLASS, momentDEFINITIONURL, momentENCODING, momentID, 
+    momentSTYLE, momentXLINK_HREF, momentXREF
 };
 enum momentaboutAtt {
-	momentaboutCLASS, momentaboutDEFINITIONURL, momentaboutENCODING, 
-	momentaboutID, momentaboutSTYLE, momentaboutXLINK_HREF, 
-	momentaboutXREF
+    momentaboutCLASS, momentaboutDEFINITIONURL, momentaboutENCODING, 
+    momentaboutID, momentaboutSTYLE, momentaboutXLINK_HREF, 
+    momentaboutXREF
 };
 enum moverAtt {
-	moverACCENT, moverCLASS, moverID, moverSTYLE, moverXLINK_HREF, 
-	moverXREF
+    moverACCENT, moverCLASS, moverID, moverSTYLE, moverXLINK_HREF, 
+    moverXREF
 };
 enum mpaddedAtt {
-	mpaddedCLASS, mpaddedDEPTH, mpaddedHEIGHT, mpaddedID, mpaddedLSPACE, 
-	mpaddedSTYLE, mpaddedWIDTH, mpaddedXLINK_HREF, mpaddedXREF
+    mpaddedCLASS, mpaddedDEPTH, mpaddedHEIGHT, mpaddedID, mpaddedLSPACE, 
+    mpaddedSTYLE, mpaddedWIDTH, mpaddedXLINK_HREF, mpaddedXREF
 };
 enum mphantomAtt {
-	mphantomCLASS, mphantomID, mphantomSTYLE, mphantomXLINK_HREF, 
-	mphantomXREF
+    mphantomCLASS, mphantomID, mphantomSTYLE, mphantomXLINK_HREF, 
+    mphantomXREF
 };
 enum mprescriptsAtt {
-	
+    
 };
 enum mrootAtt {
-	mrootCLASS, mrootID, mrootSTYLE, mrootXLINK_HREF, mrootXREF
+    mrootCLASS, mrootID, mrootSTYLE, mrootXLINK_HREF, mrootXREF
 };
 enum mrowAtt {
-	mrowCLASS, mrowID, mrowSTYLE, mrowXLINK_HREF, mrowXREF
+    mrowCLASS, mrowID, mrowSTYLE, mrowXLINK_HREF, mrowXREF
 };
 enum msAtt {
-	msCLASS, msID, msLQUOTE, msMATHBACKGROUND, msMATHCOLOR, msMATHSIZE, 
-	msMATHVARIANT, msRQUOTE, msSTYLE, msXLINK_HREF, msXREF
+    msCLASS, msID, msLQUOTE, msMATHBACKGROUND, msMATHCOLOR, msMATHSIZE, 
+    msMATHVARIANT, msRQUOTE, msSTYLE, msXLINK_HREF, msXREF
 };
 enum mspaceAtt {
-	mspaceCLASS, mspaceDEPTH, mspaceHEIGHT, mspaceID, mspaceLINEBREAK, 
-	mspaceSTYLE, mspaceWIDTH, mspaceXLINK_HREF, mspaceXREF
+    mspaceCLASS, mspaceDEPTH, mspaceHEIGHT, mspaceID, mspaceLINEBREAK, 
+    mspaceSTYLE, mspaceWIDTH, mspaceXLINK_HREF, mspaceXREF
 };
 enum msqrtAtt {
-	msqrtCLASS, msqrtID, msqrtSTYLE, msqrtXLINK_HREF, msqrtXREF
+    msqrtCLASS, msqrtID, msqrtSTYLE, msqrtXLINK_HREF, msqrtXREF
 };
 enum mstyleAtt {
-	mstyleACCENT, mstyleBACKGROUND, mstyleCLASS, mstyleCOLOR, 
-	mstyleDISPLAYSTYLE, mstyleFENCE, mstyleFORM, mstyleID, mstyleLARGEOP, 
-	mstyleLINETHICKNESS, mstyleLSPACE, mstyleMATHBACKGROUND, 
-	mstyleMATHCOLOR, mstyleMATHSIZE, mstyleMATHVARIANT, mstyleMAXSIZE, 
-	mstyleMEDIUMMATHSPACE, mstyleMINSIZE, mstyleMOVABLELIMITS, 
-	mstyleRSPACE, mstyleSCRIPTLEVEL, mstyleSCRIPTMINSIZE, 
-	mstyleSCRIPTSIZEMULTIPLIER, mstyleSEPARATOR, mstyleSTRETCHY, 
-	mstyleSTYLE, mstyleSYMMETRIC, mstyleTHICKMATHSPACE, 
-	mstyleTHINMATHSPACE, mstyleVERYTHICKMATHSPACE, mstyleVERYTHINMATHSPACE, 
-	mstyleVERYVERYTHICKMATHSPACE, mstyleVERYVERYTHINMATHSPACE, 
-	mstyleXLINK_HREF, mstyleXREF
+    mstyleACCENT, mstyleBACKGROUND, mstyleCLASS, mstyleCOLOR, 
+    mstyleDISPLAYSTYLE, mstyleFENCE, mstyleFORM, mstyleID, mstyleLARGEOP, 
+    mstyleLINETHICKNESS, mstyleLSPACE, mstyleMATHBACKGROUND, 
+    mstyleMATHCOLOR, mstyleMATHSIZE, mstyleMATHVARIANT, mstyleMAXSIZE, 
+    mstyleMEDIUMMATHSPACE, mstyleMINSIZE, mstyleMOVABLELIMITS, 
+    mstyleRSPACE, mstyleSCRIPTLEVEL, mstyleSCRIPTMINSIZE, 
+    mstyleSCRIPTSIZEMULTIPLIER, mstyleSEPARATOR, mstyleSTRETCHY, 
+    mstyleSTYLE, mstyleSYMMETRIC, mstyleTHICKMATHSPACE, 
+    mstyleTHINMATHSPACE, mstyleVERYTHICKMATHSPACE, mstyleVERYTHINMATHSPACE, 
+    mstyleVERYVERYTHICKMATHSPACE, mstyleVERYVERYTHINMATHSPACE, 
+    mstyleXLINK_HREF, mstyleXREF
 };
 enum msubAtt {
-	msubCLASS, msubID, msubSTYLE, msubSUBSCRIPTSHIFT, msubXLINK_HREF, 
-	msubXREF
+    msubCLASS, msubID, msubSTYLE, msubSUBSCRIPTSHIFT, msubXLINK_HREF, 
+    msubXREF
 };
 enum msubsupAtt {
-	msubsupCLASS, msubsupID, msubsupSTYLE, msubsupSUBSCRIPTSHIFT, 
-	msubsupSUPERSCRIPTSHIFT, msubsupXLINK_HREF, msubsupXREF
+    msubsupCLASS, msubsupID, msubsupSTYLE, msubsupSUBSCRIPTSHIFT, 
+    msubsupSUPERSCRIPTSHIFT, msubsupXLINK_HREF, msubsupXREF
 };
 enum msupAtt {
-	msupCLASS, msupID, msupSTYLE, msupSUPERSCRIPTSHIFT, msupXLINK_HREF, 
-	msupXREF
+    msupCLASS, msupID, msupSTYLE, msupSUPERSCRIPTSHIFT, msupXLINK_HREF, 
+    msupXREF
 };
 enum mtableAtt {
-	mtableALIGN, mtableALIGNMENTSCOPE, mtableCLASS, mtableCOLUMNALIGN, 
-	mtableCOLUMNLINES, mtableCOLUMNSPACING, mtableCOLUMNWIDTH, 
-	mtableDISPLAYSTYLE, mtableEQUALCOLUMNS, mtableEQUALROWS, mtableFRAME, 
-	mtableFRAMESPACING, mtableGROUPALIGN, mtableID, mtableMINLABELSPACING, 
-	mtableROWALIGN, mtableROWLINES, mtableROWSPACING, mtableSIDE, 
-	mtableSTYLE, mtableWIDTH, mtableXLINK_HREF, mtableXREF
+    mtableALIGN, mtableALIGNMENTSCOPE, mtableCLASS, mtableCOLUMNALIGN, 
+    mtableCOLUMNLINES, mtableCOLUMNSPACING, mtableCOLUMNWIDTH, 
+    mtableDISPLAYSTYLE, mtableEQUALCOLUMNS, mtableEQUALROWS, mtableFRAME, 
+    mtableFRAMESPACING, mtableGROUPALIGN, mtableID, mtableMINLABELSPACING, 
+    mtableROWALIGN, mtableROWLINES, mtableROWSPACING, mtableSIDE, 
+    mtableSTYLE, mtableWIDTH, mtableXLINK_HREF, mtableXREF
 };
 enum mtdAtt {
-	mtdCLASS, mtdCOLUMNALIGN, mtdCOLUMNSPAN, mtdGROUPALIGN, mtdID, 
-	mtdROWALIGN, mtdROWSPAN, mtdSTYLE, mtdXLINK_HREF, mtdXREF
+    mtdCLASS, mtdCOLUMNALIGN, mtdCOLUMNSPAN, mtdGROUPALIGN, mtdID, 
+    mtdROWALIGN, mtdROWSPAN, mtdSTYLE, mtdXLINK_HREF, mtdXREF
 };
 enum mtextAtt {
-	mtextCLASS, mtextID, mtextMATHBACKGROUND, mtextMATHCOLOR, 
-	mtextMATHSIZE, mtextMATHVARIANT, mtextSTYLE, mtextXLINK_HREF, 
-	mtextXREF
+    mtextCLASS, mtextID, mtextMATHBACKGROUND, mtextMATHCOLOR, 
+    mtextMATHSIZE, mtextMATHVARIANT, mtextSTYLE, mtextXLINK_HREF, 
+    mtextXREF
 };
 enum mtrAtt {
-	mtrCLASS, mtrCOLUMNALIGN, mtrGROUPALIGN, mtrID, mtrROWALIGN, mtrSTYLE, 
-	mtrXLINK_HREF, mtrXREF
+    mtrCLASS, mtrCOLUMNALIGN, mtrGROUPALIGN, mtrID, mtrROWALIGN, mtrSTYLE, 
+    mtrXLINK_HREF, mtrXREF
 };
 enum munderAtt {
-	munderACCENTUNDER, munderCLASS, munderID, munderSTYLE, 
-	munderXLINK_HREF, munderXREF
+    munderACCENTUNDER, munderCLASS, munderID, munderSTYLE, 
+    munderXLINK_HREF, munderXREF
 };
 enum munderoverAtt {
-	munderoverACCENT, munderoverACCENTUNDER, munderoverCLASS, munderoverID, 
-	munderoverSTYLE, munderoverXLINK_HREF, munderoverXREF
+    munderoverACCENT, munderoverACCENTUNDER, munderoverCLASS, munderoverID, 
+    munderoverSTYLE, munderoverXLINK_HREF, munderoverXREF
 };
 enum naturalnumbersAtt {
-	naturalnumbersCLASS, naturalnumbersDEFINITIONURL, 
-	naturalnumbersENCODING, naturalnumbersID, naturalnumbersSTYLE, 
-	naturalnumbersXLINK_HREF, naturalnumbersXREF
+    naturalnumbersCLASS, naturalnumbersDEFINITIONURL, 
+    naturalnumbersENCODING, naturalnumbersID, naturalnumbersSTYLE, 
+    naturalnumbersXLINK_HREF, naturalnumbersXREF
 };
 enum neqAtt {
-	neqCLASS, neqDEFINITIONURL, neqENCODING, neqID, neqSTYLE, 
-	neqXLINK_HREF, neqXREF
+    neqCLASS, neqDEFINITIONURL, neqENCODING, neqID, neqSTYLE, 
+    neqXLINK_HREF, neqXREF
 };
 enum noneAtt {
-	
+    
 };
 enum notAtt {
-	notCLASS, notDEFINITIONURL, notENCODING, notID, notSTYLE, 
-	notXLINK_HREF, notXREF
+    notCLASS, notDEFINITIONURL, notENCODING, notID, notSTYLE, 
+    notXLINK_HREF, notXREF
 };
 enum notanumberAtt {
-	notanumberCLASS, notanumberDEFINITIONURL, notanumberENCODING, 
-	notanumberID, notanumberSTYLE, notanumberXLINK_HREF, notanumberXREF
+    notanumberCLASS, notanumberDEFINITIONURL, notanumberENCODING, 
+    notanumberID, notanumberSTYLE, notanumberXLINK_HREF, notanumberXREF
 };
 enum notinAtt {
-	notinCLASS, notinDEFINITIONURL, notinENCODING, notinID, notinSTYLE, 
-	notinXLINK_HREF, notinXREF
+    notinCLASS, notinDEFINITIONURL, notinENCODING, notinID, notinSTYLE, 
+    notinXLINK_HREF, notinXREF
 };
 enum notprsubsetAtt {
-	notprsubsetCLASS, notprsubsetDEFINITIONURL, notprsubsetENCODING, 
-	notprsubsetID, notprsubsetSTYLE, notprsubsetXLINK_HREF, 
-	notprsubsetXREF
+    notprsubsetCLASS, notprsubsetDEFINITIONURL, notprsubsetENCODING, 
+    notprsubsetID, notprsubsetSTYLE, notprsubsetXLINK_HREF, 
+    notprsubsetXREF
 };
 enum notsubsetAtt {
-	notsubsetCLASS, notsubsetDEFINITIONURL, notsubsetENCODING, notsubsetID, 
-	notsubsetSTYLE, notsubsetXLINK_HREF, notsubsetXREF
+    notsubsetCLASS, notsubsetDEFINITIONURL, notsubsetENCODING, notsubsetID, 
+    notsubsetSTYLE, notsubsetXLINK_HREF, notsubsetXREF
 };
 enum orAtt {
-	orCLASS, orDEFINITIONURL, orENCODING, orID, orSTYLE, orXLINK_HREF, 
-	orXREF
+    orCLASS, orDEFINITIONURL, orENCODING, orID, orSTYLE, orXLINK_HREF, 
+    orXREF
 };
 enum otherwiseAtt {
-	otherwiseCLASS, otherwiseID, otherwiseSTYLE, otherwiseXLINK_HREF, 
-	otherwiseXREF
+    otherwiseCLASS, otherwiseID, otherwiseSTYLE, otherwiseXLINK_HREF, 
+    otherwiseXREF
 };
 enum outerproductAtt {
-	outerproductCLASS, outerproductDEFINITIONURL, outerproductENCODING, 
-	outerproductID, outerproductSTYLE, outerproductXLINK_HREF, 
-	outerproductXREF
+    outerproductCLASS, outerproductDEFINITIONURL, outerproductENCODING, 
+    outerproductID, outerproductSTYLE, outerproductXLINK_HREF, 
+    outerproductXREF
 };
 enum partialdiffAtt {
-	partialdiffCLASS, partialdiffDEFINITIONURL, partialdiffENCODING, 
-	partialdiffID, partialdiffSTYLE, partialdiffXLINK_HREF, 
-	partialdiffXREF
+    partialdiffCLASS, partialdiffDEFINITIONURL, partialdiffENCODING, 
+    partialdiffID, partialdiffSTYLE, partialdiffXLINK_HREF, 
+    partialdiffXREF
 };
 enum piAtt {
-	piCLASS, piDEFINITIONURL, piENCODING, piID, piSTYLE, piXLINK_HREF, 
-	piXREF
+    piCLASS, piDEFINITIONURL, piENCODING, piID, piSTYLE, piXLINK_HREF, 
+    piXREF
 };
 enum pieceAtt {
-	
+    
 };
 enum piecewiseAtt {
-	piecewiseCLASS, piecewiseID, piecewiseSTYLE, piecewiseXLINK_HREF, 
-	piecewiseXREF
+    piecewiseCLASS, piecewiseID, piecewiseSTYLE, piecewiseXLINK_HREF, 
+    piecewiseXREF
 };
 enum plusAtt {
-	plusCLASS, plusDEFINITIONURL, plusENCODING, plusID, plusSTYLE, 
-	plusXLINK_HREF, plusXREF
+    plusCLASS, plusDEFINITIONURL, plusENCODING, plusID, plusSTYLE, 
+    plusXLINK_HREF, plusXREF
 };
 enum powerAtt {
-	powerCLASS, powerDEFINITIONURL, powerENCODING, powerID, powerSTYLE, 
-	powerXLINK_HREF, powerXREF
+    powerCLASS, powerDEFINITIONURL, powerENCODING, powerID, powerSTYLE, 
+    powerXLINK_HREF, powerXREF
 };
 enum primesAtt {
-	primesCLASS, primesDEFINITIONURL, primesENCODING, primesID, 
-	primesSTYLE, primesXLINK_HREF, primesXREF
+    primesCLASS, primesDEFINITIONURL, primesENCODING, primesID, 
+    primesSTYLE, primesXLINK_HREF, primesXREF
 };
 enum productAtt {
-	productCLASS, productDEFINITIONURL, productENCODING, productID, 
-	productSTYLE, productXLINK_HREF, productXREF
+    productCLASS, productDEFINITIONURL, productENCODING, productID, 
+    productSTYLE, productXLINK_HREF, productXREF
 };
 enum prsubsetAtt {
-	prsubsetCLASS, prsubsetDEFINITIONURL, prsubsetENCODING, prsubsetID, 
-	prsubsetSTYLE, prsubsetXLINK_HREF, prsubsetXREF
+    prsubsetCLASS, prsubsetDEFINITIONURL, prsubsetENCODING, prsubsetID, 
+    prsubsetSTYLE, prsubsetXLINK_HREF, prsubsetXREF
 };
 enum quotientAtt {
-	quotientCLASS, quotientDEFINITIONURL, quotientENCODING, quotientID, 
-	quotientSTYLE, quotientXLINK_HREF, quotientXREF
+    quotientCLASS, quotientDEFINITIONURL, quotientENCODING, quotientID, 
+    quotientSTYLE, quotientXLINK_HREF, quotientXREF
 };
 enum rationalsAtt {
-	rationalsCLASS, rationalsDEFINITIONURL, rationalsENCODING, rationalsID, 
-	rationalsSTYLE, rationalsXLINK_HREF, rationalsXREF
+    rationalsCLASS, rationalsDEFINITIONURL, rationalsENCODING, rationalsID, 
+    rationalsSTYLE, rationalsXLINK_HREF, rationalsXREF
 };
 enum realAtt {
-	realCLASS, realDEFINITIONURL, realENCODING, realID, realSTYLE, 
-	realXLINK_HREF, realXREF
+    realCLASS, realDEFINITIONURL, realENCODING, realID, realSTYLE, 
+    realXLINK_HREF, realXREF
 };
 enum realsAtt {
-	realsCLASS, realsDEFINITIONURL, realsENCODING, realsID, realsSTYLE, 
-	realsXLINK_HREF, realsXREF
+    realsCLASS, realsDEFINITIONURL, realsENCODING, realsID, realsSTYLE, 
+    realsXLINK_HREF, realsXREF
 };
 enum remAtt {
-	remCLASS, remDEFINITIONURL, remENCODING, remID, remSTYLE, 
-	remXLINK_HREF, remXREF
+    remCLASS, remDEFINITIONURL, remENCODING, remID, remSTYLE, 
+    remXLINK_HREF, remXREF
 };
 enum rootAtt {
-	rootCLASS, rootDEFINITIONURL, rootENCODING, rootID, rootSTYLE, 
-	rootXLINK_HREF, rootXREF
+    rootCLASS, rootDEFINITIONURL, rootENCODING, rootID, rootSTYLE, 
+    rootXLINK_HREF, rootXREF
 };
 enum scalarproductAtt {
-	scalarproductCLASS, scalarproductDEFINITIONURL, scalarproductENCODING, 
-	scalarproductID, scalarproductSTYLE, scalarproductXLINK_HREF, 
-	scalarproductXREF
+    scalarproductCLASS, scalarproductDEFINITIONURL, scalarproductENCODING, 
+    scalarproductID, scalarproductSTYLE, scalarproductXLINK_HREF, 
+    scalarproductXREF
 };
 enum sdevAtt {
-	sdevCLASS, sdevDEFINITIONURL, sdevENCODING, sdevID, sdevSTYLE, 
-	sdevXLINK_HREF, sdevXREF
+    sdevCLASS, sdevDEFINITIONURL, sdevENCODING, sdevID, sdevSTYLE, 
+    sdevXLINK_HREF, sdevXREF
 };
 enum secAtt {
-	secCLASS, secDEFINITIONURL, secENCODING, secID, secSTYLE, 
-	secXLINK_HREF, secXREF
+    secCLASS, secDEFINITIONURL, secENCODING, secID, secSTYLE, 
+    secXLINK_HREF, secXREF
 };
 enum sechAtt {
-	sechCLASS, sechDEFINITIONURL, sechENCODING, sechID, sechSTYLE, 
-	sechXLINK_HREF, sechXREF
+    sechCLASS, sechDEFINITIONURL, sechENCODING, sechID, sechSTYLE, 
+    sechXLINK_HREF, sechXREF
 };
 enum selectorAtt {
-	selectorCLASS, selectorDEFINITIONURL, selectorENCODING, selectorID, 
-	selectorSTYLE, selectorXLINK_HREF, selectorXREF
+    selectorCLASS, selectorDEFINITIONURL, selectorENCODING, selectorID, 
+    selectorSTYLE, selectorXLINK_HREF, selectorXREF
 };
 enum semanticsAtt {
-	semanticsCLASS, semanticsDEFINITIONURL, semanticsENCODING, semanticsID, 
-	semanticsSTYLE, semanticsXLINK_HREF, semanticsXREF
+    semanticsCLASS, semanticsDEFINITIONURL, semanticsENCODING, semanticsID, 
+    semanticsSTYLE, semanticsXLINK_HREF, semanticsXREF
 };
 enum sepAtt {
-	
+    
 };
 enum setAtt {
-	setCLASS, setID, setSTYLE, setTYPE, setXLINK_HREF, setXREF
+    setCLASS, setID, setSTYLE, setTYPE, setXLINK_HREF, setXREF
 };
 enum setdiffAtt {
-	setdiffCLASS, setdiffDEFINITIONURL, setdiffENCODING, setdiffID, 
-	setdiffSTYLE, setdiffXLINK_HREF, setdiffXREF
+    setdiffCLASS, setdiffDEFINITIONURL, setdiffENCODING, setdiffID, 
+    setdiffSTYLE, setdiffXLINK_HREF, setdiffXREF
 };
 enum sinAtt {
-	sinCLASS, sinDEFINITIONURL, sinENCODING, sinID, sinSTYLE, 
-	sinXLINK_HREF, sinXREF
+    sinCLASS, sinDEFINITIONURL, sinENCODING, sinID, sinSTYLE, 
+    sinXLINK_HREF, sinXREF
 };
 enum sinhAtt {
-	sinhCLASS, sinhDEFINITIONURL, sinhENCODING, sinhID, sinhSTYLE, 
-	sinhXLINK_HREF, sinhXREF
+    sinhCLASS, sinhDEFINITIONURL, sinhENCODING, sinhID, sinhSTYLE, 
+    sinhXLINK_HREF, sinhXREF
 };
 enum subsetAtt {
-	subsetCLASS, subsetDEFINITIONURL, subsetENCODING, subsetID, 
-	subsetSTYLE, subsetXLINK_HREF, subsetXREF
+    subsetCLASS, subsetDEFINITIONURL, subsetENCODING, subsetID, 
+    subsetSTYLE, subsetXLINK_HREF, subsetXREF
 };
 enum sumAtt {
-	sumCLASS, sumDEFINITIONURL, sumENCODING, sumID, sumSTYLE, 
-	sumXLINK_HREF, sumXREF
+    sumCLASS, sumDEFINITIONURL, sumENCODING, sumID, sumSTYLE, 
+    sumXLINK_HREF, sumXREF
 };
 enum tanAtt {
-	tanCLASS, tanDEFINITIONURL, tanENCODING, tanID, tanSTYLE, 
-	tanXLINK_HREF, tanXREF
+    tanCLASS, tanDEFINITIONURL, tanENCODING, tanID, tanSTYLE, 
+    tanXLINK_HREF, tanXREF
 };
 enum tanhAtt {
-	tanhCLASS, tanhDEFINITIONURL, tanhENCODING, tanhID, tanhSTYLE, 
-	tanhXLINK_HREF, tanhXREF
+    tanhCLASS, tanhDEFINITIONURL, tanhENCODING, tanhID, tanhSTYLE, 
+    tanhXLINK_HREF, tanhXREF
 };
 enum tendstoAtt {
-	tendstoCLASS, tendstoDEFINITIONURL, tendstoENCODING, tendstoID, 
-	tendstoSTYLE, tendstoTYPE, tendstoXLINK_HREF, tendstoXREF
+    tendstoCLASS, tendstoDEFINITIONURL, tendstoENCODING, tendstoID, 
+    tendstoSTYLE, tendstoTYPE, tendstoXLINK_HREF, tendstoXREF
 };
 enum timesAtt {
-	timesCLASS, timesDEFINITIONURL, timesENCODING, timesID, timesSTYLE, 
-	timesXLINK_HREF, timesXREF
+    timesCLASS, timesDEFINITIONURL, timesENCODING, timesID, timesSTYLE, 
+    timesXLINK_HREF, timesXREF
 };
 enum transposeAtt {
-	transposeCLASS, transposeDEFINITIONURL, transposeENCODING, transposeID, 
-	transposeSTYLE, transposeXLINK_HREF, transposeXREF
+    transposeCLASS, transposeDEFINITIONURL, transposeENCODING, transposeID, 
+    transposeSTYLE, transposeXLINK_HREF, transposeXREF
 };
 enum trueAtt {
-	trueCLASS, trueDEFINITIONURL, trueENCODING, trueID, trueSTYLE, 
-	trueXLINK_HREF, trueXREF
+    trueCLASS, trueDEFINITIONURL, trueENCODING, trueID, trueSTYLE, 
+    trueXLINK_HREF, trueXREF
 };
 enum unionAtt {
-	unionCLASS, unionDEFINITIONURL, unionENCODING, unionID, unionSTYLE, 
-	unionXLINK_HREF, unionXREF
+    unionCLASS, unionDEFINITIONURL, unionENCODING, unionID, unionSTYLE, 
+    unionXLINK_HREF, unionXREF
 };
 enum uplimitAtt {
-	uplimitCLASS, uplimitDEFINITIONURL, uplimitENCODING, uplimitID, 
-	uplimitSTYLE, uplimitXLINK_HREF, uplimitXREF
+    uplimitCLASS, uplimitDEFINITIONURL, uplimitENCODING, uplimitID, 
+    uplimitSTYLE, uplimitXLINK_HREF, uplimitXREF
 };
 enum varianceAtt {
-	varianceCLASS, varianceDEFINITIONURL, varianceENCODING, varianceID, 
-	varianceSTYLE, varianceXLINK_HREF, varianceXREF
+    varianceCLASS, varianceDEFINITIONURL, varianceENCODING, varianceID, 
+    varianceSTYLE, varianceXLINK_HREF, varianceXREF
 };
 enum vectorAtt {
-	vectorCLASS, vectorID, vectorSTYLE, vectorXLINK_HREF, vectorXREF
+    vectorCLASS, vectorID, vectorSTYLE, vectorXLINK_HREF, vectorXREF
 };
 enum vectorproductAtt {
-	vectorproductCLASS, vectorproductDEFINITIONURL, vectorproductENCODING, 
-	vectorproductID, vectorproductSTYLE, vectorproductXLINK_HREF, 
-	vectorproductXREF
+    vectorproductCLASS, vectorproductDEFINITIONURL, vectorproductENCODING, 
+    vectorproductID, vectorproductSTYLE, vectorproductXLINK_HREF, 
+    vectorproductXREF
 };
 enum xorAtt {
-	xorCLASS, xorDEFINITIONURL, xorENCODING, xorID, xorSTYLE, 
-	xorXLINK_HREF, xorXREF
+    xorCLASS, xorDEFINITIONURL, xorENCODING, xorID, xorSTYLE, 
+    xorXLINK_HREF, xorXREF
 };
 const uint numAttTypes = 8;
 const uint numAttributes = 91;

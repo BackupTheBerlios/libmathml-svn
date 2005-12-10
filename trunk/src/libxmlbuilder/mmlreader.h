@@ -14,30 +14,30 @@ class MMLNode;
 class MMLElement;
 class MMLReader {
 public:
-	MMLReader();
-	~MMLReader();
-	bool parse(const DOMString &);
-	MMLDocument *document();
-	DOMString error() { return err; }
-	static void errorHandler(void *arg, const char *msg,
-		xmlParserSeverities severity, xmlTextReaderLocatorPtr locator);
+    MMLReader();
+    ~MMLReader();
+    bool parse(const DOMString &);
+    MMLDocument *document();
+    DOMString error() { return err; }
+    static void errorHandler(void *arg, const char *msg,
+        xmlParserSeverities severity, xmlTextReaderLocatorPtr locator);
 private:
-	MMLNode *cur;
-	MMLElement *openel;
-	MMLDocument *doc;
-	xmlTextReader *reader;
-	xmlChar *name, *value;
-	bool empty;
-	int depth, nodetype;
-	DOMString err;
-	bool ok;
+    MMLNode *cur;
+    MMLElement *openel;
+    MMLDocument *doc;
+    xmlTextReader *reader;
+    xmlChar *name, *value;
+    bool empty;
+    int depth, nodetype;
+    DOMString err;
+    bool ok;
 
-	void freeOld();
-	void processNode();
-	bool startElement();
-	bool endElement();
-	bool attribute();
-	bool text();
+    void freeOld();
+    void processNode();
+    bool startElement();
+    bool endElement();
+    bool attribute();
+    bool text();
 };
 
 #endif

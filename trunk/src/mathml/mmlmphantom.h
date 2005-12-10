@@ -4,11 +4,11 @@
 #include "mmlmrow.h"
 
 class MMLmphantom : public MMLmrow {
-friend	MMLElement *MMLDocument::createElement(const DOMString &);
+friend    MMLElement *MMLDocument::createElement(const DOMString &);
 public:
-	void doPaint(MML::Attributes *) const;
+    void doPaint(MML::Attributes *) const;
 private:
-	MMLmphantom(MMLDocument *);
+    MMLmphantom(MMLDocument *);
 };
 
 #endif

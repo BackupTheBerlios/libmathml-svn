@@ -20,94 +20,94 @@ const MathColor MathColor::yellow("#FFFF00");
 const MathColor MathColor::transparent;
 
 const char *MathColor::nametable[17] = {"aqua", "black", "blue", "fuchsia",
-	"gray", "green", "lime", "maroon", "navy", "olive", "purple", "red",
-	"silver", "teal", "white", "yellow", "transparent"};
+    "gray", "green", "lime", "maroon", "navy", "olive", "purple", "red",
+    "silver", "teal", "white", "yellow", "transparent"};
 const MathColor *MathColor::colortable[17] = {&aqua, &black, &blue, &fuchsia,
-	&gray, &green, &lime, &maroon, &navy, &olive, &purple, &red, &silver,
-	&teal, &white, &yellow, &transparent};
+    &gray, &green, &lime, &maroon, &navy, &olive, &purple, &red, &silver,
+    &teal, &white, &yellow, &transparent};
 
 MathColor::MathColor() {
-	transp = valid = true;
+    transp = valid = true;
 }
 MathColor::MathColor(const DOMString &d) {
-	// check for a predefined color
-	for (uint i=0; i<17; ++i) {
-		if (!strcasecmp(d.utf8(), nametable[i])) {
-			*this = *colortable[i];
-			return;
-		}
-	}
-	// convert RGB color
-	uint len = d.length();
-	if ((len != 4 && len != 7) || d[0] != '#') {
-		valid = false;
-		return;
-	}
-	valid = true;
-	transp = false;
-	if (len == 4) {
-		rr = 16*getValue(d[1]);
-		gg = 16*getValue(d[2]);
-		bb = 16*getValue(d[3]);
-	} else {
-		rr = getValue(d[1], d[2]);
-		gg = getValue(d[3], d[4]);
-		bb = getValue(d[5], d[6]);
-	}
+    // check for a predefined color
+    for (uint i=0; i<17; ++i) {
+        if (!strcasecmp(d.utf8(), nametable[i])) {
+            *this = *colortable[i];
+            return;
+        }
+    }
+    // convert RGB color
+    uint len = d.length();
+    if ((len != 4 && len != 7) || d[0] != '#') {
+        valid = false;
+        return;
+    }
+    valid = true;
+    transp = false;
+    if (len == 4) {
+        rr = 16*getValue(d[1]);
+        gg = 16*getValue(d[2]);
+        bb = 16*getValue(d[3]);
+    } else {
+        rr = getValue(d[1], d[2]);
+        gg = getValue(d[3], d[4]);
+        bb = getValue(d[5], d[6]);
+    }
 }
 bool
 MathColor::operator==(const MathColor &m) const {
-	if (!valid && !m.valid) return true;
-	if (!valid || !m.valid) return false;
-	if (transp && m.transp) return true;
-	if (transp || m.transp) return false;
-	return rr == m.rr && gg == m.gg && bb == m.bb;
+    if (!valid && !m.valid) return true;
+    if (!valid || !m.valid) return false;
+    if (transp && m.transp) return true;
+    if (transp || m.transp) return false;
+    return rr == m.rr && gg == m.gg && bb == m.bb;
 }
 bool
 MathColor::operator!=(const MathColor &m) const {
-	return !(*this == m);
+    return !(*this == m);
 }
 bool
 MathColor::isTransparent() const {
-	return !valid || transp;
+    return !valid || transp;
 }
 bool
 MathColor::isValid() const {
-	return valid;
+    return valid;
 }
 int
 MathColor::getValue(ushort h) {
-	if (h >= '0' && h <= '9') {
-		return h - '0';
-	}
-	if (h >= 'a' && h <= 'f') {
-		return 10 + h - 'a';
-	}
-	if (h >= 'A' && h <= 'F') {
-		return 10 + h - 'A';
-	}
-	valid = false;
-	return -1;
+    if (h >= '0' && h <= '9') {
+        return h - '0';
+    }
+    if (h >= 'a' && h <= 'f') {
+        return 10 + h - 'a';
+    }
+    if (h >= 'A' && h <= 'F') {
+        return 10 + h - 'A';
+    }
+    valid = false;
+    return -1;
 }
 int
 MathColor::getValue(ushort h1, ushort h2) {
-	return 16*getValue(h1) + getValue(h2);
+    return 16*getValue(h1) + getValue(h2);
 }
 void
 MathColor::setRgb(uchar r, uchar g, uchar b) {
-	rr = r; gg = g; bb = b;
-	valid = true;
-	transp = false;
+    rr = r; gg = g; bb = b;
+    valid = true;
+    transp = false;
 }
 uchar
 MathColor::r() const {
-	return rr;
+    return rr;
 }
 uchar
 MathColor::g() const {
-	return gg;
+    return gg;
 }
 uchar
 MathColor::b() const {
-	return bb;
+    return bb;
 }

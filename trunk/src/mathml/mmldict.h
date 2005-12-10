@@ -6,12 +6,12 @@
 
 class MMLDict {
 public:
-	static ushort resolveEntity(DOMString);
+    static ushort resolveEntity(DOMString);
 private:
-	static bool done;
-	static void makedict();
-	static void makeEntDict();
-	static std::map<DOMString, ushort> ent;
+    static bool done;
+    static void makedict();
+    static void makeEntDict();
+    static std::map<DOMString, ushort> ent;
 };
 
 #endif

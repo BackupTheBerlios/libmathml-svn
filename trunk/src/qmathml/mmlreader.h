@@ -12,19 +12,19 @@ class QXmlInputSource;
 
 class MMLReader {
 public:
-	MMLReader();
-	~MMLReader();
-	bool parse(const QString &);
+    MMLReader();
+    ~MMLReader();
+    bool parse(const QString &);
     bool parse(QIODevice &);
     bool parse(const QXmlInputSource &);
-	MMLDocument *document();
-	const MMLDocument *document() const;
-	QString error() const;
+    MMLDocument *document();
+    const MMLDocument *document() const;
+    QString error() const;
 private:
-	MMLDocument *doc;
-	MMLErrorHandler *errorHandler;
-	MMLContentHandler *contentHandler;
-	MMLEntityResolver *entityResolver;
+    MMLDocument *doc;
+    MMLErrorHandler *errorHandler;
+    MMLContentHandler *contentHandler;
+    MMLEntityResolver *entityResolver;
 };
 
 #endif

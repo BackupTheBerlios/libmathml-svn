@@ -84,7 +84,7 @@
    the ones we use within the rest of Valgrind. */
 #if !defined(__i386__) && !defined(__x86_64__) && !defined(__powerpc__)
 #  ifndef NVALGRIND
-#    define NVALGRIND	1
+#    define NVALGRIND    1
 #  endif  /* NVALGRIND */
 #endif
 
@@ -96,11 +96,11 @@
 
 /* Define NVALGRIND to completely remove the Valgrind magic sequence
    from the compiled code (analogous to NDEBUG's effects on assert()) */
-#define VALGRIND_MAGIC_SEQUENCE(					\
+#define VALGRIND_MAGIC_SEQUENCE(                    \
         _zzq_rlval, _zzq_default, _zzq_request,                         \
         _zzq_arg1, _zzq_arg2, _zzq_arg3, _zzq_arg4)                     \
-   {									\
-      (_zzq_rlval) = (_zzq_default);					\
+   {                                    \
+      (_zzq_rlval) = (_zzq_default);                    \
    }
 
 #else  /* NVALGRIND */
@@ -134,34 +134,34 @@
     _zzq_args[2] = (volatile unsigned long long)(_zzq_arg2);    \
     _zzq_args[3] = (volatile unsigned long long)(_zzq_arg3);    \
     _zzq_args[4] = (volatile unsigned long long)(_zzq_arg4);    \
-    __asm__ volatile("roll $29, %%eax ; roll $3, %%eax\n\t"	\
-                     "rorl $27, %%eax ; rorl $5, %%eax\n\t"	\
-                     "roll $13, %%eax ; roll $19, %%eax"		\
-                     : "=d" (_zzq_rlval)				\
-                     : "a" (&_zzq_args[0]), "0" (_zzq_default)	\
-                     : "cc", "memory"				\
-                    );						\
+    __asm__ volatile("roll $29, %%eax ; roll $3, %%eax\n\t"    \
+                     "rorl $27, %%eax ; rorl $5, %%eax\n\t"    \
+                     "roll $13, %%eax ; roll $19, %%eax"        \
+                     : "=d" (_zzq_rlval)                \
+                     : "a" (&_zzq_args[0]), "0" (_zzq_default)    \
+                     : "cc", "memory"                \
+                    );                        \
   }
 #endif  /* __x86_64__ */
 
 #ifdef __i386__
-#define VALGRIND_MAGIC_SEQUENCE(				\
-        _zzq_rlval, _zzq_default, _zzq_request,			\
-        _zzq_arg1, _zzq_arg2, _zzq_arg3, _zzq_arg4)		\
-								\
-  { unsigned int _zzq_args[5];					\
-    _zzq_args[0] = (unsigned int)(_zzq_request);		\
-    _zzq_args[1] = (unsigned int)(_zzq_arg1);			\
-    _zzq_args[2] = (unsigned int)(_zzq_arg2);			\
-    _zzq_args[3] = (unsigned int)(_zzq_arg3);			\
-    _zzq_args[4] = (unsigned int)(_zzq_arg4);			\
-    __asm__ volatile("roll $29, %%eax ; roll $3, %%eax\n\t"	\
-                     "rorl $27, %%eax ; rorl $5, %%eax\n\t"	\
-                     "roll $13, %%eax ; roll $19, %%eax"	\
-                     : "=d" (_zzq_rlval)			\
-                     : "a" (&_zzq_args[0]), "0" (_zzq_default)	\
-                     : "cc", "memory"				\
-                    );						\
+#define VALGRIND_MAGIC_SEQUENCE(                \
+        _zzq_rlval, _zzq_default, _zzq_request,            \
+        _zzq_arg1, _zzq_arg2, _zzq_arg3, _zzq_arg4)        \
+                                \
+  { unsigned int _zzq_args[5];                    \
+    _zzq_args[0] = (unsigned int)(_zzq_request);        \
+    _zzq_args[1] = (unsigned int)(_zzq_arg1);            \
+    _zzq_args[2] = (unsigned int)(_zzq_arg2);            \
+    _zzq_args[3] = (unsigned int)(_zzq_arg3);            \
+    _zzq_args[4] = (unsigned int)(_zzq_arg4);            \
+    __asm__ volatile("roll $29, %%eax ; roll $3, %%eax\n\t"    \
+                     "rorl $27, %%eax ; rorl $5, %%eax\n\t"    \
+                     "roll $13, %%eax ; roll $19, %%eax"    \
+                     : "=d" (_zzq_rlval)            \
+                     : "a" (&_zzq_args[0]), "0" (_zzq_default)    \
+                     : "cc", "memory"                \
+                    );                        \
   }
 #endif  /* __i386__ */
 

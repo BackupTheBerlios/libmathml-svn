@@ -29,14 +29,14 @@ class MMLDocument;
 class CursorInfo : public QWidget {
 Q_OBJECT
 public:
-	CursorInfo(QWidget *parent = 0);
-	void setDocument(MMLDocument *doc);
+    CursorInfo(QWidget *parent = 0);
+    void setDocument(MMLDocument *doc);
 public slots:
-	void cursorChanged();
+    void cursorChanged();
 private:
-	BPInfo *start;
-	BPInfo *end;
-	MathCursor *mc;
+    BPInfo *start;
+    BPInfo *end;
+    MathCursor *mc;
 };
 
 #endif

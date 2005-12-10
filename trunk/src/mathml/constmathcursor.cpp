@@ -22,81 +22,81 @@
 #include "mathcursor.h"
 
 ConstMathCursor::ConstMathCursor(MathCursor *m)
-	: mc(m) {
+    : mc(m) {
 }
 const MMLNode *
 ConstMathCursor::movePrevious() {
-	return mc->movePrevious();
+    return mc->movePrevious();
 }
 const MMLNode *
 ConstMathCursor::moveNext() {
-	return mc->moveNext();
+    return mc->moveNext();
 }
 const MMLNode *
 ConstMathCursor::moveUp() {
-	return mc->moveUp();
+    return mc->moveUp();
 }
 const MMLNode *
 ConstMathCursor::moveDown() {
-	return mc->moveDown();
+    return mc->moveDown();
 }
 const MMLNode *
 ConstMathCursor::moveRight() {
-	return mc->moveRight();
+    return mc->moveRight();
 }
 const MMLNode *
 ConstMathCursor::moveLeft() {
-	return mc->moveLeft();
+    return mc->moveLeft();
 }
 bool
 ConstMathCursor::moveTo(float x, float y) {
-	return mc->moveTo(x, y);
+    return mc->moveTo(x, y);
 }
 void
 ConstMathCursor::selectNext() {
-	mc->selectNext();
+    mc->selectNext();
 }
 void
 ConstMathCursor::selectPrevious() {
-	mc->selectPrevious();
+    mc->selectPrevious();
 }
 bool
 ConstMathCursor::selectTo(float x, float y) {
-	return mc->selectTo(x, y);
+    return mc->selectTo(x, y);
 }
 const MMLNode *
 ConstMathCursor::container() const {
-	return mc->container();
+    return mc->container();
 }
 long
 ConstMathCursor::offset() const {
-	return mc->offset();
+    return mc->offset();
 }
 const MMLNode *
 ConstMathCursor::leftNode() const {
-	return mc->leftNode();
+    return mc->leftNode();
 }
 const MMLNode *
 ConstMathCursor::rightNode() const {
-	return mc->rightNode();
+    return mc->rightNode();
 }
 void
 ConstMathCursor::setBeforeNode(MMLNode *n) {
-	mc->setBeforeNode(n);
+    mc->setBeforeNode(n);
 }
 void
 ConstMathCursor::setAfterNode(MMLNode *n) {
-	mc->setAfterNode(n);
+    mc->setAfterNode(n);
 }
 int
 ConstMathCursor::nearness(const MMLNode *n) const {
-	return mc->nearness(n);
+    return mc->nearness(n);
 }
 bool
 ConstMathCursor::isSelected(const MMLNode *n) const {
-	return mc->isSelected(n);
+    return mc->isSelected(n);
 }
 bool
 ConstMathCursor::collapsed() const {
-	return mc->collapsed();
+    return mc->collapsed();
 }

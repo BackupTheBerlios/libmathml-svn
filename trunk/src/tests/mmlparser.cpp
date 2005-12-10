@@ -22,9 +22,9 @@ parse(MMLReader *r, const char *filepath) {
 
 int
 main(int argc, const char **argv) {
-	MMLReader r;
-	for (int i=1; i<argc; ++i) {
-		parse(&r, argv[i]);
-	}
-	return VALGRIND_COUNT_ERRORS;
+    MMLReader r;
+    for (int i=1; i<argc; ++i) {
+        parse(&r, argv[i]);
+    }
+    return VALGRIND_COUNT_ERRORS;
 }

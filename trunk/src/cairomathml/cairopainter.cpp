@@ -6,9 +6,9 @@ using std::cout;
 using std::endl;
 
 CairoPainter::CairoPainter() {
-	absx = absy = 0;
-	debugdrawtext = false;
-	fittext = true;
+    absx = absy = 0;
+    debugdrawtext = false;
+    fittext = true;
 
     m_seriffont = "serif";
     m_sansseriffont = "sans-serif";
@@ -38,7 +38,7 @@ CairoPainter::setFont(const std::string &family, float size) {
 }
 void
 CairoPainter::setOutline(bool outline) {
-	debugdrawtext = outline;
+    debugdrawtext = outline;
 }
 void
 CairoPainter::setBackground(uint r, uint g, uint b) {
@@ -46,7 +46,7 @@ CairoPainter::setBackground(uint r, uint g, uint b) {
 }
 float
 CairoPainter::dpi(bool /* horizontal */) const {
-	return 72;//pango_cairo_context_get_resolution(m_pango);
+    return 72;//pango_cairo_context_get_resolution(m_pango);
 }
 float
 CairoPainter::fontAscent() const {
@@ -81,85 +81,85 @@ CairoPainter::ex() const {
 }
 MathColor
 CairoPainter::mathColor() const {
-	return m_foreground;
+    return m_foreground;
 }
 MathColor
 CairoPainter::highlightColor(uchar level) const {
-	MathColor mc;
-	int r, g, b;
-	int lm = int(pow(2,level));
-	r = (m_highlight.r() - m_background.r())/lm + m_background.r();
-	g = (m_highlight.g() - m_background.g())/lm + m_background.g();
-	b = (m_highlight.b() - m_background.b())/lm + m_background.b();
-	mc.setRgb(r, g, b);
-	return mc;
+    MathColor mc;
+    int r, g, b;
+    int lm = int(pow(2,level));
+    r = (m_highlight.r() - m_background.r())/lm + m_background.r();
+    g = (m_highlight.g() - m_background.g())/lm + m_background.g();
+    b = (m_highlight.b() - m_background.b())/lm + m_background.b();
+    mc.setRgb(r, g, b);
+    return mc;
 }
 MathColor
 CairoPainter::selectionColor() const {
-	return m_selection;
+    return m_selection;
 }
 void
 CairoPainter::setMathVariant(MathVariant mv) {
-	switch (mv) {
-	case (NORMAL):
+    switch (mv) {
+    case (NORMAL):
         cairo_select_font_face(m_painter, m_seriffont.c_str(),
             CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
-		break;
-	case (BOLD):
+        break;
+    case (BOLD):
         cairo_select_font_face(m_painter, m_seriffont.c_str(),
             CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
-		break;
-	case (ITALIC):
+        break;
+    case (ITALIC):
         cairo_select_font_face(m_painter, m_seriffont.c_str(),
             CAIRO_FONT_SLANT_ITALIC, CAIRO_FONT_WEIGHT_NORMAL);
-		break;
-	case (BOLD_ITALIC):
+        break;
+    case (BOLD_ITALIC):
         cairo_select_font_face(m_painter, m_seriffont.c_str(),
             CAIRO_FONT_SLANT_ITALIC, CAIRO_FONT_WEIGHT_BOLD);
-		break;
-	case (DOUBLE_STRUCK): break;
-	case (BOLD_FRAKTUR): break;
-	case (SCRIPT):
+        break;
+    case (DOUBLE_STRUCK): break;
+    case (BOLD_FRAKTUR): break;
+    case (SCRIPT):
         cairo_select_font_face(m_painter, m_scriptfont.c_str(),
             CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
-		break;
-	case (BOLD_SCRIPT):
+        break;
+    case (BOLD_SCRIPT):
         cairo_select_font_face(m_painter, m_scriptfont.c_str(),
             CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
-		break;
-	case (FRAKTUR): break;
-	case (SANS_SERIF):
+        break;
+    case (FRAKTUR): break;
+    case (SANS_SERIF):
         cairo_select_font_face(m_painter, m_sansseriffont.c_str(),
             CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
-		break;
-	case (BOLD_SANS_SERIF):
+        break;
+    case (BOLD_SANS_SERIF):
         cairo_select_font_face(m_painter, m_sansseriffont.c_str(),
             CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
-		break;
-	case (SANS_SERIF_ITALIC):
+        break;
+    case (SANS_SERIF_ITALIC):
         cairo_select_font_face(m_painter, m_sansseriffont.c_str(),
             CAIRO_FONT_SLANT_ITALIC, CAIRO_FONT_WEIGHT_NORMAL);
-		break;
-	case (SANS_SERIF_BOLD_ITALIC):
+        break;
+    case (SANS_SERIF_BOLD_ITALIC):
         cairo_select_font_face(m_painter, m_sansseriffont.c_str(),
             CAIRO_FONT_SLANT_ITALIC, CAIRO_FONT_WEIGHT_BOLD);
-		break;
-	case (MONOSPACE):
+        break;
+    case (MONOSPACE):
         cairo_select_font_face(m_painter, m_monofont.c_str(),
             CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
-		break;
-	}
+        break;
+    }
     cairo_font_extents(m_painter, &m_fontmetrics);
 }
 void
 CairoPainter::setMathColor(MathColor mc) {
-	if (mc.isTransparent()) {
-		// mathcolor cannot be transparent, only background can
+    if (mc.isTransparent()) {
+        // mathcolor cannot be transparent, only background can
         cairo_set_source_rgba(m_painter, 0, 0, 0, 1);
-	} else {
+    } else {
         cairo_set_source_rgb(m_painter, mc.r()/256.0, mc.g()/256.0,
             mc.b()/256.0);
-	}
+    }
 }
 void
 CairoPainter::setMathBackground(MathColor mc) {
@@ -181,8 +181,8 @@ CairoPainter::fontSize() const {
 }
 void
 CairoPainter::drawLine(float x1, float y1, float x2, float y2,
-		float linethickness) {
-	if (linethickness <= 0) {
+        float linethickness) {
+    if (linethickness <= 0) {
         linethickness = 1;
     }
     float t = cairo_get_line_width(m_painter);
@@ -201,7 +201,7 @@ CairoPainter::drawRect(float x, float y, float w, float h) {
 }
 void
 CairoPainter::fillRect(float x, float y, float w, float h, const MathColor &bg,
-		const MathColor &fg) {
+        const MathColor &fg) {
     cairo_save(m_painter);
     setMathColor(bg);
     cairo_rectangle(m_painter, x+absx, y+absy, w, h);
@@ -213,7 +213,7 @@ CairoPainter::fillRect(float x, float y, float w, float h, const MathColor &bg,
 }
 void
 CairoPainter::fillParallelogram(float x1, float y1, float x2, float y2,
-		float x3, float y3) {
+        float x3, float y3) {
     x1 += absx;
     y1 += absy;
     x2 += absx;
@@ -230,9 +230,9 @@ CairoPainter::drawPolygon(int n, float *x, float *y) {
     if (n <= 0) return;
 
     cairo_move_to(m_painter, x[n-1]+absx, y[n-1]+absy);
-	for (int i=0; i<n; ++i) {
+    for (int i=0; i<n; ++i) {
         cairo_line_to(m_painter, x[i]+absx, y[i]+absy);
-	}
+    }
     cairo_fill(m_painter);
 }
 void
@@ -247,8 +247,8 @@ CairoPainter::drawText(const DOMString &s) {
    width (a+d). We haven't implemented stretching, so i just center the character. */
 void
 CairoPainter::drawText(const DOMString &s, float w) {
-	float sw = stringWidth(s) + absx; // this can't be right
-	float hdiff = w - sw;
+    float sw = stringWidth(s) + absx; // this can't be right
+    float hdiff = w - sw;
     cairo_move_to(m_painter, hdiff/2+absx, absy);
     cairo_show_text(m_painter, s.utf8());
 }
@@ -263,7 +263,7 @@ void
 CairoPainter::drawOutline(float w) {
     float a = fontAscent();
     float d = fontDescent();
-	 // total character area
+     // total character area
     cairo_save(m_painter);
     cairo_set_source_rgb(m_painter, 1, 0, 0);
     cairo_rectangle(m_painter, absx, absy-a, w, a);
@@ -275,16 +275,16 @@ CairoPainter::drawOutline(float w) {
 }
 void
 CairoPainter::drawText(const DOMString &s, float w, float a, float d) {
-	float sw = stringWidth(s);
-	float hdiff = w-sw;
-	float fa = fontAscent();
-	float fd = fontDescent();
-	float vdiff = d-fd - a+fa;
+    float sw = stringWidth(s);
+    float hdiff = w-sw;
+    float fa = fontAscent();
+    float fd = fontDescent();
+    float vdiff = d-fd - a+fa;
     cairo_move_to(m_painter, hdiff/2, vdiff/2);
     cairo_show_text(m_painter, s.utf8());
 }
 void
 CairoPainter::translate(float x, float y) {
-	absx += x;
-	absy += y;
+    absx += x;
+    absy += y;
 }

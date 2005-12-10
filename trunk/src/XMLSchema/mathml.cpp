@@ -3,699 +3,699 @@
 #include "mathml.h"
 using namespace MML;
 MMLDOMString::MMLDOMString(DOMString v, bool c)
-		: value(v) {cleanup=c;
+        : value(v) {cleanup=c;
 }
 MMLMathColor::MMLMathColor(MathColor v, bool c)
-		: value(v) {cleanup=c;
+        : value(v) {cleanup=c;
 }
 MMLMathVariant::MMLMathVariant(MathVariant v, bool c)
-		: value(v) {cleanup=c;
+        : value(v) {cleanup=c;
 }
 MMLbool::MMLbool(bool v, bool c)
-		: value(v) {cleanup=c;
+        : value(v) {cleanup=c;
 }
 MMLfloat::MMLfloat(float v, bool c)
-		: value(v) {cleanup=c;
+        : value(v) {cleanup=c;
 }
 MMLh_unit::MMLh_unit(h_unit v, bool c)
-		: value(v) {cleanup=c;
+        : value(v) {cleanup=c;
 }
 MMLint::MMLint(int v, bool c)
-		: value(v) {cleanup=c;
+        : value(v) {cleanup=c;
 }
 MMLv_unit::MMLv_unit(v_unit v, bool c)
-		: value(v) {cleanup=c;
+        : value(v) {cleanup=c;
 }
 const char * const MML::elementTag[179] = {
-	"abs", "and", "annotation", "annotation-xml", "apply", "approx", 
-	"arccos", "arccosh", "arccot", "arccoth", "arccsc", "arccsch", 
-	"arcsec", "arcsech", "arcsin", "arcsinh", "arctan", "arctanh", "arg", 
-	"bvar", "card", "cartesianproduct", "ceiling", "ci", "cn", "codomain", 
-	"complexes", "compose", "condition", "conjugate", "cos", "cosh", "cot", 
-	"coth", "csc", "csch", "csymbol", "curl", "declare", "degree", 
-	"determinant", "diff", "divergence", "divide", "domain", 
-	"domainofapplication", "emptyset", "eq", "equivalent", "eulergamma", 
-	"exists", "exp", "exponentiale", "factorial", "factorof", "false", 
-	"floor", "forall", "gcd", "geq", "grad", "gt", "ident", "image", 
-	"imaginary", "imaginaryi", "implies", "in", "infinity", "int", 
-	"integers", "intersect", "interval", "inverse", "lambda", "laplacian", 
-	"lcm", "leq", "limit", "list", "ln", "log", "logbase", "lowlimit", 
-	"lt", "maction", "maligngroup", "malignmark", "math", "matrix", 
-	"matrixrow", "max", "mean", "median", "menclose", "merror", "mfenced", 
-	"mfrac", "mglyph", "mi", "min", "minus", "mlabeledtr", "mmultiscripts", 
-	"mn", "mo", "mode", "moment", "momentabout", "mover", "mpadded", 
-	"mphantom", "mprescripts", "mroot", "mrow", "ms", "mspace", "msqrt", 
-	"mstyle", "msub", "msubsup", "msup", "mtable", "mtd", "mtext", "mtr", 
-	"munder", "munderover", "naturalnumbers", "neq", "none", "not", 
-	"notanumber", "notin", "notprsubset", "notsubset", "or", "otherwise", 
-	"outerproduct", "partialdiff", "pi", "piece", "piecewise", "plus", 
-	"power", "primes", "product", "prsubset", "quotient", "rationals", 
-	"real", "reals", "rem", "root", "scalarproduct", "sdev", "sec", "sech", 
-	"selector", "semantics", "sep", "set", "setdiff", "sin", "sinh", 
-	"subset", "sum", "tan", "tanh", "tendsto", "times", "transpose", 
-	"true", "union", "uplimit", "variance", "vector", "vectorproduct", 
-	"xor"
+    "abs", "and", "annotation", "annotation-xml", "apply", "approx", 
+    "arccos", "arccosh", "arccot", "arccoth", "arccsc", "arccsch", 
+    "arcsec", "arcsech", "arcsin", "arcsinh", "arctan", "arctanh", "arg", 
+    "bvar", "card", "cartesianproduct", "ceiling", "ci", "cn", "codomain", 
+    "complexes", "compose", "condition", "conjugate", "cos", "cosh", "cot", 
+    "coth", "csc", "csch", "csymbol", "curl", "declare", "degree", 
+    "determinant", "diff", "divergence", "divide", "domain", 
+    "domainofapplication", "emptyset", "eq", "equivalent", "eulergamma", 
+    "exists", "exp", "exponentiale", "factorial", "factorof", "false", 
+    "floor", "forall", "gcd", "geq", "grad", "gt", "ident", "image", 
+    "imaginary", "imaginaryi", "implies", "in", "infinity", "int", 
+    "integers", "intersect", "interval", "inverse", "lambda", "laplacian", 
+    "lcm", "leq", "limit", "list", "ln", "log", "logbase", "lowlimit", 
+    "lt", "maction", "maligngroup", "malignmark", "math", "matrix", 
+    "matrixrow", "max", "mean", "median", "menclose", "merror", "mfenced", 
+    "mfrac", "mglyph", "mi", "min", "minus", "mlabeledtr", "mmultiscripts", 
+    "mn", "mo", "mode", "moment", "momentabout", "mover", "mpadded", 
+    "mphantom", "mprescripts", "mroot", "mrow", "ms", "mspace", "msqrt", 
+    "mstyle", "msub", "msubsup", "msup", "mtable", "mtd", "mtext", "mtr", 
+    "munder", "munderover", "naturalnumbers", "neq", "none", "not", 
+    "notanumber", "notin", "notprsubset", "notsubset", "or", "otherwise", 
+    "outerproduct", "partialdiff", "pi", "piece", "piecewise", "plus", 
+    "power", "primes", "product", "prsubset", "quotient", "rationals", 
+    "real", "reals", "rem", "root", "scalarproduct", "sdev", "sec", "sech", 
+    "selector", "semantics", "sep", "set", "setdiff", "sin", "sinh", 
+    "subset", "sum", "tan", "tanh", "tendsto", "times", "transpose", 
+    "true", "union", "uplimit", "variance", "vector", "vectorproduct", 
+    "xor"
 };
 const char * const MML::attributeTag[91] = {
-	"accent", "accentunder", "actiontype", "align", "alignmentscope", 
-	"alt", "altimg", "alttext", "background", "base", "baseline", 
-	"bevelled", "class", "close", "closure", "color", "columnalign", 
-	"columnlines", "columnspacing", "columnspan", "columnwidth", 
-	"definitionURL", "denomalign", "depth", "display", "displaystyle", 
-	"edge", "encoding", "equalcolumns", "equalrows", "fence", "fontfamily", 
-	"form", "frame", "framespacing", "groupalign", "height", "id", "index", 
-	"largeop", "linebreak", "linethickness", "lquote", "lspace", "macros", 
-	"mathbackground", "mathcolor", "mathsize", "mathvariant", "maxsize", 
-	"mediummathspace", "minlabelspacing", "minsize", "movablelimits", 
-	"name", "nargs", "notation", "numalign", "occurrence", "open", "order", 
-	"overflow", "rowalign", "rowlines", "rowspacing", "rowspan", "rquote", 
-	"rspace", "scope", "scriptlevel", "scriptminsize", 
-	"scriptsizemultiplier", "selection", "separator", "separators", "side", 
-	"stretchy", "style", "subscriptshift", "superscriptshift", "symmetric", 
-	"thickmathspace", "thinmathspace", "type", "verythickmathspace", 
-	"verythinmathspace", "veryverythickmathspace", "veryverythinmathspace", 
-	"width", "xlink:href", "xref"
+    "accent", "accentunder", "actiontype", "align", "alignmentscope", 
+    "alt", "altimg", "alttext", "background", "base", "baseline", 
+    "bevelled", "class", "close", "closure", "color", "columnalign", 
+    "columnlines", "columnspacing", "columnspan", "columnwidth", 
+    "definitionURL", "denomalign", "depth", "display", "displaystyle", 
+    "edge", "encoding", "equalcolumns", "equalrows", "fence", "fontfamily", 
+    "form", "frame", "framespacing", "groupalign", "height", "id", "index", 
+    "largeop", "linebreak", "linethickness", "lquote", "lspace", "macros", 
+    "mathbackground", "mathcolor", "mathsize", "mathvariant", "maxsize", 
+    "mediummathspace", "minlabelspacing", "minsize", "movablelimits", 
+    "name", "nargs", "notation", "numalign", "occurrence", "open", "order", 
+    "overflow", "rowalign", "rowlines", "rowspacing", "rowspan", "rquote", 
+    "rspace", "scope", "scriptlevel", "scriptminsize", 
+    "scriptsizemultiplier", "selection", "separator", "separators", "side", 
+    "stretchy", "style", "subscriptshift", "superscriptshift", "symmetric", 
+    "thickmathspace", "thinmathspace", "type", "verythickmathspace", 
+    "verythinmathspace", "veryverythickmathspace", "veryverythinmathspace", 
+    "width", "xlink:href", "xref"
 };
 const AttributeType MML::attTypes[91] = {
-	BOOL_T, BOOL_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, 
-	DOMSTRING_T, DOMSTRING_T, MATHCOLOR_T, INT_T, DOMSTRING_T, BOOL_T, 
-	DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, MATHCOLOR_T, DOMSTRING_T, 
-	DOMSTRING_T, DOMSTRING_T, INT_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, 
-	H_UNIT_T, DOMSTRING_T, BOOL_T, DOMSTRING_T, DOMSTRING_T, BOOL_T, 
-	BOOL_T, BOOL_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, 
-	DOMSTRING_T, V_UNIT_T, DOMSTRING_T, INT_T, BOOL_T, DOMSTRING_T, 
-	V_UNIT_T, DOMSTRING_T, H_UNIT_T, DOMSTRING_T, MATHCOLOR_T, MATHCOLOR_T, 
-	V_UNIT_T, MATHVARIANT_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, 
-	BOOL_T, DOMSTRING_T, INT_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, 
-	DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, 
-	DOMSTRING_T, INT_T, DOMSTRING_T, H_UNIT_T, DOMSTRING_T, INT_T, 
-	V_UNIT_T, FLOAT_T, INT_T, BOOL_T, DOMSTRING_T, DOMSTRING_T, BOOL_T, 
-	DOMSTRING_T, H_UNIT_T, H_UNIT_T, BOOL_T, H_UNIT_T, H_UNIT_T, 
-	DOMSTRING_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, 
-	DOMSTRING_T, DOMSTRING_T
+    BOOL_T, BOOL_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, 
+    DOMSTRING_T, DOMSTRING_T, MATHCOLOR_T, INT_T, DOMSTRING_T, BOOL_T, 
+    DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, MATHCOLOR_T, DOMSTRING_T, 
+    DOMSTRING_T, DOMSTRING_T, INT_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, 
+    H_UNIT_T, DOMSTRING_T, BOOL_T, DOMSTRING_T, DOMSTRING_T, BOOL_T, 
+    BOOL_T, BOOL_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, 
+    DOMSTRING_T, V_UNIT_T, DOMSTRING_T, INT_T, BOOL_T, DOMSTRING_T, 
+    V_UNIT_T, DOMSTRING_T, H_UNIT_T, DOMSTRING_T, MATHCOLOR_T, MATHCOLOR_T, 
+    V_UNIT_T, MATHVARIANT_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, 
+    BOOL_T, DOMSTRING_T, INT_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, 
+    DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, 
+    DOMSTRING_T, INT_T, DOMSTRING_T, H_UNIT_T, DOMSTRING_T, INT_T, 
+    V_UNIT_T, FLOAT_T, INT_T, BOOL_T, DOMSTRING_T, DOMSTRING_T, BOOL_T, 
+    DOMSTRING_T, H_UNIT_T, H_UNIT_T, BOOL_T, H_UNIT_T, H_UNIT_T, 
+    DOMSTRING_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, 
+    DOMSTRING_T, DOMSTRING_T
 };
 const Attribute MML::absAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::andAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::annotationAtts[6] = {
-	CLASS, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::annotation_xmlAtts[6] = {
-	CLASS, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::applyAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::approxAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::arccosAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::arccoshAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::arccotAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::arccothAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::arccscAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::arccschAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::arcsecAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::arcsechAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::arcsinAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::arcsinhAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::arctanAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::arctanhAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::argAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::bvarAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::cardAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::cartesianproductAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::ceilingAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::ciAtts[8] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, TYPE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, TYPE, XLINK_HREF, XREF
 };
 const Attribute MML::cnAtts[9] = {
-	BASE, CLASS, DEFINITIONURL, ENCODING, ID, STYLE, TYPE, XLINK_HREF, 
-	XREF
+    BASE, CLASS, DEFINITIONURL, ENCODING, ID, STYLE, TYPE, XLINK_HREF, 
+    XREF
 };
 const Attribute MML::codomainAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::complexesAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::composeAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::conditionAtts[2] = {
-	DEFINITIONURL, ENCODING
+    DEFINITIONURL, ENCODING
 };
 const Attribute MML::conjugateAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::cosAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::coshAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::cotAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::cothAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::cscAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::cschAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::csymbolAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::curlAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::declareAtts[6] = {
-	DEFINITIONURL, ENCODING, NARGS, OCCURRENCE, SCOPE, TYPE
+    DEFINITIONURL, ENCODING, NARGS, OCCURRENCE, SCOPE, TYPE
 };
 const Attribute MML::degreeAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::determinantAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::diffAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::divergenceAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::divideAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::domainAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::domainofapplicationAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::emptysetAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::eqAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::equivalentAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::eulergammaAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::existsAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::expAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::exponentialeAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::factorialAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::factorofAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::falseAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::floorAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::forallAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::gcdAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::geqAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::gradAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::gtAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::identAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::imageAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::imaginaryAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::imaginaryiAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::impliesAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::inAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::infinityAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::intAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::integersAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::intersectAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::intervalAtts[6] = {
-	CLASS, CLOSURE, ID, STYLE, XLINK_HREF, XREF
+    CLASS, CLOSURE, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::inverseAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::lambdaAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::laplacianAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::lcmAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::leqAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::limitAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::listAtts[6] = {
-	CLASS, ID, ORDER, STYLE, XLINK_HREF, XREF
+    CLASS, ID, ORDER, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::lnAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::logAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::logbaseAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::lowlimitAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::ltAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::mactionAtts[7] = {
-	ACTIONTYPE, CLASS, ID, SELECTION, STYLE, XLINK_HREF, XREF
+    ACTIONTYPE, CLASS, ID, SELECTION, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::maligngroupAtts[6] = {
-	CLASS, GROUPALIGN, ID, STYLE, XLINK_HREF, XREF
+    CLASS, GROUPALIGN, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::malignmarkAtts[6] = {
-	CLASS, EDGE, ID, STYLE, XLINK_HREF, XREF
+    CLASS, EDGE, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::mathAtts[15] = {
-	ALTIMG, ALTTEXT, BASELINE, CLASS, DISPLAY, HEIGHT, ID, MACROS, NAME, 
-	OVERFLOW, STYLE, TYPE, WIDTH, XLINK_HREF, XREF
+    ALTIMG, ALTTEXT, BASELINE, CLASS, DISPLAY, HEIGHT, ID, MACROS, NAME, 
+    OVERFLOW, STYLE, TYPE, WIDTH, XLINK_HREF, XREF
 };
 const Attribute MML::matrixAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::matrixrowAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::maxAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::meanAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::medianAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::mencloseAtts[6] = {
-	CLASS, ID, NOTATION, STYLE, XLINK_HREF, XREF
+    CLASS, ID, NOTATION, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::merrorAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::mfencedAtts[8] = {
-	CLASS, CLOSE, ID, OPEN, SEPARATORS, STYLE, XLINK_HREF, XREF
+    CLASS, CLOSE, ID, OPEN, SEPARATORS, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::mfracAtts[9] = {
-	BEVELLED, CLASS, DENOMALIGN, ID, LINETHICKNESS, NUMALIGN, STYLE, 
-	XLINK_HREF, XREF
+    BEVELLED, CLASS, DENOMALIGN, ID, LINETHICKNESS, NUMALIGN, STYLE, 
+    XLINK_HREF, XREF
 };
 const Attribute MML::mglyphAtts[3] = {
-	ALT, FONTFAMILY, INDEX
+    ALT, FONTFAMILY, INDEX
 };
 const Attribute MML::miAtts[9] = {
-	CLASS, ID, MATHBACKGROUND, MATHCOLOR, MATHSIZE, MATHVARIANT, STYLE, 
-	XLINK_HREF, XREF
+    CLASS, ID, MATHBACKGROUND, MATHCOLOR, MATHSIZE, MATHVARIANT, STYLE, 
+    XLINK_HREF, XREF
 };
 const Attribute MML::minAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::minusAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::mlabeledtrAtts[8] = {
-	CLASS, COLUMNALIGN, GROUPALIGN, ID, ROWALIGN, STYLE, XLINK_HREF, XREF
+    CLASS, COLUMNALIGN, GROUPALIGN, ID, ROWALIGN, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::mmultiscriptsAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::mnAtts[9] = {
-	CLASS, ID, MATHBACKGROUND, MATHCOLOR, MATHSIZE, MATHVARIANT, STYLE, 
-	XLINK_HREF, XREF
+    CLASS, ID, MATHBACKGROUND, MATHCOLOR, MATHSIZE, MATHVARIANT, STYLE, 
+    XLINK_HREF, XREF
 };
 const Attribute MML::moAtts[21] = {
-	ACCENT, CLASS, FENCE, FORM, ID, LARGEOP, LSPACE, MATHBACKGROUND, 
-	MATHCOLOR, MATHSIZE, MATHVARIANT, MAXSIZE, MINSIZE, MOVABLELIMITS, 
-	RSPACE, SEPARATOR, STRETCHY, STYLE, SYMMETRIC, XLINK_HREF, XREF
+    ACCENT, CLASS, FENCE, FORM, ID, LARGEOP, LSPACE, MATHBACKGROUND, 
+    MATHCOLOR, MATHSIZE, MATHVARIANT, MAXSIZE, MINSIZE, MOVABLELIMITS, 
+    RSPACE, SEPARATOR, STRETCHY, STYLE, SYMMETRIC, XLINK_HREF, XREF
 };
 const Attribute MML::modeAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::momentAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::momentaboutAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::moverAtts[6] = {
-	ACCENT, CLASS, ID, STYLE, XLINK_HREF, XREF
+    ACCENT, CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::mpaddedAtts[9] = {
-	CLASS, DEPTH, HEIGHT, ID, LSPACE, STYLE, WIDTH, XLINK_HREF, XREF
+    CLASS, DEPTH, HEIGHT, ID, LSPACE, STYLE, WIDTH, XLINK_HREF, XREF
 };
 const Attribute MML::mphantomAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::mprescriptsAtts[1] = {
-	
+    
 };
 const Attribute MML::mrootAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::mrowAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::msAtts[11] = {
-	CLASS, ID, LQUOTE, MATHBACKGROUND, MATHCOLOR, MATHSIZE, MATHVARIANT, 
-	RQUOTE, STYLE, XLINK_HREF, XREF
+    CLASS, ID, LQUOTE, MATHBACKGROUND, MATHCOLOR, MATHSIZE, MATHVARIANT, 
+    RQUOTE, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::mspaceAtts[9] = {
-	CLASS, DEPTH, HEIGHT, ID, LINEBREAK, STYLE, WIDTH, XLINK_HREF, XREF
+    CLASS, DEPTH, HEIGHT, ID, LINEBREAK, STYLE, WIDTH, XLINK_HREF, XREF
 };
 const Attribute MML::msqrtAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::mstyleAtts[35] = {
-	ACCENT, BACKGROUND, CLASS, COLOR, DISPLAYSTYLE, FENCE, FORM, ID, 
-	LARGEOP, LINETHICKNESS, LSPACE, MATHBACKGROUND, MATHCOLOR, MATHSIZE, 
-	MATHVARIANT, MAXSIZE, MEDIUMMATHSPACE, MINSIZE, MOVABLELIMITS, RSPACE, 
-	SCRIPTLEVEL, SCRIPTMINSIZE, SCRIPTSIZEMULTIPLIER, SEPARATOR, STRETCHY, 
-	STYLE, SYMMETRIC, THICKMATHSPACE, THINMATHSPACE, VERYTHICKMATHSPACE, 
-	VERYTHINMATHSPACE, VERYVERYTHICKMATHSPACE, VERYVERYTHINMATHSPACE, 
-	XLINK_HREF, XREF
+    ACCENT, BACKGROUND, CLASS, COLOR, DISPLAYSTYLE, FENCE, FORM, ID, 
+    LARGEOP, LINETHICKNESS, LSPACE, MATHBACKGROUND, MATHCOLOR, MATHSIZE, 
+    MATHVARIANT, MAXSIZE, MEDIUMMATHSPACE, MINSIZE, MOVABLELIMITS, RSPACE, 
+    SCRIPTLEVEL, SCRIPTMINSIZE, SCRIPTSIZEMULTIPLIER, SEPARATOR, STRETCHY, 
+    STYLE, SYMMETRIC, THICKMATHSPACE, THINMATHSPACE, VERYTHICKMATHSPACE, 
+    VERYTHINMATHSPACE, VERYVERYTHICKMATHSPACE, VERYVERYTHINMATHSPACE, 
+    XLINK_HREF, XREF
 };
 const Attribute MML::msubAtts[6] = {
-	CLASS, ID, STYLE, SUBSCRIPTSHIFT, XLINK_HREF, XREF
+    CLASS, ID, STYLE, SUBSCRIPTSHIFT, XLINK_HREF, XREF
 };
 const Attribute MML::msubsupAtts[7] = {
-	CLASS, ID, STYLE, SUBSCRIPTSHIFT, SUPERSCRIPTSHIFT, XLINK_HREF, XREF
+    CLASS, ID, STYLE, SUBSCRIPTSHIFT, SUPERSCRIPTSHIFT, XLINK_HREF, XREF
 };
 const Attribute MML::msupAtts[6] = {
-	CLASS, ID, STYLE, SUPERSCRIPTSHIFT, XLINK_HREF, XREF
+    CLASS, ID, STYLE, SUPERSCRIPTSHIFT, XLINK_HREF, XREF
 };
 const Attribute MML::mtableAtts[23] = {
-	ALIGN, ALIGNMENTSCOPE, CLASS, COLUMNALIGN, COLUMNLINES, COLUMNSPACING, 
-	COLUMNWIDTH, DISPLAYSTYLE, EQUALCOLUMNS, EQUALROWS, FRAME, 
-	FRAMESPACING, GROUPALIGN, ID, MINLABELSPACING, ROWALIGN, ROWLINES, 
-	ROWSPACING, SIDE, STYLE, WIDTH, XLINK_HREF, XREF
+    ALIGN, ALIGNMENTSCOPE, CLASS, COLUMNALIGN, COLUMNLINES, COLUMNSPACING, 
+    COLUMNWIDTH, DISPLAYSTYLE, EQUALCOLUMNS, EQUALROWS, FRAME, 
+    FRAMESPACING, GROUPALIGN, ID, MINLABELSPACING, ROWALIGN, ROWLINES, 
+    ROWSPACING, SIDE, STYLE, WIDTH, XLINK_HREF, XREF
 };
 const Attribute MML::mtdAtts[10] = {
-	CLASS, COLUMNALIGN, COLUMNSPAN, GROUPALIGN, ID, ROWALIGN, ROWSPAN, 
-	STYLE, XLINK_HREF, XREF
+    CLASS, COLUMNALIGN, COLUMNSPAN, GROUPALIGN, ID, ROWALIGN, ROWSPAN, 
+    STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::mtextAtts[9] = {
-	CLASS, ID, MATHBACKGROUND, MATHCOLOR, MATHSIZE, MATHVARIANT, STYLE, 
-	XLINK_HREF, XREF
+    CLASS, ID, MATHBACKGROUND, MATHCOLOR, MATHSIZE, MATHVARIANT, STYLE, 
+    XLINK_HREF, XREF
 };
 const Attribute MML::mtrAtts[8] = {
-	CLASS, COLUMNALIGN, GROUPALIGN, ID, ROWALIGN, STYLE, XLINK_HREF, XREF
+    CLASS, COLUMNALIGN, GROUPALIGN, ID, ROWALIGN, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::munderAtts[6] = {
-	ACCENTUNDER, CLASS, ID, STYLE, XLINK_HREF, XREF
+    ACCENTUNDER, CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::munderoverAtts[7] = {
-	ACCENT, ACCENTUNDER, CLASS, ID, STYLE, XLINK_HREF, XREF
+    ACCENT, ACCENTUNDER, CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::naturalnumbersAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::neqAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::noneAtts[1] = {
-	
+    
 };
 const Attribute MML::notAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::notanumberAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::notinAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::notprsubsetAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::notsubsetAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::orAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::otherwiseAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::outerproductAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::partialdiffAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::piAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::pieceAtts[1] = {
-	
+    
 };
 const Attribute MML::piecewiseAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::plusAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::powerAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::primesAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::productAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::prsubsetAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::quotientAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::rationalsAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::realAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::realsAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::remAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::rootAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::scalarproductAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::sdevAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::secAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::sechAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::selectorAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::semanticsAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::sepAtts[1] = {
-	
+    
 };
 const Attribute MML::setAtts[6] = {
-	CLASS, ID, STYLE, TYPE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, TYPE, XLINK_HREF, XREF
 };
 const Attribute MML::setdiffAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::sinAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::sinhAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::subsetAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::sumAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::tanAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::tanhAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::tendstoAtts[8] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, TYPE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, TYPE, XLINK_HREF, XREF
 };
 const Attribute MML::timesAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::transposeAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::trueAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::unionAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::uplimitAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::varianceAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::vectorAtts[5] = {
-	CLASS, ID, STYLE, XLINK_HREF, XREF
+    CLASS, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::vectorproductAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute MML::xorAtts[7] = {
-	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
+    CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
 };
 const Attribute * const MML::attList[numElements] = {
-	absAtts, andAtts, annotationAtts, annotation_xmlAtts, applyAtts, 
-	approxAtts, arccosAtts, arccoshAtts, arccotAtts, arccothAtts, 
-	arccscAtts, arccschAtts, arcsecAtts, arcsechAtts, arcsinAtts, 
-	arcsinhAtts, arctanAtts, arctanhAtts, argAtts, bvarAtts, cardAtts, 
-	cartesianproductAtts, ceilingAtts, ciAtts, cnAtts, codomainAtts, 
-	complexesAtts, composeAtts, conditionAtts, conjugateAtts, cosAtts, 
-	coshAtts, cotAtts, cothAtts, cscAtts, cschAtts, csymbolAtts, curlAtts, 
-	declareAtts, degreeAtts, determinantAtts, diffAtts, divergenceAtts, 
-	divideAtts, domainAtts, domainofapplicationAtts, emptysetAtts, eqAtts, 
-	equivalentAtts, eulergammaAtts, existsAtts, expAtts, exponentialeAtts, 
-	factorialAtts, factorofAtts, falseAtts, floorAtts, forallAtts, gcdAtts, 
-	geqAtts, gradAtts, gtAtts, identAtts, imageAtts, imaginaryAtts, 
-	imaginaryiAtts, impliesAtts, inAtts, infinityAtts, intAtts, 
-	integersAtts, intersectAtts, intervalAtts, inverseAtts, lambdaAtts, 
-	laplacianAtts, lcmAtts, leqAtts, limitAtts, listAtts, lnAtts, logAtts, 
-	logbaseAtts, lowlimitAtts, ltAtts, mactionAtts, maligngroupAtts, 
-	malignmarkAtts, mathAtts, matrixAtts, matrixrowAtts, maxAtts, meanAtts, 
-	medianAtts, mencloseAtts, merrorAtts, mfencedAtts, mfracAtts, 
-	mglyphAtts, miAtts, minAtts, minusAtts, mlabeledtrAtts, 
-	mmultiscriptsAtts, mnAtts, moAtts, modeAtts, momentAtts, 
-	momentaboutAtts, moverAtts, mpaddedAtts, mphantomAtts, mprescriptsAtts, 
-	mrootAtts, mrowAtts, msAtts, mspaceAtts, msqrtAtts, mstyleAtts, 
-	msubAtts, msubsupAtts, msupAtts, mtableAtts, mtdAtts, mtextAtts, 
-	mtrAtts, munderAtts, munderoverAtts, naturalnumbersAtts, neqAtts, 
-	noneAtts, notAtts, notanumberAtts, notinAtts, notprsubsetAtts, 
-	notsubsetAtts, orAtts, otherwiseAtts, outerproductAtts, 
-	partialdiffAtts, piAtts, pieceAtts, piecewiseAtts, plusAtts, powerAtts, 
-	primesAtts, productAtts, prsubsetAtts, quotientAtts, rationalsAtts, 
-	realAtts, realsAtts, remAtts, rootAtts, scalarproductAtts, sdevAtts, 
-	secAtts, sechAtts, selectorAtts, semanticsAtts, sepAtts, setAtts, 
-	setdiffAtts, sinAtts, sinhAtts, subsetAtts, sumAtts, tanAtts, tanhAtts, 
-	tendstoAtts, timesAtts, transposeAtts, trueAtts, unionAtts, 
-	uplimitAtts, varianceAtts, vectorAtts, vectorproductAtts, xorAtts
+    absAtts, andAtts, annotationAtts, annotation_xmlAtts, applyAtts, 
+    approxAtts, arccosAtts, arccoshAtts, arccotAtts, arccothAtts, 
+    arccscAtts, arccschAtts, arcsecAtts, arcsechAtts, arcsinAtts, 
+    arcsinhAtts, arctanAtts, arctanhAtts, argAtts, bvarAtts, cardAtts, 
+    cartesianproductAtts, ceilingAtts, ciAtts, cnAtts, codomainAtts, 
+    complexesAtts, composeAtts, conditionAtts, conjugateAtts, cosAtts, 
+    coshAtts, cotAtts, cothAtts, cscAtts, cschAtts, csymbolAtts, curlAtts, 
+    declareAtts, degreeAtts, determinantAtts, diffAtts, divergenceAtts, 
+    divideAtts, domainAtts, domainofapplicationAtts, emptysetAtts, eqAtts, 
+    equivalentAtts, eulergammaAtts, existsAtts, expAtts, exponentialeAtts, 
+    factorialAtts, factorofAtts, falseAtts, floorAtts, forallAtts, gcdAtts, 
+    geqAtts, gradAtts, gtAtts, identAtts, imageAtts, imaginaryAtts, 
+    imaginaryiAtts, impliesAtts, inAtts, infinityAtts, intAtts, 
+    integersAtts, intersectAtts, intervalAtts, inverseAtts, lambdaAtts, 
+    laplacianAtts, lcmAtts, leqAtts, limitAtts, listAtts, lnAtts, logAtts, 
+    logbaseAtts, lowlimitAtts, ltAtts, mactionAtts, maligngroupAtts, 
+    malignmarkAtts, mathAtts, matrixAtts, matrixrowAtts, maxAtts, meanAtts, 
+    medianAtts, mencloseAtts, merrorAtts, mfencedAtts, mfracAtts, 
+    mglyphAtts, miAtts, minAtts, minusAtts, mlabeledtrAtts, 
+    mmultiscriptsAtts, mnAtts, moAtts, modeAtts, momentAtts, 
+    momentaboutAtts, moverAtts, mpaddedAtts, mphantomAtts, mprescriptsAtts, 
+    mrootAtts, mrowAtts, msAtts, mspaceAtts, msqrtAtts, mstyleAtts, 
+    msubAtts, msubsupAtts, msupAtts, mtableAtts, mtdAtts, mtextAtts, 
+    mtrAtts, munderAtts, munderoverAtts, naturalnumbersAtts, neqAtts, 
+    noneAtts, notAtts, notanumberAtts, notinAtts, notprsubsetAtts, 
+    notsubsetAtts, orAtts, otherwiseAtts, outerproductAtts, 
+    partialdiffAtts, piAtts, pieceAtts, piecewiseAtts, plusAtts, powerAtts, 
+    primesAtts, productAtts, prsubsetAtts, quotientAtts, rationalsAtts, 
+    realAtts, realsAtts, remAtts, rootAtts, scalarproductAtts, sdevAtts, 
+    secAtts, sechAtts, selectorAtts, semanticsAtts, sepAtts, setAtts, 
+    setdiffAtts, sinAtts, sinhAtts, subsetAtts, sumAtts, tanAtts, tanhAtts, 
+    tendstoAtts, timesAtts, transposeAtts, trueAtts, unionAtts, 
+    uplimitAtts, varianceAtts, vectorAtts, vectorproductAtts, xorAtts
 };
 const uint MML::attListLen[numElements] = {
-	7, 7, 6, 6, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 5, 7, 7, 7, 8, 
-	9, 7, 7, 7, 2, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 5, 7, 7, 7, 7, 7, 7, 7, 7, 
-	7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 
-	6, 7, 5, 7, 7, 7, 7, 6, 7, 7, 5, 7, 7, 7, 6, 6, 15, 5, 5, 7, 7, 7, 6, 
-	5, 8, 9, 3, 9, 7, 7, 8, 5, 9, 21, 7, 7, 7, 6, 9, 5, 0, 5, 5, 11, 9, 5, 
-	35, 6, 7, 6, 23, 10, 9, 8, 6, 7, 7, 7, 0, 7, 7, 7, 7, 7, 7, 5, 7, 7, 7, 
-	0, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 0, 6, 7, 7, 7, 
-	7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 5, 7, 7
+    7, 7, 6, 6, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 5, 7, 7, 7, 8, 
+    9, 7, 7, 7, 2, 7, 7, 7, 7, 7, 7, 7, 7, 7, 6, 5, 7, 7, 7, 7, 7, 7, 7, 7, 
+    7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 
+    6, 7, 5, 7, 7, 7, 7, 6, 7, 7, 5, 7, 7, 7, 6, 6, 15, 5, 5, 7, 7, 7, 6, 
+    5, 8, 9, 3, 9, 7, 7, 8, 5, 9, 21, 7, 7, 7, 6, 9, 5, 0, 5, 5, 11, 9, 5, 
+    35, 6, 7, 6, 23, 10, 9, 8, 6, 7, 7, 7, 0, 7, 7, 7, 7, 7, 7, 5, 7, 7, 7, 
+    0, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 0, 6, 7, 7, 7, 
+    7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 5, 7, 7
 };
 MMLAttribute * (* const MML::attFunc[numAttTypes])(const DOMString &, Attribute) = {
-	createBOOL, createDOMSTRING, createFLOAT, createH_UNIT, createINT, 
-	createMATHCOLOR, createMATHVARIANT, createV_UNIT
+    createBOOL, createDOMSTRING, createFLOAT, createH_UNIT, createINT, 
+    createMATHCOLOR, createMATHVARIANT, createV_UNIT
 };

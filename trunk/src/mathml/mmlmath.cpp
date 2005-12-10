@@ -23,52 +23,52 @@
 #include "mathml.h"
 
 MMLmath::MMLmath(MMLDocument *o) : MMLElement(MML::MATH, o) {
-	// initialize the default values for the attributes
-	if (!defset[id]) {
-		defset[id] = true;
-		const MMLAttribute **da = defatt[id];
-		using namespace MML;
-		createAttribute(ALTIMG, "", id, da);
-		createAttribute(ALTTEXT, "", id, da);
-		createAttribute(BASELINE, "", id, da);
-		createAttribute(DISPLAY, "inline", id, da);
-		createAttribute(HEIGHT, "0", id, da);
-		createAttribute(MACROS, "", id, da);
-		createAttribute(NAME, "", id, da);
-		createAttribute(OVERFLOW, "scroll", id, da);
-		createAttribute(TYPE, "", id, da);
-		createAttribute(WIDTH, "0", id, da);
-	}
+    // initialize the default values for the attributes
+    if (!defset[id]) {
+        defset[id] = true;
+        const MMLAttribute **da = defatt[id];
+        using namespace MML;
+        createAttribute(ALTIMG, "", id, da);
+        createAttribute(ALTTEXT, "", id, da);
+        createAttribute(BASELINE, "", id, da);
+        createAttribute(DISPLAY, "inline", id, da);
+        createAttribute(HEIGHT, "0", id, da);
+        createAttribute(MACROS, "", id, da);
+        createAttribute(NAME, "", id, da);
+        createAttribute(OVERFLOW, "scroll", id, da);
+        createAttribute(TYPE, "", id, da);
+        createAttribute(WIDTH, "0", id, da);
+    }
 }
 bool
 MMLmath::validate() {
-	if (validated) {
-		return valid;
-	}
-	validated = true;
-	validateChildren(0, true);
-	if (!valid) return false;
+    if (validated) {
+        return valid;
+    }
+    validated = true;
+    validateChildren(0, true);
+    if (!valid) return false;
 
-	// if there are more than one children: construct an inferred mrow
-	if (first && first != last) {
-		MMLNode *mrow = owner->createInferredmrow(this);
-		appendChild(mrow);
-	}
+    // if there are more than one children: construct an inferred mrow
+    if (first && first != last) {
+        MMLNode *mrow = owner->createInferredmrow(this);
+        appendChild(mrow);
+    }
 
-	return valid;
+    return valid;
 }
 void
 MMLmath::doLayout(MML::Attributes *a) const {
-	if (!first) return;
+    if (!first) return;
 
-	MMLNode *n = first;
-	n->layout(a);
-	gui->width = n->getWidth();
-	gui->ascent = n->getAscent();
-	gui->descent = n->getDescent();
+    MMLNode *n = first;
+    n->layout(a);
+    gui->width = n->getWidth();
+    gui->ascent = n->getAscent();
+    gui->descent = n->getDescent();
 }
 void
 MMLmath::doPaint(MML::Attributes *a) const {
-	if (!first) return;
-	first->paint(a);
+    if (!first) return;
+    first->paint(a);
 }

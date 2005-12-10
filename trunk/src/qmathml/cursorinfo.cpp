@@ -24,42 +24,42 @@
 #include <QVBoxLayout>
 
 CursorInfo::CursorInfo(QWidget *parent)
-	: QWidget(parent) {
-	start = new BPInfo();
-	end = new BPInfo();
-	setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    : QWidget(parent) {
+    start = new BPInfo();
+    end = new BPInfo();
+    setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
-	QVBoxLayout *layout = new QVBoxLayout();
+    QVBoxLayout *layout = new QVBoxLayout();
     setLayout(layout);
-	layout->addWidget(start);
-	layout->addWidget(end);
-	layout->addStretch(1);
-	mc = 0;
+    layout->addWidget(start);
+    layout->addWidget(end);
+    layout->addStretch(1);
+    mc = 0;
 }
 void
 CursorInfo::setDocument(MMLDocument *doc) {
-	if (doc) {
-		mc = doc->cursor();
-	} else {
-		mc = 0;
-	}	
-	cursorChanged();
+    if (doc) {
+        mc = doc->cursor();
+    } else {
+        mc = 0;
+    }    
+    cursorChanged();
 }
 void
 CursorInfo::cursorChanged() {
-	if (!mc) {
-		start->hide();
-		end->hide();
-	} else if (mc->collapsed()) {
-		start->setTitle(tr("cursor"));
-		start->setBoundPoint(mc->cursor());
-		end->hide();
-	} else {
-		start->setTitle(tr("start selection"));
-		start->setBoundPoint(mc->left());
-		start->show();
-		end->setTitle(tr("end selection"));
-		end->setBoundPoint(mc->right());
-		end->show();
-	}
+    if (!mc) {
+        start->hide();
+        end->hide();
+    } else if (mc->collapsed()) {
+        start->setTitle(tr("cursor"));
+        start->setBoundPoint(mc->cursor());
+        end->hide();
+    } else {
+        start->setTitle(tr("start selection"));
+        start->setBoundPoint(mc->left());
+        start->show();
+        end->setTitle(tr("end selection"));
+        end->setBoundPoint(mc->right());
+        end->show();
+    }
 }

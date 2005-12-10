@@ -8,26 +8,26 @@ class MMLDocument;
 class MathMLView : public QWidget {
 Q_OBJECT
 public:
-	MathMLView(QWidget *parent);
-	~MathMLView();
-	void setDocument(const MMLDocument *);
-	void changeFont(const QFont &);
-	void changeZoom(float);
+    MathMLView(QWidget *parent);
+    ~MathMLView();
+    void setDocument(const MMLDocument *);
+    void changeFont(const QFont &);
+    void changeZoom(float);
     QSize sizeHint() const {
         return scale*pix.size();
     }
 signals:
-	void cursorChanged();
+    void cursorChanged();
 public slots:
-	void setOutline(bool);
+    void setOutline(bool);
 protected:
-	void mousePressEvent(QMouseEvent *);
-	void mouseMoveEvent ( QMouseEvent * e );
-	void keyPressEvent(QKeyEvent *);
+    void mousePressEvent(QMouseEvent *);
+    void mouseMoveEvent ( QMouseEvent * e );
+    void keyPressEvent(QKeyEvent *);
     void paintEvent(QPaintEvent *);
 private:
-	float scale;
-	const MMLDocument *doc;
+    float scale;
+    const MMLDocument *doc;
     QPixmap pix;
     MMLPixmap mmlpix;
 

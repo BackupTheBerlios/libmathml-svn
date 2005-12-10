@@ -15,19 +15,19 @@
 class MMLPainter;
 class PainterSettings {
 public:
-	PainterSettings(MML::Attributes *);
-	bool isPainterSetting(MML::Attribute) const;
-	void setPainter(MMLPainter *p);
-	void set(MML::Attribute);
+    PainterSettings(MML::Attributes *);
+    bool isPainterSetting(MML::Attribute) const;
+    void setPainter(MMLPainter *p);
+    void set(MML::Attribute);
 private:
-	bool changeMMLPainter[MML::numAttributes];
-	MMLPainter *p;
-	const MML::Attributes *att;
+    bool changeMMLPainter[MML::numAttributes];
+    MMLPainter *p;
+    const MML::Attributes *att;
 
-	float fontmultiplier;
-	int oldscriptlevel;
-	void setFontSize();
-	void setScriptLevel();
+    float fontmultiplier;
+    int oldscriptlevel;
+    void setFontSize();
+    void setScriptLevel();
 };
 
 #endif

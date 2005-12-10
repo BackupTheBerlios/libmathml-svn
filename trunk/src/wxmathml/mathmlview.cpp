@@ -6,16 +6,16 @@
 #include <cmath>
 
 MathMLView::MathMLView(wxWindow *parent)
-	: wxWindow(parent, -1) {
-	m_owner = parent;
-	doc = 0;
+    : wxWindow(parent, -1) {
+    m_owner = parent;
+    doc = 0;
     m_scale = 1;
     mmlpix.setOutline(false);
 }
 MathMLView::~MathMLView() {
-	if (doc) {
-		delete doc;
-	}
+    if (doc) {
+        delete doc;
+    }
 }
 void
 MathMLView::setOutline(bool o) {
@@ -24,7 +24,7 @@ MathMLView::setOutline(bool o) {
 }
 void
 MathMLView::changeFont(const wxFont &f) {
-	mmlpix.setFont(f);
+    mmlpix.setFont(f);
     updatePix();
     GetParent()->Layout();
 }
@@ -38,7 +38,7 @@ MathMLView::setDocument(const MMLDocument *d) {
         mmlpix.setDocument(doc);
         updatePix();
     }
-	GetParent()->Layout();
+    GetParent()->Layout();
 }
 void
 MathMLView::updatePix() {
@@ -48,58 +48,58 @@ MathMLView::updatePix() {
 }
 const MMLDocument *
 MathMLView::document() const {
-	return doc;
+    return doc;
 }
 void
 MathMLView::OnPaint(wxPaintEvent &) {
-	if (doc) {
-		wxPaintDC dc(this);
+    if (doc) {
+        wxPaintDC dc(this);
         dc.SetUserScale(m_scale, m_scale);
         dc.Blit(0, 0, mmlpix.getWidth(), mmlpix.getHeight(), &mmlpix.getPixmap(), 0, 0);
-	}
+    }
 }
 void
 MathMLView::OnMouseMove(wxMouseEvent &e) {
-	if (!e.LeftIsDown()) return;
-	SetFocus();
-	if (doc) {
+    if (!e.LeftIsDown()) return;
+    SetFocus();
+    if (doc) {
         float x = e.GetX()/m_scale;
         float y = e.GetY()/m_scale;
         wxPoint p = mmlpix.getCoords((int)x, (int)y);
-		bool change = doc->constcursor()->selectTo(p.x, p.y);
+        bool change = doc->constcursor()->selectTo(p.x, p.y);
         if (change) {
             mmlpix.repaint();
             Refresh();
         }
-	}
+    }
 }
 void
 MathMLView::OnMousePress(wxMouseEvent &e) {
     printf("press\n");
-	SetFocus();
-	if (doc) {
+    SetFocus();
+    if (doc) {
         float x = e.GetX()/m_scale;
         float y = e.GetY()/m_scale;
         wxPoint p = mmlpix.getCoords((int)x, (int)y);
-		ConstMathCursor *c = doc->constcursor();
+        ConstMathCursor *c = doc->constcursor();
         bool change;
-		if (e.ShiftDown()) {
-			change = c->selectTo(x, y);
-		} else {
+        if (e.ShiftDown()) {
+            change = c->selectTo(x, y);
+        } else {
             printf("moving\n");
-			change = c->moveTo(x, y);
-		}
+            change = c->moveTo(x, y);
+        }
         if (change) {
             printf("changed\n");
             mmlpix.repaint();
             Refresh();
         }
-	}
+    }
 }
 // the event tables connect the wxWindows events with the functions (event
 // handlers) which process them.
 BEGIN_EVENT_TABLE(MathMLView, wxWindow)
-	EVT_PAINT  (MathMLView::OnPaint)
-	EVT_MOTION (MathMLView::OnMouseMove)
-	EVT_LEFT_DOWN (MathMLView::OnMousePress)
+    EVT_PAINT  (MathMLView::OnPaint)
+    EVT_MOTION (MathMLView::OnMouseMove)
+    EVT_LEFT_DOWN (MathMLView::OnMousePress)
 END_EVENT_TABLE()

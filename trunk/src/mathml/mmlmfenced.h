@@ -7,14 +7,14 @@
 class MMLmfenced : public MMLElement {
 friend MMLElement *MMLDocument::createElement(const DOMString &);
 public:
-	bool validate();
-	void doLayout(MML::Attributes *p) const;
-	void doPaint(MML::Attributes *) const;
+    bool validate();
+    void doLayout(MML::Attributes *p) const;
+    void doPaint(MML::Attributes *) const;
 private:
-	MMLmfenced(MMLDocument *);
+    MMLmfenced(MMLDocument *);
 
-	void setSeparators(const DOMString &s) const;
-	ushort getSeparator(short i, const DOMString &s) const;
+    void setSeparators(const DOMString &s) const;
+    ushort getSeparator(short i, const DOMString &s) const;
 };
 
 #endif

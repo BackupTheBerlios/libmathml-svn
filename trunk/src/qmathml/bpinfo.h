@@ -27,10 +27,10 @@ class QLabel;
 
 class BPInfo : public QGroupBox {
 public:
-	BPInfo(QWidget *parent = 0);
-	void setBoundPoint(const BoundPoint &bp);
+    BPInfo(QWidget *parent = 0);
+    void setBoundPoint(const BoundPoint &bp);
 private:
-	QLabel *nodeName;
+    QLabel *nodeName;
 };
 
 #endif

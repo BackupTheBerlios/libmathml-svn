@@ -21,16 +21,16 @@
 #define NODEGUI_H
 
 struct NodeGUI {
-	// coordinates of the element or document
-	float x, y;
-	float width;
-	float ascent;
-	float descent;
-	bool selected;
-	short firstviewport;
-	short lastviewport;
+    // coordinates of the element or document
+    float x, y;
+    float width;
+    float ascent;
+    float descent;
+    bool selected;
+    short firstviewport;
+    short lastviewport;
 
-	void resetCoords();
+    void resetCoords();
 };
 
 #endif

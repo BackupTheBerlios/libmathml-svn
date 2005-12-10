@@ -8,14 +8,14 @@
 using namespace std;
 
 MathMLView2::MathMLView2(QWidget *parent)
-	: QWidget(parent) {
+    : QWidget(parent) {
     // the size of the widget is fixed
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     // we have a buffered widget
     setAttribute(Qt::WA_NoBackground, true);
-	m_doc = NULL;
-	m_scale = 1;
-	setFocusPolicy(Qt::StrongFocus);
+    m_doc = NULL;
+    m_scale = 1;
+    setFocusPolicy(Qt::StrongFocus);
     m_mmlimg.setOutline(false);
     QColor c = palette().background().color();
     m_mmlimg.setBackgroundColor(c.red()/256.0, c.green()/256.0, c.blue()/256.0);
@@ -24,20 +24,20 @@ MathMLView2::MathMLView2(QWidget *parent)
     changeFont(font());
 }
 MathMLView2::~MathMLView2() {
-	if (m_doc) {
-		delete m_doc;
-	}
+    if (m_doc) {
+        delete m_doc;
+    }
 }
 void
 MathMLView2::setDocument(const MMLDocument *d) {
-	if (m_doc == d) return;
+    if (m_doc == d) return;
 
     // remove the image, because it references the buffer
     m_img = QImage();
     if (m_doc) {
         delete m_doc;
-	}
-	m_doc = d;
+    }
+    m_doc = d;
     m_mmlimg.setDocument(m_doc);
     updatePix();
 }
@@ -74,104 +74,104 @@ MathMLView2::changeFont(const QFont &f) {
         size = font().pixelSize()*72.0/logicalDpiX();
     }
     m_mmlimg.setFont((const char*)font().family().toUtf8(), size);
-	setFont(f);
+    setFont(f);
     updatePix();
 }
 void
 MathMLView2::changeZoom(float s) {
     if (m_scale != s) {
-	    m_scale = s;
+        m_scale = s;
         updateGeometry();
     }
 }
 void
 MathMLView2::setOutline(bool o) {
-	m_mmlimg.setOutline(o);
+    m_mmlimg.setOutline(o);
     updatePix();
 }
 void
 MathMLView2::mousePressEvent(QMouseEvent *e) {
-	setFocus();
-	if (m_doc) {
+    setFocus();
+    if (m_doc) {
         float x = e->x()/m_scale;
         float y = e->y()/m_scale;
         m_mmlimg.getCoords(x, y);
         bool change;
-		if (e->modifiers() == Qt::ShiftModifier) {
-			change = m_doc->constcursor()->selectTo(x, y);
-		} else {
-			change = m_doc->constcursor()->moveTo(x, y);
-		}
-		if (change) {
-			emit cursorChanged();
+        if (e->modifiers() == Qt::ShiftModifier) {
+            change = m_doc->constcursor()->selectTo(x, y);
+        } else {
+            change = m_doc->constcursor()->moveTo(x, y);
+        }
+        if (change) {
+            emit cursorChanged();
             m_mmlimg.repaint();
             updatePix();
-		}
-	}
+        }
+    }
 }
 void
 MathMLView2::mouseMoveEvent ( QMouseEvent *e  ) {
-	setFocus();
-	if (m_doc) {
-		float x = e->x()/m_scale;
-		float y = e->y()/m_scale;
+    setFocus();
+    if (m_doc) {
+        float x = e->x()/m_scale;
+        float y = e->y()/m_scale;
         m_mmlimg.getCoords(x, y);
-		bool change = m_doc->constcursor()->selectTo(x, y);
-		if (change) {
+        bool change = m_doc->constcursor()->selectTo(x, y);
+        if (change) {
             m_mmlimg.repaint();
             updatePix();
-		}
-	}
+        }
+    }
 }
 void
 MathMLView2::keyPressEvent(QKeyEvent *e) {
-	if (m_doc) {
-		ConstMathCursor *c = m_doc->constcursor();
-		bool change = true;
-		if (e->modifiers() == Qt::ShiftModifier) {
-			switch (e->key()) {
-			case Qt::Key_Up:
-				//n = c->moveUp();
-				break;
-			case Qt::Key_Down:
-				//n = c->moveDown();
-				break;
-			case Qt::Key_Left:
-				c->selectPrevious();
-				break;
-			case Qt::Key_Right:
-				c->selectNext();
-				break;
-			default:
-				change = false;
-				break;
-			}
-		} else {
-			switch (e->key()) {
-			case Qt::Key_Up:
-				c->moveUp();
-				break;
-			case Qt::Key_Down:
-				c->moveDown();
-				break;
-			case Qt::Key_Left:
-				c->movePrevious();
-				break;
-			case Qt::Key_Right:
-				c->moveNext();
-				break;
-			default:
-				change = false;
-				break;
-			}
-		}
-		if (change) {
-			emit cursorChanged();
+    if (m_doc) {
+        ConstMathCursor *c = m_doc->constcursor();
+        bool change = true;
+        if (e->modifiers() == Qt::ShiftModifier) {
+            switch (e->key()) {
+            case Qt::Key_Up:
+                //n = c->moveUp();
+                break;
+            case Qt::Key_Down:
+                //n = c->moveDown();
+                break;
+            case Qt::Key_Left:
+                c->selectPrevious();
+                break;
+            case Qt::Key_Right:
+                c->selectNext();
+                break;
+            default:
+                change = false;
+                break;
+            }
+        } else {
+            switch (e->key()) {
+            case Qt::Key_Up:
+                c->moveUp();
+                break;
+            case Qt::Key_Down:
+                c->moveDown();
+                break;
+            case Qt::Key_Left:
+                c->movePrevious();
+                break;
+            case Qt::Key_Right:
+                c->moveNext();
+                break;
+            default:
+                change = false;
+                break;
+            }
+        }
+        if (change) {
+            emit cursorChanged();
             m_mmlimg.repaint();
             updatePix();
-		}
-		printf("%s\n", c->container()->nodeName());
-	}
+        }
+        printf("%s\n", c->container()->nodeName());
+    }
 }
 void
 MathMLView2::focusOutEvent ( QFocusEvent * event ) {

@@ -26,28 +26,28 @@ class MMLNode;
 
 class ConstMathCursor {
 public:
-	ConstMathCursor(MathCursor *mc);
-	const MMLNode *movePrevious();
-	const MMLNode *moveNext();
-	const MMLNode *moveUp();
-	const MMLNode *moveDown();
-	const MMLNode *moveRight();
-	const MMLNode *moveLeft();
-	bool moveTo(float, float);
-	void selectNext();
-	void selectPrevious();
-	bool selectTo(float, float);
-	const MMLNode *container() const;
-	long offset() const;
-	const MMLNode *leftNode() const;
-	const MMLNode *rightNode() const;
-	void setBeforeNode(MMLNode *);
-	void setAfterNode(MMLNode *);
-	int nearness(const MMLNode *) const;
-	bool isSelected(const MMLNode *) const;
-	bool collapsed() const;
+    ConstMathCursor(MathCursor *mc);
+    const MMLNode *movePrevious();
+    const MMLNode *moveNext();
+    const MMLNode *moveUp();
+    const MMLNode *moveDown();
+    const MMLNode *moveRight();
+    const MMLNode *moveLeft();
+    bool moveTo(float, float);
+    void selectNext();
+    void selectPrevious();
+    bool selectTo(float, float);
+    const MMLNode *container() const;
+    long offset() const;
+    const MMLNode *leftNode() const;
+    const MMLNode *rightNode() const;
+    void setBeforeNode(MMLNode *);
+    void setAfterNode(MMLNode *);
+    int nearness(const MMLNode *) const;
+    bool isSelected(const MMLNode *) const;
+    bool collapsed() const;
 private:
-	MathCursor * const mc;
+    MathCursor * const mc;
 };
 
 #endif

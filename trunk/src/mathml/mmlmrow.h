@@ -8,14 +8,14 @@ class MMLmrow : public MMLElement {
 friend MMLElement *MMLDocument::createElement(const DOMString &);
 friend MMLmrow *MMLDocument::createInferredmrow(MMLElement *);
 public:
-	bool validate();
-	void doLayout(MML::Attributes *p) const;
-	void doPaint(MML::Attributes *) const;
+    bool validate();
+    void doLayout(MML::Attributes *p) const;
+    void doPaint(MML::Attributes *) const;
 protected:
-	MMLmrow(MML::Element, MMLDocument *); // allow mrow to be subclassed
+    MMLmrow(MML::Element, MMLDocument *); // allow mrow to be subclassed
 private:
 
-	MMLmrow(MMLDocument *);
+    MMLmrow(MMLDocument *);
 };
 
 #endif

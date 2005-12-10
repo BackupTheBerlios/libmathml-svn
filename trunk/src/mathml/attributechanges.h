@@ -5,20 +5,20 @@
 
 class MMLAttribute;
 struct AttributeChange {
-	short id;
-	const MMLAttribute *newA;
-	const MMLAttribute *oldA;
+    short id;
+    const MMLAttribute *newA;
+    const MMLAttribute *oldA;
 };
 
 class AttributeChanges {
 public:
-	AttributeChanges();
-	void add(short id, const MMLAttribute *newA, const MMLAttribute *oldA);
-	bool empty() const;
-	short size() const;
-	AttributeChange pop();
+    AttributeChanges();
+    void add(short id, const MMLAttribute *newA, const MMLAttribute *oldA);
+    bool empty() const;
+    short size() const;
+    AttributeChange pop();
 private:
-	std::stack<AttributeChange> changes;
+    std::stack<AttributeChange> changes;
 };
 
 #endif

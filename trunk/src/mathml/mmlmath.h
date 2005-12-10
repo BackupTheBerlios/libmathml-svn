@@ -24,13 +24,13 @@
 #include "mmldocument.h"
 
 class MMLmath : public MMLElement {
-friend	MMLElement *MMLDocument::createElement(const DOMString &);
+friend    MMLElement *MMLDocument::createElement(const DOMString &);
 public:
-	bool validate();
-	void doLayout(MML::Attributes *p) const;
-	void doPaint(MML::Attributes *) const;
+    bool validate();
+    void doLayout(MML::Attributes *p) const;
+    void doPaint(MML::Attributes *) const;
 private:
-	MMLmath(MMLDocument *);
+    MMLmath(MMLDocument *);
 };
 
 #endif

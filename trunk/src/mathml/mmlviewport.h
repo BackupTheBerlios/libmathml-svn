@@ -14,39 +14,39 @@ class MMLDocument;
 
 class MMLViewPort {
 public:
-	MMLViewPort();
-	MMLViewPort(MMLDocument *);
-	void setOwner(MMLDocument *o);
-	void setX(float x) { this->x = x; }
-	void setY(float y) { this->y = y; }
-	void setWidth(float w) { width = w; }
-	void setAscent(float a) { ascent = a; }
-	void setDescent(float d) { descent = d; }
-	void setBegin();
-	void setBegin(const BoundPoint &b);
-	void setEnd();
-	void setEnd(const BoundPoint &e);
-	void setMaxWidth(float);
-	float getX() const { return x; }
-	float getY() const { return y; }
-	float getWidth() const { return width; }
-	float getAscent() const { return ascent; }
-	float getDescent() const { return descent; }
-	const BoundPoint &getBegin() const;
-	const BoundPoint &getEnd() const;
-	bool isFull() const;
-	void translate(float x, float y);
-	bool fit(float width, float ascent, float descent) const;
-	void add(float width, float ascent, float descent);
+    MMLViewPort();
+    MMLViewPort(MMLDocument *);
+    void setOwner(MMLDocument *o);
+    void setX(float x) { this->x = x; }
+    void setY(float y) { this->y = y; }
+    void setWidth(float w) { width = w; }
+    void setAscent(float a) { ascent = a; }
+    void setDescent(float d) { descent = d; }
+    void setBegin();
+    void setBegin(const BoundPoint &b);
+    void setEnd();
+    void setEnd(const BoundPoint &e);
+    void setMaxWidth(float);
+    float getX() const { return x; }
+    float getY() const { return y; }
+    float getWidth() const { return width; }
+    float getAscent() const { return ascent; }
+    float getDescent() const { return descent; }
+    const BoundPoint &getBegin() const;
+    const BoundPoint &getEnd() const;
+    bool isFull() const;
+    void translate(float x, float y);
+    bool fit(float width, float ascent, float descent) const;
+    void add(float width, float ascent, float descent);
 private:
-	bool full;
-	float maxwidth;
-	float width, ascent, descent;
-	float x, y;
-	float lx, ly;
-	MMLDocument *owner;
-	BoundPoint begin;
-	BoundPoint end;
+    bool full;
+    float maxwidth;
+    float width, ascent, descent;
+    float x, y;
+    float lx, ly;
+    MMLDocument *owner;
+    BoundPoint begin;
+    BoundPoint end;
 };
 
 #endif

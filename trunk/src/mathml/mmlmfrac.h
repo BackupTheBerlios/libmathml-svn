@@ -5,14 +5,14 @@
 #include "mmldocument.h"
 #include "mmll_unit.h"
 class MMLmfrac : public MMLElement {
-friend	MMLElement *MMLDocument::createElement(const DOMString &);
+friend    MMLElement *MMLDocument::createElement(const DOMString &);
 public:
-	bool validate();
-	void doLayout(MML::Attributes *) const;
-	void doPaint(MML::Attributes *) const;
-	static v_unit defLineThickness;
+    bool validate();
+    void doLayout(MML::Attributes *) const;
+    void doPaint(MML::Attributes *) const;
+    static v_unit defLineThickness;
 private:
-	MMLmfrac(MMLDocument *);
+    MMLmfrac(MMLDocument *);
 };
 
 #endif
