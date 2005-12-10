@@ -12,41 +12,41 @@
 <!-- ====================================================================== -->
 
 <!-- 4.4.1.1 cn -->
-<xsl:template match="m:cn"><xsl:apply-templates/></xsl:template>
+<xsl:template match="cn"><xsl:apply-templates/></xsl:template>
 
-<xsl:template match="m:cn[@type='complex-cartesian']">
+<xsl:template match="cn[@type='complex-cartesian']">
 	<xsl:apply-templates select="text()[1]"/>
   	<xsl:text>+</xsl:text>
 	<xsl:apply-templates select="text()[2]"/>
 	<xsl:text>i</xsl:text>
 </xsl:template>
 
-<xsl:template match="m:cn[@type='rational']">
+<xsl:template match="cn[@type='rational']">
 	<xsl:apply-templates select="text()[1]"/>
 	<xsl:text>/</xsl:text>
 	<xsl:apply-templates select="text()[2]"/>
 </xsl:template>
 
-<xsl:template match="m:cn[@type='integer' and @base!=10]">
+<xsl:template match="cn[@type='integer' and @base!=10]">
 		<xsl:apply-templates/>
 		<xsl:text>_{</xsl:text><xsl:value-of select="@base"/><xsl:text>}</xsl:text>
 </xsl:template>
 
-<xsl:template match="m:cn[@type='complex-polar']">
+<xsl:template match="cn[@type='complex-polar']">
 	<xsl:apply-templates select="text()[1]"/>
 	<xsl:text>e^{i </xsl:text>
 	<xsl:apply-templates select="text()[2]"/>
 	<xsl:text>}</xsl:text>
 </xsl:template>
 
-<xsl:template match="m:cn[@type='e-notation']">
+<xsl:template match="cn[@type='e-notation']">
     <xsl:apply-templates select="text()[1]"/>
     <xsl:text>E</xsl:text>
     <xsl:apply-templates select="text()[2]"/>
 </xsl:template>
 
 <!-- 4.4.1.1 ci 4.4.1.2 csymbol -->
-<xsl:template match="m:ci | m:csymbol">
+<xsl:template match="ci | csymbol">
 	<xsl:choose>
 		<xsl:when test="string-length(normalize-space(text()))>1">
 			<xsl:text>\mathrm{</xsl:text><xsl:apply-templates/><xsl:text>}</xsl:text>
@@ -56,7 +56,7 @@
 </xsl:template>
 
 <!-- 4.4.2.1 apply 4.4.2.2 reln -->
-<xsl:template match="m:apply | m:reln">
+<xsl:template match="apply | reln">
 	<xsl:apply-templates select="*[1]">
 	<!-- <? -->
 		<xsl:with-param name="p" select="10"/>
@@ -71,12 +71,12 @@
 </xsl:template>
 
 <!-- 4.4.2.3 fn -->
-<xsl:template match="m:fn[m:apply[1]]"> <!-- for m:fn using default rule -->
+<xsl:template match="fn[apply[1]]"> <!-- for fn using default rule -->
 	<xsl:text>(</xsl:text><xsl:apply-templates/><xsl:text>)</xsl:text>
 </xsl:template>
 
 <!-- 4.4.2.4 interval -->
-<xsl:template match="m:interval[*[2]]">
+<xsl:template match="interval[*[2]]">
 	<xsl:choose>
 		<xsl:when test="@closure='open' or @closure='open-closed'">
 			<xsl:text>\left(</xsl:text>		
@@ -94,32 +94,32 @@
 	</xsl:choose>
 </xsl:template>
 
-<xsl:template match="m:interval">
+<xsl:template match="interval">
 	<xsl:text>\left\{</xsl:text><xsl:apply-templates/><xsl:text>\right\}</xsl:text>
 </xsl:template>
 
 <!-- 4.4.2.5 inverse -->
-<xsl:template match="m:apply[*[1][self::m:inverse]]">
+<xsl:template match="apply[*[1][self::inverse]]">
 	<xsl:apply-templates select="*[2]"/><xsl:text>^{(-1)}</xsl:text>
 </xsl:template>
 
 <!-- 4.4.2.6 sep 4.4.2.7 condition -->
-<xsl:template match="m:sep | m:condition"><xsl:apply-templates/></xsl:template>
+<xsl:template match="sep | condition"><xsl:apply-templates/></xsl:template>
 
 <!-- 4.4.2.9 lambda -->
-<xsl:template match="m:lambda">
-	<xsl:apply-templates select="m:bvar/*"/>
+<xsl:template match="lambda">
+	<xsl:apply-templates select="bvar/*"/>
   <xsl:text>\mapsto </xsl:text>
   <xsl:apply-templates select="*[last()]"/>
 <!--	Other variant 
 	<xsl:text>\mathrm{lambda}\: </xsl:text>
-  	<xsl:apply-templates select="m:bvar/*"/>
+  	<xsl:apply-templates select="bvar/*"/>
   	<xsl:text>.\: </xsl:text>
   <xsl:apply-templates select="*[last()]"/> -->
 </xsl:template>
 
 <!-- 4.4.2.10 compose -->
-<xsl:template match="m:apply[*[1][self::m:compose]]">
+<xsl:template match="apply[*[1][self::compose]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="1"/>
@@ -129,43 +129,43 @@
 </xsl:template>
 
 <!-- 4.4.2.11 ident -->
-<xsl:template match="m:ident"><xsl:text>\mathrm{id}</xsl:text></xsl:template>
+<xsl:template match="ident"><xsl:text>\mathrm{id}</xsl:text></xsl:template>
 
 <!-- 4.4.2.12 domain 4.4.2.13 codomain 4.4.2.14 image 4.4.3.21 arg 4.4.3.24 lcm
 		4.4.5.9 grad 4.4.5.10 curl 4.4.9.4 median 4.4.9.5 mode-->
-<xsl:template match="m:domain | m:codomain | m:image | m:arg | m:lcm | m:grad |
-								 m:curl | m:median | m:mode">
+<xsl:template match="domain | codomain | image | arg | lcm | grad |
+								 curl | median | mode">
 	<xsl:text>\mathop{\mathrm{</xsl:text>
 	<xsl:value-of select="local-name()"/>
 	<xsl:text>}}</xsl:text>
 </xsl:template>
 
 <!-- 4.4.2.15 domainofapplication -->
-<xsl:template match="m:domainofapplication"/>
+<xsl:template match="domainofapplication"/>
 
 <!-- 4.4.2.16 piecewise -->
-<xsl:template match="m:piecewise">
+<xsl:template match="piecewise">
 	<xsl:text>\begin{cases}</xsl:text>
-	<xsl:apply-templates select="m:piece"/>
-	<xsl:apply-templates select="m:otherwise"/>
+	<xsl:apply-templates select="piece"/>
+	<xsl:apply-templates select="otherwise"/>
 	<xsl:text>\end{cases}</xsl:text>
 </xsl:template>
 
-<xsl:template match="m:piece">
+<xsl:template match="piece">
 		<xsl:apply-templates select="*[1]"/>
 		<xsl:text> &amp; \text{if $</xsl:text>
 		<xsl:apply-templates select="*[2]"/>
 		<xsl:text>$}</xsl:text>
-		<xsl:if test="not(position()=last()) or ../m:otherwise"><xsl:text>\\ </xsl:text></xsl:if>
+		<xsl:if test="not(position()=last()) or ../otherwise"><xsl:text>\\ </xsl:text></xsl:if>
 </xsl:template>
 
-<xsl:template match="m:otherwise">
+<xsl:template match="otherwise">
 	<xsl:apply-templates select="*[1]"/>
 	<xsl:text> &amp; \text{otherwise}</xsl:text>
 </xsl:template>
 
 <!-- 4.4.3.1 quotient -->
-<xsl:template match="m:apply[*[1][self::m:quotient]]">
+<xsl:template match="apply[*[1][self::quotient]]">
 	<xsl:text>\left\lfloor\frac{</xsl:text>
 	<xsl:apply-templates select="*[2]"/>
 	<xsl:text>}{</xsl:text>
@@ -174,7 +174,7 @@
 </xsl:template>
 
 <!-- 4.4.3.2 factorial -->
-<xsl:template match="m:apply[*[1][self::m:factorial]]">
+<xsl:template match="apply[*[1][self::factorial]]">
 	<xsl:apply-templates select="*[2]">
 		<xsl:with-param name="p" select="7"/>
 	</xsl:apply-templates>
@@ -182,7 +182,7 @@
 </xsl:template>
 
 <!-- 4.4.3.3 divide -->
-<xsl:template match="m:apply[*[1][self::m:divide]]">
+<xsl:template match="apply[*[1][self::divide]]">
 	<xsl:param name="p" select="0"/>
   <xsl:param name="this-p" select="3"/>
   <xsl:if test="$this-p &lt; $p"><xsl:text>\left(</xsl:text></xsl:if>
@@ -199,15 +199,15 @@
 </xsl:template>
 
 <!-- 4.4.3.4 max min -->
-<xsl:template match="m:apply[*[1][self::m:max or self::m:min]]">
+<xsl:template match="apply[*[1][self::max or self::min]]">
 	<xsl:text>\</xsl:text>
 	<xsl:value-of select="local-name(*[1])"/>
 	<xsl:text>\{</xsl:text>
    <xsl:choose>
-		<xsl:when test="m:condition">
+		<xsl:when test="condition">
    		<xsl:apply-templates select="*[last()]"/>
    		<xsl:text>\mid </xsl:text>
-			<xsl:apply-templates select="m:condition/node()"/>
+			<xsl:apply-templates select="condition/node()"/>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:for-each select="*[position() &gt; 1]">
@@ -220,14 +220,14 @@
 </xsl:template>
 
 <!-- 4.4.3.5  minus-->
-<xsl:template match="m:apply[*[1][self::m:minus] and count(*)=2]">
+<xsl:template match="apply[*[1][self::minus] and count(*)=2]">
 	<xsl:text>-</xsl:text>
 	<xsl:apply-templates select="*[2]">
 		<xsl:with-param name="p" select="5"/>
 	</xsl:apply-templates>
 </xsl:template>
 
-<xsl:template match="m:apply[*[1][self::m:minus] and count(*)&gt;2]">
+<xsl:template match="apply[*[1][self::minus] and count(*)&gt;2]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="binary">
 		<xsl:with-param name="mo">-</xsl:with-param>
@@ -237,7 +237,7 @@
 </xsl:template>
 
 <!-- 4.4.3.6  plus-->
-<xsl:template match="m:apply[*[1][self::m:plus]]">
+<xsl:template match="apply[*[1][self::plus]]">
   <xsl:param name="p" select="0"/>
   <xsl:if test="$p &gt; 2">
 		<xsl:text>(</xsl:text>
@@ -245,23 +245,23 @@
   <xsl:for-each select="*[position()&gt;1]">
    <xsl:if test="position() &gt; 1">
     <xsl:choose>
-      <xsl:when test="self::m:apply[*[1][self::m:times] and
-      *[2][self::m:apply/*[1][self::m:minus] or self::m:cn[not(m:sep) and
+      <xsl:when test="self::apply[*[1][self::times] and
+      *[2][self::apply/*[1][self::minus] or self::cn[not(sep) and
       (number(.) &lt; 0)]]]">-</xsl:when>
       <xsl:otherwise>+</xsl:otherwise>
     </xsl:choose>
    </xsl:if>   
     <xsl:choose>
-      <xsl:when test="self::m:apply[*[1][self::m:times] and
-      *[2][self::m:cn[not(m:sep) and (number(.) &lt;0)]]]">
+      <xsl:when test="self::apply[*[1][self::times] and
+      *[2][self::cn[not(sep) and (number(.) &lt;0)]]]">
 			<xsl:value-of select="-(*[2])"/>
 			<xsl:apply-templates select=".">
 		     <xsl:with-param name="first" select="2"/>
 		     <xsl:with-param name="p" select="2"/>
 		   </xsl:apply-templates>
        </xsl:when>
-      <xsl:when test="self::m:apply[*[1][self::m:times] and
-      *[2][self::m:apply/*[1][self::m:minus]]]">
+      <xsl:when test="self::apply[*[1][self::times] and
+      *[2][self::apply/*[1][self::minus]]]">
 				<xsl:apply-templates select="./*[2]/*[2]"/>
 				<xsl:apply-templates select=".">
 					<xsl:with-param name="first" select="2"/>
@@ -281,7 +281,7 @@
 </xsl:template>
 
 <!-- 4.4.3.7 power -->
-<xsl:template match="m:apply[*[1][self::m:power]]">
+<xsl:template match="apply[*[1][self::power]]">
 	<xsl:apply-templates select="*[2]">
 		<xsl:with-param name="p" select="5"/>
 	</xsl:apply-templates>
@@ -293,7 +293,7 @@
 </xsl:template>
 
 <!-- 4.4.3.8 remainder -->
-<xsl:template match="m:apply[*[1][self::m:rem]]">
+<xsl:template match="apply[*[1][self::rem]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="binary">
 		<xsl:with-param name="mo">\mod </xsl:with-param>
@@ -303,14 +303,14 @@
 </xsl:template>
 
 <!-- 4.4.3.9  times-->
-<xsl:template match="m:apply[*[1][self::m:times]]" name="times">
+<xsl:template match="apply[*[1][self::times]]" name="times">
   <xsl:param name="p" select="0"/>
   <xsl:param name="first" select="1"/>
   <xsl:if test="$p &gt; 3"><xsl:text>(</xsl:text></xsl:if>
   <xsl:for-each select="*[position()&gt;1]">
 		<xsl:if test="position() &gt; 1">
 			<xsl:choose>
-				<xsl:when test="self::m:cn">\times <!-- times --></xsl:when>
+				<xsl:when test="self::cn">\times <!-- times --></xsl:when>
 				<xsl:otherwise><!--invisible times--></xsl:otherwise>
 			</xsl:choose>
 		</xsl:if> 
@@ -324,23 +324,23 @@
 </xsl:template>
 
 <!-- 4.4.3.10 root -->
-<xsl:template match="m:apply[*[1][self::m:root]]">
+<xsl:template match="apply[*[1][self::root]]">
 	<xsl:text>\sqrt</xsl:text>
-	<xsl:if test="m:degree!=2">
+	<xsl:if test="degree!=2">
 		<xsl:text>[</xsl:text>
-		<xsl:apply-templates select="m:degree/*"/>
+		<xsl:apply-templates select="degree/*"/>
 		<xsl:text>]</xsl:text>
 	</xsl:if>
 	<xsl:text>{</xsl:text>
-	<xsl:apply-templates select="*[position()&gt;1 and not(self::m:degree)]"/>
+	<xsl:apply-templates select="*[position()&gt;1 and not(self::degree)]"/>
 	<xsl:text>}</xsl:text>
 </xsl:template>
 
 <!-- 4.4.3.11 gcd -->
-<xsl:template match="m:gcd"><xsl:text>\gcd </xsl:text></xsl:template>
+<xsl:template match="gcd"><xsl:text>\gcd </xsl:text></xsl:template>
 
 <!-- 4.4.3.12 and -->
-<xsl:template match="m:apply[*[1][self::m:and]]">
+<xsl:template match="apply[*[1][self::and]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="2"/>
@@ -350,7 +350,7 @@
 </xsl:template>
 
 <!-- 4.4.3.13 or -->
-<xsl:template match="m:apply[*[1][self::m:or]]">
+<xsl:template match="apply[*[1][self::or]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="3"/>
@@ -360,7 +360,7 @@
 </xsl:template>
 
 <!-- 4.4.3.14 xor -->
-<xsl:template match="m:apply[*[1][self::m:xor]]">
+<xsl:template match="apply[*[1][self::xor]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="3"/>
@@ -370,7 +370,7 @@
 </xsl:template>
 
 <!-- 4.4.3.15 not -->
-<xsl:template match="m:apply[*[1][self::m:not]]">
+<xsl:template match="apply[*[1][self::not]]">
 	<xsl:text>\neg </xsl:text>
 	<xsl:apply-templates select="*[2]">
 		<xsl:with-param name="p" select="7"/>
@@ -378,7 +378,7 @@
 </xsl:template>
 
 <!-- 4.4.3.16 implies -->
-<xsl:template match="m:apply[*[1][self::m:implies]] | m:reln[*[1][self::m:implies]]">
+<xsl:template match="apply[*[1][self::implies]] | reln[*[1][self::implies]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="binary">
 		<xsl:with-param name="mo">\implies </xsl:with-param>
@@ -388,13 +388,13 @@
 </xsl:template>
 
 <!-- 4.4.3.17 forall 4.4.3.18 exists -->
-<xsl:template match="m:apply[*[1][self::m:forall or self::m:exists]]">
+<xsl:template match="apply[*[1][self::forall or self::exists]]">
 	<xsl:text>\</xsl:text>
 	<xsl:value-of select="local-name(*[1])"/>
 	<xsl:text> </xsl:text>
-	<xsl:apply-templates select="m:bvar"/>
-	<xsl:if test="m:condition">
-		<xsl:text>, </xsl:text><xsl:apply-templates select="m:condition"/>
+	<xsl:apply-templates select="bvar"/>
+	<xsl:if test="condition">
+		<xsl:text>, </xsl:text><xsl:apply-templates select="condition"/>
 	</xsl:if>
 	<xsl:if test="*[last()][local-name()!='condition'][local-name()!='bvar']">
 		<xsl:text>\colon </xsl:text>
@@ -403,39 +403,39 @@
 </xsl:template>
 
 <!-- 4.4.3.19 abs -->
-<xsl:template match="m:apply[*[1][self::m:abs]]">
+<xsl:template match="apply[*[1][self::abs]]">
 	<xsl:text>\left|</xsl:text>
 	<xsl:apply-templates select="*[2]"/>
 	<xsl:text>\right|</xsl:text>
 </xsl:template>
 
 <!-- 4.4.3.20 conjugate -->
-<xsl:template match="m:apply[*[1][self::m:conjugate]]">
+<xsl:template match="apply[*[1][self::conjugate]]">
 	<xsl:text>\overline{</xsl:text><xsl:apply-templates select="*[2]"/><xsl:text>}</xsl:text>
 </xsl:template>
 
 <!-- 4.4.3.22 real -->
-<xsl:template match="m:real"><xsl:text>\Re </xsl:text></xsl:template>
+<xsl:template match="real"><xsl:text>\Re </xsl:text></xsl:template>
 
 <!-- 4.4.3.23 imaginary -->
-<xsl:template match="m:imaginary"><xsl:text>\Im </xsl:text></xsl:template>
+<xsl:template match="imaginary"><xsl:text>\Im </xsl:text></xsl:template>
 
 <!-- 4.4.3.25 floor -->
-<xsl:template match="m:apply[*[1][self::m:floor]]">
+<xsl:template match="apply[*[1][self::floor]]">
 	<xsl:text>\lfloor </xsl:text>
 	<xsl:apply-templates select="*[2]"/>
 	<xsl:text>\rfloor </xsl:text>
 </xsl:template>
 
 <!-- 4.4.3.25 ceiling -->
-<xsl:template match="m:apply[*[1][self::m:ceiling]]">
+<xsl:template match="apply[*[1][self::ceiling]]">
 	<xsl:text>\lceil </xsl:text>
 	<xsl:apply-templates select="*[2]"/>
 	<xsl:text>\rceil </xsl:text>
 </xsl:template>
 
 <!-- 4.4.4.1 eq -->
-<xsl:template match="m:apply[*[1][self::m:eq]] | m:reln[*[1][self::m:eq]]">
+<xsl:template match="apply[*[1][self::eq]] | reln[*[1][self::eq]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="1"/>
@@ -445,7 +445,7 @@
 </xsl:template>
 
 <!-- 4.4.4.2 neq -->
-<xsl:template match="m:apply[*[1][self::m:neq]] | m:reln[*[1][self::m:neq]]">
+<xsl:template match="apply[*[1][self::neq]] | reln[*[1][self::neq]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="1"/>
@@ -455,7 +455,7 @@
 </xsl:template>
 
 <!-- 4.4.4.3 gt -->
-<xsl:template match="m:apply[*[1][self::m:gt]] | m:reln[*[1][self::m:gt]]">
+<xsl:template match="apply[*[1][self::gt]] | reln[*[1][self::gt]]">
 <xsl:param name="p" select="0"/>
 <xsl:call-template name="infix">
 	<xsl:with-param name="this-p" select="1"/>
@@ -465,7 +465,7 @@
 </xsl:template>
 
 <!-- 4.4.4.4 lt -->
-<xsl:template match="m:apply[*[1][self::m:lt]] | m:reln[*[1][self::m:lt]]">
+<xsl:template match="apply[*[1][self::lt]] | reln[*[1][self::lt]]">
 <xsl:param name="p" select="0"/>
 <xsl:call-template name="infix">
 	<xsl:with-param name="this-p" select="1"/>
@@ -475,7 +475,7 @@
 </xsl:template>
 
 <!-- 4.4.4.5 geq -->
-<xsl:template match="m:apply[*[1][self::m:geq]] | m:reln[*[1][self::m:geq]]">
+<xsl:template match="apply[*[1][self::geq]] | reln[*[1][self::geq]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="1"/>
@@ -485,7 +485,7 @@
 </xsl:template>
 
 <!-- 4.4.4.6 leq -->
-<xsl:template match="m:apply[*[1][self::m:leq]] | m:reln[*[1][self::m:leq]]">
+<xsl:template match="apply[*[1][self::leq]] | reln[*[1][self::leq]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="1"/>
@@ -495,7 +495,7 @@
 </xsl:template>
 
 <!-- 4.4.4.7 equivalent -->
-<xsl:template match="m:apply[*[1][self::m:equivalent]] | m:reln[*[1][self::m:equivalent]]">
+<xsl:template match="apply[*[1][self::equivalent]] | reln[*[1][self::equivalent]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="1"/>
@@ -505,7 +505,7 @@
 </xsl:template>
 
 <!-- 4.4.4.8 approx -->
-<xsl:template match="m:apply[*[1][self::m:approx]] | m:reln[*[1][self::m:approx]]">
+<xsl:template match="apply[*[1][self::approx]] | reln[*[1][self::approx]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="1"/>
@@ -515,7 +515,7 @@
 </xsl:template>
 
 <!-- 4.4.4.9 factorof -->
-<xsl:template match="m:apply[*[1][self::m:factorof]] | m:reln[*[1][self::m:factorof]]">
+<xsl:template match="apply[*[1][self::factorof]] | reln[*[1][self::factorof]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="binary">
 		<xsl:with-param name="mo"> | </xsl:with-param>
@@ -525,58 +525,58 @@
 </xsl:template>
 
 <!-- 4.4.5.1 int -->
-<xsl:template match="m:apply[*[1][self::m:int]]">
+<xsl:template match="apply[*[1][self::int]]">
 	<xsl:text>\int</xsl:text>
-	<xsl:if test="m:lowlimit/*|m:interval/*[1]|m:condition/*">
+	<xsl:if test="lowlimit/*|interval/*[1]|condition/*">
 		<xsl:text>_{</xsl:text>
-		<xsl:apply-templates select="m:lowlimit/*|m:interval/*[1]|m:condition/*"/>
+		<xsl:apply-templates select="lowlimit/*|interval/*[1]|condition/*"/>
 		<xsl:text>}</xsl:text>
 	</xsl:if>
-	<xsl:if test="m:uplimit/*|m:interval/*[2]">
+	<xsl:if test="uplimit/*|interval/*[2]">
 		<xsl:text>^{</xsl:text>
-		<xsl:apply-templates select="m:uplimit/*|m:interval/*[2]"/>
+		<xsl:apply-templates select="uplimit/*|interval/*[2]"/>
 		<xsl:text>}</xsl:text>
 	</xsl:if>
 	<xsl:text> </xsl:text>
 	<xsl:apply-templates select="*[last()]"/>
 	<xsl:text>\,d </xsl:text>
-	<xsl:apply-templates select="m:bvar"/>
+	<xsl:apply-templates select="bvar"/>
 </xsl:template>
 
 <!-- 4.4.5.2 diff -->
-<xsl:template match="m:apply[*[1][self::m:diff] and m:ci and count(*)=2]" priority="2">
+<xsl:template match="apply[*[1][self::diff] and ci and count(*)=2]" priority="2">
 	<xsl:apply-templates select="*[2]"/>
 	<xsl:text>^\prime </xsl:text>
 </xsl:template>
 
-<xsl:template match="m:apply[*[1][self::m:diff]]" priority="1">
+<xsl:template match="apply[*[1][self::diff]]" priority="1">
 	<xsl:text>\frac{</xsl:text>
 	<xsl:choose>
-		<xsl:when test="m:bvar/m:degree">
+		<xsl:when test="bvar/degree">
 			<xsl:text>d^{</xsl:text>
-			<xsl:apply-templates select="m:bvar/m:degree/node()"/>
+			<xsl:apply-templates select="bvar/degree/node()"/>
 			<xsl:text>}</xsl:text>
 			<xsl:apply-templates select="*[last()]"/>
 			<xsl:text>}{d</xsl:text>
-			<xsl:apply-templates select="m:bvar/node()"/>
+			<xsl:apply-templates select="bvar/node()"/>
 			<xsl:text>^{</xsl:text>
-			<xsl:apply-templates select="m:bvar/m:degree/node()"/>
+			<xsl:apply-templates select="bvar/degree/node()"/>
 			<xsl:text>}</xsl:text>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:text>d </xsl:text>
 			<xsl:apply-templates select="*[last()]"/>
 			<xsl:text>}{d </xsl:text>
-			<xsl:apply-templates select="m:bvar"/>
+			<xsl:apply-templates select="bvar"/>
 		</xsl:otherwise>
 	</xsl:choose>
 	<xsl:text>}</xsl:text>
 </xsl:template>
 
 <!-- 4.4.5.3 partialdiff -->
-<xsl:template match="m:apply[*[1][self::m:partialdiff] and m:list and m:ci and count(*)=3]" priority="2">
+<xsl:template match="apply[*[1][self::partialdiff] and list and ci and count(*)=3]" priority="2">
 	<xsl:text>D_{</xsl:text>
-	<xsl:for-each select="m:list[1]/*">
+	<xsl:for-each select="list[1]/*">
 		<xsl:apply-templates select="."/>
 		<xsl:if test="position()&lt;last()"><xsl:text>, </xsl:text></xsl:if>
 	</xsl:for-each>
@@ -584,35 +584,35 @@
 	<xsl:apply-templates select="*[3]"/>
 </xsl:template>
 
-<xsl:template match="m:apply[*[1][self::m:partialdiff]]" priority="1">
+<xsl:template match="apply[*[1][self::partialdiff]]" priority="1">
 	<xsl:text>\frac{\partial^{</xsl:text>
 	<xsl:choose>
-		<xsl:when test="m:degree">
-			<xsl:apply-templates select="m:degree/node()"/>
+		<xsl:when test="degree">
+			<xsl:apply-templates select="degree/node()"/>
 		</xsl:when>
-		<xsl:when test="m:bvar/m:degree[string(number(.))='NaN']">
-			<xsl:for-each select="m:bvar/m:degree">
+		<xsl:when test="bvar/degree[string(number(.))='NaN']">
+			<xsl:for-each select="bvar/degree">
 				<xsl:apply-templates select="node()"/>
 				<xsl:if test="position()&lt;last()"><xsl:text>+</xsl:text></xsl:if>
 			</xsl:for-each>
-			<xsl:if test="count(m:bvar[not(m:degree)])&gt;0">
+			<xsl:if test="count(bvar[not(degree)])&gt;0">
 				<xsl:text>+</xsl:text>
-				<xsl:value-of select="count(m:bvar[not(m:degree)])"/>
+				<xsl:value-of select="count(bvar[not(degree)])"/>
 			</xsl:if>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:value-of select="sum(m:bvar/m:degree)+count(m:bvar[not(m:degree)])"/>
+			<xsl:value-of select="sum(bvar/degree)+count(bvar[not(degree)])"/>
 		</xsl:otherwise>
 	</xsl:choose>
 	<xsl:text>}</xsl:text>
 	<xsl:apply-templates select="*[last()]"/>
 	<xsl:text>}{</xsl:text>
-	<xsl:for-each select="m:bvar">
+	<xsl:for-each select="bvar">
 		<xsl:text>\partial </xsl:text>
 		<xsl:apply-templates select="node()"/>
-		<xsl:if test="m:degree">
+		<xsl:if test="degree">
 			<xsl:text>^{</xsl:text>
-			<xsl:apply-templates select="m:degree/node()"/>
+			<xsl:apply-templates select="degree/node()"/>
 			<xsl:text>}</xsl:text>
 		</xsl:if>
 	</xsl:for-each>
@@ -620,36 +620,36 @@
 </xsl:template>
 
 <!-- 4.4.2.8 declare 4.4.5.4 lowlimit 4.4.5.5 uplimit 4.4.5.7 degree 4.4.9.5 momentabout -->
-<xsl:template match="m:declare | m:lowlimit | m:uplimit | m:degree | m:momentabout"/>
+<xsl:template match="declare | lowlimit | uplimit | degree | momentabout"/>
 
 <!-- 4.4.5.6  bvar-->
-<xsl:template match="m:bvar">
+<xsl:template match="bvar">
 	<xsl:apply-templates/>
-	<xsl:if test="following-sibling::m:bvar"><xsl:text>, </xsl:text></xsl:if>
+	<xsl:if test="following-sibling::bvar"><xsl:text>, </xsl:text></xsl:if>
 </xsl:template>
 
 <!-- 4.4.5.8 divergence-->
-<xsl:template match="m:divergence"><xsl:text>\mathop{\mathrm{div}}</xsl:text></xsl:template>
+<xsl:template match="divergence"><xsl:text>\mathop{\mathrm{div}}</xsl:text></xsl:template>
 
 <!-- 4.4.5.11 laplacian-->
-<xsl:template match="m:laplacian"><xsl:text>\nabla^2 </xsl:text></xsl:template>
+<xsl:template match="laplacian"><xsl:text>\nabla^2 </xsl:text></xsl:template>
 
 <!-- 4.4.6.1 set -->
-<xsl:template match="m:set">
+<xsl:template match="set">
 	<xsl:text>\{</xsl:text><xsl:call-template name="set"/><xsl:text>\}</xsl:text>
 </xsl:template>
 
 <!-- 4.4.6.2 list -->
-<xsl:template match="m:list">
+<xsl:template match="list">
 	<xsl:text>\left[</xsl:text><xsl:call-template name="set"/><xsl:text>\right]</xsl:text>
 </xsl:template>
 
 <xsl:template name="set">
    <xsl:choose>
-		<xsl:when test="m:condition">
-   		<xsl:apply-templates select="m:bvar/*[not(self::bvar or self::condition)]"/>
+		<xsl:when test="condition">
+   		<xsl:apply-templates select="bvar/*[not(self::bvar or self::condition)]"/>
    		<xsl:text>\colon </xsl:text>
-			<xsl:apply-templates select="m:condition/node()"/>
+			<xsl:apply-templates select="condition/node()"/>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:for-each select="*">
@@ -661,7 +661,7 @@
 </xsl:template>
 
 <!-- 4.4.6.3 union -->
-<xsl:template match="m:apply[*[1][self::m:union]]">
+<xsl:template match="apply[*[1][self::union]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="2"/>
@@ -671,7 +671,7 @@
 </xsl:template>
 
 <!-- 4.4.6.4 intersect -->
-<xsl:template match="m:apply[*[1][self::m:intersect]]">
+<xsl:template match="apply[*[1][self::intersect]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="3"/>
@@ -681,7 +681,7 @@
 </xsl:template>
 
 <!-- 4.4.6.5 in -->
-<xsl:template match="m:apply[*[1][self::m:in]] | m:reln[*[1][self::m:in]]">
+<xsl:template match="apply[*[1][self::in]] | reln[*[1][self::in]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="binary">
 		<xsl:with-param name="mo">\in </xsl:with-param>
@@ -691,7 +691,7 @@
 </xsl:template>
 
 <!-- 4.4.6.6 notin -->
-<xsl:template match="m:apply[*[1][self::m:notin]] | m:reln[*[1][self::m:notin]]">
+<xsl:template match="apply[*[1][self::notin]] | reln[*[1][self::notin]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="binary">
 		<xsl:with-param name="mo">\notin </xsl:with-param>
@@ -701,7 +701,7 @@
 </xsl:template>
 
 <!-- 4.4.6.7 subset -->
-<xsl:template match="m:apply[*[1][self::m:subset]] | m:reln[*[1][self::m:subset]]">
+<xsl:template match="apply[*[1][self::subset]] | reln[*[1][self::subset]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="2"/>
@@ -711,7 +711,7 @@
 </xsl:template>
 
 <!-- 4.4.6.8 prsubset -->
-<xsl:template match="m:apply[*[1][self::m:prsubset]] | m:reln[*[1][self::m:prsubset]]">
+<xsl:template match="apply[*[1][self::prsubset]] | reln[*[1][self::prsubset]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="2"/>
@@ -721,7 +721,7 @@
 </xsl:template>
 
 <!-- 4.4.6.9 notsubset -->
-<xsl:template match="m:apply[*[1][self::m:notsubset]] | m:reln[*[1][self::m:notsubset]]">
+<xsl:template match="apply[*[1][self::notsubset]] | reln[*[1][self::notsubset]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="binary">
 		<xsl:with-param name="this-p" select="2"/>
@@ -731,7 +731,7 @@
 </xsl:template>
 
 <!-- 4.4.6.10 notprsubset -->
-<xsl:template match="m:apply[*[1][self::m:notprsubset]] | m:reln[*[1][self::m:notprsubset]]">
+<xsl:template match="apply[*[1][self::notprsubset]] | reln[*[1][self::notprsubset]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="binary">
 		<xsl:with-param name="this-p" select="2"/>
@@ -741,7 +741,7 @@
 </xsl:template>
 
 <!-- 4.4.6.11 setdiff -->
-<xsl:template match="m:apply[*[1][self::m:setdiff]]">
+<xsl:template match="apply[*[1][self::setdiff]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="binary">
 		<xsl:with-param name="this-p" select="2"/>
@@ -751,14 +751,14 @@
 </xsl:template>
 
 <!-- 4.4.6.12 card -->
-<xsl:template match="m:apply[*[1][self::m:card]]">
+<xsl:template match="apply[*[1][self::card]]">
 	<xsl:text>|</xsl:text>
 	<xsl:apply-templates select="*[2]"/>
 	<xsl:text>|</xsl:text>
 </xsl:template>
 
 <!-- 4.4.6.13 cartesianproduct 4.4.10.6 vectorproduct -->
-<xsl:template match="m:apply[*[1][self::m:cartesianproduct or self::m:vectorproduct]]">
+<xsl:template match="apply[*[1][self::cartesianproduct or self::vectorproduct]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="2"/>
@@ -768,7 +768,7 @@
 </xsl:template>
 
 <xsl:template
-match="m:apply[*[1][self::m:cartesianproduct][count(following-sibling::m:reals)=count(following-sibling::*)]]"
+match="apply[*[1][self::cartesianproduct][count(following-sibling::reals)=count(following-sibling::*)]]"
 priority="2">
 	<xsl:apply-templates select="*[2]">
 		<xsl:with-param name="p" select="5"/>
@@ -779,28 +779,28 @@ priority="2">
 </xsl:template>
 
 <!-- 4.4.7.1 sum -->
-<xsl:template match="m:apply[*[1][self::m:sum]]">
+<xsl:template match="apply[*[1][self::sum]]">
 	<xsl:text>\sum</xsl:text><xsl:call-template name="series"/>
 </xsl:template>
 
 <!-- 4.4.7.2 product -->
-<xsl:template match="m:apply[*[1][self::m:product]]">
+<xsl:template match="apply[*[1][self::product]]">
 	<xsl:text>\prod</xsl:text><xsl:call-template name="series"/>
 </xsl:template>
 	
 <xsl:template name="series">
-	<xsl:if test="m:lowlimit/*|m:interval/*[1]|m:condition/*">
+	<xsl:if test="lowlimit/*|interval/*[1]|condition/*">
 		<xsl:text>_{</xsl:text>
-		<xsl:if test="not(m:condition)">
-			<xsl:apply-templates select="m:bvar"/>
+		<xsl:if test="not(condition)">
+			<xsl:apply-templates select="bvar"/>
 			<xsl:text>=</xsl:text>
 		</xsl:if>
-		<xsl:apply-templates select="m:lowlimit/*|m:interval/*[1]|m:condition/*"/>
+		<xsl:apply-templates select="lowlimit/*|interval/*[1]|condition/*"/>
 		<xsl:text>}</xsl:text>
 	</xsl:if>
-	<xsl:if test="m:uplimit/*|m:interval/*[2]">
+	<xsl:if test="uplimit/*|interval/*[2]">
 		<xsl:text>^{</xsl:text>
-		<xsl:apply-templates select="m:uplimit/*|m:interval/*[2]"/>
+		<xsl:apply-templates select="uplimit/*|interval/*[2]"/>
 		<xsl:text>}</xsl:text>
 	</xsl:if>
 	<xsl:text> </xsl:text>
@@ -808,21 +808,21 @@ priority="2">
 </xsl:template>
 
 <!-- 4.4.7.3 limit -->
-<xsl:template match="m:apply[*[1][self::m:limit]]">
+<xsl:template match="apply[*[1][self::limit]]">
 	<xsl:text>\lim_{</xsl:text>
-	<xsl:apply-templates select="m:lowlimit|m:condition/*"/>
+	<xsl:apply-templates select="lowlimit|condition/*"/>
 	<xsl:text>}</xsl:text>
 	<xsl:apply-templates select="*[last()]"/>
 </xsl:template>
 
-<xsl:template match="m:apply[m:limit]/m:lowlimit" priority="3">
-	<xsl:apply-templates select="../m:bvar/node()"/>
+<xsl:template match="apply[limit]/lowlimit" priority="3">
+	<xsl:apply-templates select="../bvar/node()"/>
 	<xsl:text>\to </xsl:text>
 	<xsl:apply-templates/>
 </xsl:template>
 
 <!-- 4.4.7.4 tendsto -->
-<xsl:template match="m:apply[*[1][self::m:tendsto]] | m:reln[*[1][self::m:tendsto]]">
+<xsl:template match="apply[*[1][self::tendsto]] | reln[*[1][self::tendsto]]">
 	<xsl:param name="p"/>
 	<xsl:call-template name="binary">
 		<xsl:with-param name="this-p" select="2"/>
@@ -839,11 +839,11 @@ priority="2">
 </xsl:template>
 
 <!-- 4.4.8.1 common tringonometric functions 4.4.8.3 natural logarithm -->
-<xsl:template match="m:apply[*[1][
- self::m:sin or 		self::m:cos or 	self::m:tan or		self::m:sec or
- self::m:csc or 		self::m:cot or 	self::m:sinh or	 	self::m:cosh or
- self::m:tanh or 		self::m:coth or	self::m:arcsin or 	self::m:arccos or
- self::m:arctan or 	self::m:ln]]">
+<xsl:template match="apply[*[1][
+ self::sin or 		self::cos or 	self::tan or		self::sec or
+ self::csc or 		self::cot or 	self::sinh or	 	self::cosh or
+ self::tanh or 		self::coth or	self::arcsin or 	self::arccos or
+ self::arctan or 	self::ln]]">
 	<xsl:text>\</xsl:text>
 	<xsl:value-of select="local-name(*[1])"/>
 	<xsl:text> </xsl:text>
@@ -852,19 +852,19 @@ priority="2">
 	</xsl:apply-templates>
 </xsl:template>
 
-<xsl:template match="m:sin | m:cos | m:tan | m:sec | m:csc |
-								 m:cot | m:sinh | m:cosh | m:tanh | m:coth |
-								 m:arcsin | m:arccos | m:arctan | m:ln">
+<xsl:template match="sin | cos | tan | sec | csc |
+								 cot | sinh | cosh | tanh | coth |
+								 arcsin | arccos | arctan | ln">
 	<xsl:text>\</xsl:text>
 	<xsl:value-of select="local-name(.)"/>
 	<xsl:text> </xsl:text>
 </xsl:template>
 
-<xsl:template match="m:apply[*[1][
- self::m:sech or 		self::m:csch or		self::m:arccosh or
- self::m:arccot or 	self::m:arccoth or 	self::m:arccsc or
- self::m:arccsch or self::m:arcsec or 	self::m:arcsech or
- self::m:arcsinh or self::m:arctanh]]">
+<xsl:template match="apply[*[1][
+ self::sech or 		self::csch or		self::arccosh or
+ self::arccot or 	self::arccoth or 	self::arccsc or
+ self::arccsch or self::arcsec or 	self::arcsech or
+ self::arcsinh or self::arctanh]]">
 	<xsl:text>\mathrm{</xsl:text>
 	<xsl:value-of select="local-name(*[1])"/>
 	<xsl:text>\,}</xsl:text>
@@ -873,30 +873,30 @@ priority="2">
 	</xsl:apply-templates>
 </xsl:template>
 
-<xsl:template match="m:sech | m:csch | m:arccosh | m:arccot |
-								 m:arccoth | m:arccsc |m:arccsch |m:arcsec |
-								 m:arcsech | m:arcsinh | m:arctanh">
+<xsl:template match="sech | csch | arccosh | arccot |
+								 arccoth | arccsc |arccsch |arcsec |
+								 arcsech | arcsinh | arctanh">
 	<xsl:text>\mathrm{</xsl:text>
 	<xsl:value-of select="local-name(.)"/>
 	<xsl:text>}</xsl:text>
 </xsl:template>
 
 <!-- 4.4.8.2 exp -->
-<xsl:template match="m:apply[*[1][self::m:exp]]">
+<xsl:template match="apply[*[1][self::exp]]">
 	<xsl:text>e^{</xsl:text><xsl:apply-templates select="*[2]"/><xsl:text>}</xsl:text>
 </xsl:template>
 
 <!-- 4.4.8.4 log -->
-<xsl:template match="m:apply[*[1][self::m:log]]">
+<xsl:template match="apply[*[1][self::log]]">
 	<xsl:text>\lg </xsl:text>
 	<xsl:apply-templates select="*[last()]">
 		<xsl:with-param name="p" select="7"/>
 	</xsl:apply-templates>
 </xsl:template>
 
-<xsl:template match="m:apply[*[1][self::m:log] and m:logbase != 10]">
+<xsl:template match="apply[*[1][self::log] and logbase != 10]">
 	<xsl:text>\log_{</xsl:text>
-	<xsl:apply-templates select="m:logbase/node()"/>
+	<xsl:apply-templates select="logbase/node()"/>
 	<xsl:text>}</xsl:text>
 	<xsl:apply-templates select="*[last()]">
 		<xsl:with-param name="p" select="7"/>
@@ -904,7 +904,7 @@ priority="2">
 </xsl:template>
 
 <!-- 4.4.9.1 mean -->
-<xsl:template match="m:apply[*[1][self::m:mean]]">
+<xsl:template match="apply[*[1][self::mean]]">
 	<xsl:text>\langle </xsl:text>
 	<xsl:for-each select="*[position()&gt;1]">
 		<xsl:apply-templates select="."/>
@@ -914,32 +914,32 @@ priority="2">
 </xsl:template>
 
 <!-- 4.4.9.2 sdef -->
-<xsl:template match="m:sdev"><xsl:text>\sigma </xsl:text></xsl:template>
+<xsl:template match="sdev"><xsl:text>\sigma </xsl:text></xsl:template>
 
 <!-- 4.4.9.3 variance -->
-<xsl:template match="m:apply[*[1][self::m:variance]]">
+<xsl:template match="apply[*[1][self::variance]]">
 	<xsl:text>\sigma(</xsl:text>
 	<xsl:apply-templates select="*[2]"/>
 	<xsl:text>)^2</xsl:text>
 </xsl:template>
 
 <!-- 4.4.9.5 moment -->
-<xsl:template match="m:apply[*[1][self::m:moment]]">
+<xsl:template match="apply[*[1][self::moment]]">
 	<xsl:text>\langle </xsl:text>
 	<xsl:apply-templates select="*[last()]"/>
 	<xsl:text>^{</xsl:text>
-	<xsl:apply-templates select="m:degree/node()"/>
+	<xsl:apply-templates select="degree/node()"/>
 	<xsl:text>}\rangle</xsl:text>
-	<xsl:if test="m:momentabout">
+	<xsl:if test="momentabout">
 		<xsl:text>_{</xsl:text>
-		<xsl:apply-templates select="m:momentabout/node()"/>
+		<xsl:apply-templates select="momentabout/node()"/>
 		<xsl:text>}</xsl:text>
 	</xsl:if>
 	<xsl:text> </xsl:text>
 </xsl:template>
 
 <!-- 4.4.10.1 vector  -->
-<xsl:template match="m:vector">
+<xsl:template match="vector">
 	<xsl:text>\left(\begin{array}{c}</xsl:text>
 	<xsl:for-each select="*">
 		<xsl:apply-templates select="."/>
@@ -949,14 +949,14 @@ priority="2">
 </xsl:template>
 
 <!-- 4.4.10.2 matrix  -->
-<xsl:template match="m:matrix">
+<xsl:template match="matrix">
 	<xsl:text>\begin{pmatrix}</xsl:text>
 	<xsl:apply-templates/>
 	<xsl:text>\end{pmatrix}</xsl:text>
 </xsl:template>
 
 <!-- 4.4.10.3 matrixrow  -->
-<xsl:template match="m:matrixrow">
+<xsl:template match="matrixrow">
 	<xsl:for-each select="*">
 		<xsl:apply-templates select="."/>
 		<xsl:if test="position()!=last()"><xsl:text> &amp; </xsl:text></xsl:if>
@@ -965,21 +965,21 @@ priority="2">
 </xsl:template>
 
 <!-- 4.4.10.4 determinant  -->
-<xsl:template match="m:apply[*[1][self::m:determinant]]">
+<xsl:template match="apply[*[1][self::determinant]]">
 	<xsl:text>\det </xsl:text>
 	<xsl:apply-templates select="*[2]">
 		<xsl:with-param name="p" select="7"/>
 	</xsl:apply-templates>
 </xsl:template>
 
-<xsl:template match="m:apply[*[1][self::m:determinant]][*[2][self::m:matrix]]" priority="2">
+<xsl:template match="apply[*[1][self::determinant]][*[2][self::matrix]]" priority="2">
 	<xsl:text>\begin{vmatrix}</xsl:text>
-	<xsl:apply-templates select="m:matrix/*"/>
+	<xsl:apply-templates select="matrix/*"/>
 	<xsl:text>\end{vmatrix}</xsl:text>
 </xsl:template>
 
 <!-- 4.4.10.5 transpose -->
-<xsl:template match="m:apply[*[1][self::m:transpose]]">
+<xsl:template match="apply[*[1][self::transpose]]">
 	<xsl:apply-templates select="*[2]">
 		<xsl:with-param name="p" select="7"/>
 	</xsl:apply-templates>
@@ -987,7 +987,7 @@ priority="2">
 </xsl:template>
 
 <!-- 4.4.10.6 selector -->
-<xsl:template match="m:apply[*[1][self::m:selector]]">
+<xsl:template match="apply[*[1][self::selector]]">
 	<xsl:apply-templates select="*[2]">
 		<xsl:with-param name="p" select="7"/>
 	</xsl:apply-templates>
@@ -1000,7 +1000,7 @@ priority="2">
 </xsl:template>
 
 <!-- 4.4.10.8 scalarproduct -->
-<xsl:template match="m:apply[*[1][self::m:scalarproduct]]">
+<xsl:template match="apply[*[1][self::scalarproduct]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="2"/>
@@ -1010,7 +1010,7 @@ priority="2">
 </xsl:template>
 
 <!-- 4.4.10.9 outerproduct -->
-<xsl:template match="m:apply[*[1][self::m:outerproduct]]">
+<xsl:template match="apply[*[1][self::outerproduct]]">
 	<xsl:param name="p" select="0"/>
 	<xsl:call-template name="infix">
 		<xsl:with-param name="this-p" select="2"/>
@@ -1020,56 +1020,56 @@ priority="2">
 </xsl:template>
 
 <!-- 4.4.11.2 semantics -->
-<xsl:template match="m:semantics"><xsl:apply-templates select="*[1]"/></xsl:template>
+<xsl:template match="semantics"><xsl:apply-templates select="*[1]"/></xsl:template>
 
-<xsl:template match="m:semantics[m:annotation/@encoding='TeX']">
-	<xsl:apply-templates select="m:annotation[@encoding='TeX']/node()"/>
+<xsl:template match="semantics[annotation/@encoding='TeX']">
+	<xsl:apply-templates select="annotation[@encoding='TeX']/node()"/>
 </xsl:template>
 
 <!-- 4.4.12.1 integers -->
-<xsl:template match="m:integers"><xsl:text>\mathbb{Z}</xsl:text></xsl:template>
+<xsl:template match="integers"><xsl:text>\mathbb{Z}</xsl:text></xsl:template>
 
 <!-- 4.4.12.2 reals -->
-<xsl:template match="m:reals"><xsl:text>\mathbb{R}</xsl:text></xsl:template>
+<xsl:template match="reals"><xsl:text>\mathbb{R}</xsl:text></xsl:template>
 
 <!-- 4.4.12.3 rationals -->
-<xsl:template match="m:rationals"><xsl:text>\mathbb{Q}</xsl:text></xsl:template>
+<xsl:template match="rationals"><xsl:text>\mathbb{Q}</xsl:text></xsl:template>
 
 <!-- 4.4.12.4 naturalnumbers -->
-<xsl:template match="m:naturalnumbers"><xsl:text>\mathbb{N}</xsl:text></xsl:template>
+<xsl:template match="naturalnumbers"><xsl:text>\mathbb{N}</xsl:text></xsl:template>
 
 <!-- 4.4.12.5 complexes -->
-<xsl:template match="m:complexes"><xsl:text>\mathbb{C}</xsl:text></xsl:template>
+<xsl:template match="complexes"><xsl:text>\mathbb{C}</xsl:text></xsl:template>
 
 <!-- 4.4.12.6 primes -->
-<xsl:template match="m:primes"><xsl:text>\mathbb{P}</xsl:text></xsl:template>
+<xsl:template match="primes"><xsl:text>\mathbb{P}</xsl:text></xsl:template>
 	
 <!-- 4.4.12.7 exponentiale -->
-<xsl:template match="m:exponentiale"><xsl:text>e</xsl:text></xsl:template>
+<xsl:template match="exponentiale"><xsl:text>e</xsl:text></xsl:template>
 
 <!-- 4.4.12.8 imaginaryi -->
-<xsl:template match="m:imaginaryi"><xsl:text>i</xsl:text></xsl:template>
+<xsl:template match="imaginaryi"><xsl:text>i</xsl:text></xsl:template>
 
 <!-- 4.4.12.9 notanumber -->
-<xsl:template match="m:notanumber"><xsl:text>NaN</xsl:text></xsl:template>
+<xsl:template match="notanumber"><xsl:text>NaN</xsl:text></xsl:template>
 
 <!-- 4.4.12.10 true -->
-<xsl:template match="m:true"><xsl:text>\mbox{true}</xsl:text></xsl:template>
+<xsl:template match="true"><xsl:text>\mbox{true}</xsl:text></xsl:template>
 
 <!-- 4.4.12.11 false -->
-<xsl:template match="m:false"><xsl:text>\mbox{false}</xsl:text></xsl:template>
+<xsl:template match="false"><xsl:text>\mbox{false}</xsl:text></xsl:template>
 
 <!-- 4.4.12.12 emptyset -->
-<xsl:template match="m:emptyset"><xsl:text>\emptyset </xsl:text></xsl:template>
+<xsl:template match="emptyset"><xsl:text>\emptyset </xsl:text></xsl:template>
 
 <!-- 4.4.12.13 pi -->
-<xsl:template match="m:pi"><xsl:text>\pi </xsl:text></xsl:template>
+<xsl:template match="pi"><xsl:text>\pi </xsl:text></xsl:template>
 
 <!-- 4.4.12.14 eulergamma -->
-<xsl:template match="m:eulergamma"><xsl:text>\gamma </xsl:text></xsl:template>
+<xsl:template match="eulergamma"><xsl:text>\gamma </xsl:text></xsl:template>
 
 <!-- 4.4.12.15 infinity -->
-<xsl:template match="m:infinity"><xsl:text>\infty </xsl:text></xsl:template>
+<xsl:template match="infinity"><xsl:text>\infty </xsl:text></xsl:template>
 
 <!-- ****************************** -->
 <xsl:template name="infix" >

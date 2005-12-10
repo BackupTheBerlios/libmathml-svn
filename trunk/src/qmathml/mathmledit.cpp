@@ -55,7 +55,7 @@ MathMLEdit::MathMLEdit(QWidget *parent, Qt::WFlags f)
 	testimage->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
 	testimage->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
-	latex = new LatexLoader();
+	latex = new LatexLoader(this);
 	connect(latex, SIGNAL(readImage(const QPixmap &)),
 		testimage, SLOT(setPixmap(const QPixmap &)));
 
@@ -164,7 +164,7 @@ MathMLEdit::setMML() {
 		cursorinfo->setDocument(0);
 		mv->setDocument(0);
 	}
-	//latex->parseData(qte->toPlainText());
+	latex->parseData(qte->toPlainText());
 }
 void
 MathMLEdit::setExamplesDir(const QString &dir) {

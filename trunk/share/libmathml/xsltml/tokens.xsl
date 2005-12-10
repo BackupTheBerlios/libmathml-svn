@@ -10,12 +10,12 @@
      copyright and other information                                        -->
 <!-- ====================================================================== -->
 
-<xsl:template match="m:mi|m:mn|m:mo|m:mtext|m:ms">
+<xsl:template match="mi|mn|mo|mtext|ms">
 	<xsl:call-template name="CommonTokenAtr"/>
 </xsl:template>
 
 <!-- 3.2.9 mglyph -->
-<xsl:template match="m:mglyph">
+<xsl:template match="mglyph">
 	<xsl:text>\textcolor{red}{</xsl:text>
 	<xsl:value-of select="@alt"/>
 	<xsl:text>}</xsl:text>
@@ -51,10 +51,10 @@
 <xsl:template name="mo">
 <xsl:if test="translate(normalize-space(.),'()[]}|','{{{{{{')='{'">
 		<xsl:choose>
-	<xsl:when test="not(@stretchy='false') and count(preceding-sibling::m:mo[translate(normalize-space(.),'()[]}|','{{{{{{')='{'])mod 2=0 and following-sibling::m:mo[1][not(@stretchy='false')][translate(normalize-space(.),'()[]}|','{{{{{{')='{']">
+	<xsl:when test="not(@stretchy='false') and count(preceding-sibling::mo[translate(normalize-space(.),'()[]}|','{{{{{{')='{'])mod 2=0 and following-sibling::mo[1][not(@stretchy='false')][translate(normalize-space(.),'()[]}|','{{{{{{')='{']">
 			<xsl:text>\left</xsl:text>
 		</xsl:when>
-		<xsl:when test="not(@stretchy='false') and count(preceding-sibling::m:mo[translate(normalize-space(.),'()[]}|','{{{{{{')='{'])mod 2=1 and preceding-sibling::m:mo[1][not(@stretchy='false')][translate(normalize-space(.),'()[]}|','{{{{{{')='{']">
+		<xsl:when test="not(@stretchy='false') and count(preceding-sibling::mo[translate(normalize-space(.),'()[]}|','{{{{{{')='{'])mod 2=1 and preceding-sibling::mo[1][not(@stretchy='false')][translate(normalize-space(.),'()[]}|','{{{{{{')='{']">
 			<xsl:text>\right</xsl:text>
 		</xsl:when>
 	</xsl:choose>
@@ -73,7 +73,7 @@
 	<xsl:text>}</xsl:text>
 </xsl:template>
 
-<xsl:template match="m:mspace">
+<xsl:template match="mspace">
 	<xsl:text>\phantom{\rule</xsl:text>
 	<xsl:if test="@depth">
 		<xsl:text>[-</xsl:text>
@@ -319,7 +319,7 @@
 	</xsl:choose>
 </xsl:template>
 
-<xsl:template match="m:*/text()">
+<xsl:template match="*/text()">
 	<xsl:call-template name="replaceEntities">
 		<xsl:with-param name="content" select="normalize-space()"/>
 	</xsl:call-template>

@@ -19,15 +19,15 @@
 <xsl:include href="entities.xsl"/>
 <xsl:include href="cmarkup.xsl"/>
 
-<xsl:strip-space elements="m:*"/>
+<xsl:strip-space elements="*"/>
 
-<xsl:template match="m:math[not(@mode) or @mode='inline'][not(@display)] | m:math[@display='inline']">
+<xsl:template match="math[not(@mode) or @mode='inline'][not(@display)] | math[@display='inline']">
 	<xsl:text>&#x00024; </xsl:text>
 	<xsl:apply-templates/>
 	<xsl:text>&#x00024;</xsl:text>
 </xsl:template>
 
-<xsl:template match="m:math[@display='block'] | m:math[@mode='display'][not(@display)]">
+<xsl:template match="math[@display='block'] | math[@mode='display'][not(@display)]">
 	<xsl:text>&#xA;\[&#xA;&#x9;</xsl:text>
 	<xsl:apply-templates/>
 	<xsl:text>&#xA;\]</xsl:text>

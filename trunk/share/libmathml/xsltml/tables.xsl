@@ -10,7 +10,7 @@
      copyright and other information                                        -->
 <!-- ====================================================================== -->
 
-<xsl:template match="m:mtd[@columnspan]">
+<xsl:template match="mtd[@columnspan]">
 	<xsl:text>\multicolumn{</xsl:text>
 	<xsl:value-of select="@columnspan"/>
 	<xsl:text>}{c}{</xsl:text>
@@ -22,7 +22,7 @@
 </xsl:template>
 
 
-<xsl:template match="m:mtd">
+<xsl:template match="mtd">
 	<xsl:if test="@columnalign='right' or @columnalign='center'">
 		<xsl:text>\hfill </xsl:text>
 	</xsl:if>
@@ -32,24 +32,24 @@
 	</xsl:if>
 	<xsl:if test="count(following-sibling::*)>0">
 <!--    this test valid for Sablotron, another form - test="not(position()=last())".
-	Also for m:mtd[@columnspan] and m:mtr  -->
+	Also for mtd[@columnspan] and mtr  -->
 		<xsl:text>&amp; </xsl:text>
 	</xsl:if>
 </xsl:template>
 
-<xsl:template match="m:mtr">
+<xsl:template match="mtr">
 	<xsl:apply-templates/>
 	<xsl:if test="count(following-sibling::*)>0">
 		<xsl:text>\\ </xsl:text>
 	</xsl:if>
 </xsl:template>
 
-<xsl:template match="m:mtable">
+<xsl:template match="mtable">
 	<xsl:text>\begin{array}{</xsl:text>
 	<xsl:if test="@frame='solid'">
 		<xsl:text>|</xsl:text>
 	</xsl:if>
-	<xsl:variable name="numbercols" select="count(./m:mtr[1]/m:mtd[not(@columnspan)])+sum(./m:mtr[1]/m:mtd/@columnspan)"/>
+	<xsl:variable name="numbercols" select="count(./mtr[1]/mtd[not(@columnspan)])+sum(./mtr[1]/mtd/@columnspan)"/>
 	<xsl:choose>
 		<xsl:when test="@columnalign">
 			<xsl:variable name="colalign">

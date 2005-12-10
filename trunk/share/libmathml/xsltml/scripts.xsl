@@ -10,7 +10,7 @@
      copyright and other information                                        -->
 <!-- ====================================================================== -->
 
-<xsl:template match="m:munderover">
+<xsl:template match="munderover">
 	<xsl:variable name="base" select="translate(./*[1],' ','')"/>
 	<xsl:variable name="under" select="translate(./*[2],' ','')"/>
 	<xsl:variable name="over" select="translate(./*[3],' ','')"/>
@@ -129,14 +129,14 @@
 	</xsl:choose>
 </xsl:template>
 
-<xsl:template match="m:mover">
+<xsl:template match="mover">
 	<xsl:call-template name="mover">
 		<xsl:with-param name="base" select="translate(./*[1],' ','')"/>
 		<xsl:with-param name="over" select="translate(./*[2],' ','')"/>
 	</xsl:call-template>
 </xsl:template>
 
-<xsl:template match="m:munder">
+<xsl:template match="munder">
 	<xsl:call-template name="munder">
 		<xsl:with-param name="base" select="translate(./*[1],' ','')"/>
 		<xsl:with-param name="under" select="translate(./*[2],' ','')"/>
@@ -289,7 +289,7 @@
 	</xsl:choose>
 </xsl:template>
 
-<xsl:template match="m:msubsup">
+<xsl:template match="msubsup">
 	<xsl:text>{</xsl:text>	
 	<xsl:apply-templates select="./*[1]"/>
 	<xsl:text>}_{</xsl:text>
@@ -299,7 +299,7 @@
 	<xsl:text>}</xsl:text>	
 </xsl:template>
 
-<xsl:template match="m:msup">
+<xsl:template match="msup">
 	<xsl:text>{</xsl:text>	
 	<xsl:apply-templates select="./*[1]"/>
 	<xsl:text>}^{</xsl:text>	
@@ -307,7 +307,7 @@
 	<xsl:text>}</xsl:text>	
 </xsl:template>
 
-<xsl:template match="m:msub">
+<xsl:template match="msub">
 	<xsl:text>{</xsl:text>	
 	<xsl:apply-templates select="./*[1]"/>
 	<xsl:text>}_{</xsl:text>	
@@ -315,8 +315,8 @@
 	<xsl:text>}</xsl:text>	
 </xsl:template>
 
-<xsl:template match="m:mmultiscripts" mode="mprescripts">
-	<xsl:for-each select="m:mprescripts/following-sibling::*">
+<xsl:template match="mmultiscripts" mode="mprescripts">
+	<xsl:for-each select="mprescripts/following-sibling::*">
 		<xsl:if test="position() mod 2 and local-name(.)!='none'">
 			<xsl:text>{}_{</xsl:text>	
 			<xsl:apply-templates select="."/>
@@ -329,7 +329,7 @@
 		</xsl:if>
 	</xsl:for-each>
 	<xsl:apply-templates select="./*[1]"/>
-	<xsl:for-each select="m:mprescripts/preceding-sibling::*[position()!=last()]">
+	<xsl:for-each select="mprescripts/preceding-sibling::*[position()!=last()]">
 		<xsl:if test="position()>2 and local-name(.)!='none'">
 			<xsl:text>{}</xsl:text>	
 		</xsl:if>
@@ -346,9 +346,9 @@
 	</xsl:for-each>
 </xsl:template>
 
-<xsl:template match="m:mmultiscripts">
+<xsl:template match="mmultiscripts">
 	<xsl:choose>
-		<xsl:when test="m:mprescripts">
+		<xsl:when test="mprescripts">
 			<xsl:apply-templates select="." mode="mprescripts"/>
 		</xsl:when>
 		<xsl:otherwise>

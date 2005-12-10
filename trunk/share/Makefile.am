@@ -1426,4 +1426,5 @@ libmathml/xsltml/mmltex.xsl \
 libmathml/xsltml/scripts.xsl \
 libmathml/xsltml/entities.xsl \
 libmathml/xsltml/tokens.xsl \
-libmathml/xsltml/glayout.xsl
+libmathml/xsltml/glayout.xsl \
+libmathml/xsltml/mml2png.sh

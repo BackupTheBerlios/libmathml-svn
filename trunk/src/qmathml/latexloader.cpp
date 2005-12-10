@@ -4,14 +4,14 @@
 #include <QTextStream>
 #include <QFileDialog>
 #include <QPixmap>
+#include <QApplication>
 #include <cstdlib>
 
 LatexLoader::LatexLoader(QObject *parent)
 		: QObject(parent) {
-	latex = new QProcess(parent);
-	connect(latex, SIGNAL(finished(int exitCode)), this, SLOT(processExited()));
-	cmd = "/home/oever/cpp/qmathml/src/qmathml/xsltml/mml2png.sh";
-
+    latex = new QProcess(parent);
+    connect(latex, SIGNAL(finished(int exitCode)), this, SLOT(processExited()));
+    cmd = qApp->applicationDirPath() + "/../share/libmathml/xsltml/mml2png.sh";
     char dirname[16];
     strcpy(dirname, "/tmp/mmlXXXXXX");
     if (mkdtemp(dirname) != 0) {
@@ -19,7 +19,11 @@ LatexLoader::LatexLoader(QObject *parent)
     }
 }
 LatexLoader::~LatexLoader() {
-	delete latex;
+    if (!QDir("/tmp").rmdir(tempdir.absolutePath())) {
+	printf("Could not remove %s.\n",
+		(const char*)tempdir.absolutePath().toUtf8());
+    }
+    delete latex;
 }
 void
 LatexLoader::parseData(const QString &data) {
@@ -36,9 +40,10 @@ LatexLoader::parseData(const QString &data) {
     latex = new QProcess(this);
     connect(latex, SIGNAL(finished(int)), this, SLOT(processExited()));
     QStringList args;
+    args.push_back(cmd);
     args.push_back(filepath);
     imgname = filepath+".png";
-    latex->start(cmd, args);
+    latex->start("sh", args);
 }
 QImage
 LatexLoader::getImage() const {
@@ -167,12 +172,13 @@ LatexLoader::cleanse(const QImage &i) {
 }
 void
 LatexLoader::processExited() {
-	if (latex->exitCode() == 0) {
-        if (img.load(imgname)) {
+     if (latex->exitCode() == 0) {
+         if (img.load(imgname)) {
             cropImage(img);
             addTransparency(img);
             emit readImage(QPixmap::fromImage(img));
         }
-	}
-	QFile(imgname).remove();
+     }
+     printf("%s", (const char*)latex->readAllStandardError());
+     QFile(imgname).remove();
 }

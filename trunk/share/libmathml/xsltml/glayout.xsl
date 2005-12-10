@@ -11,7 +11,7 @@
 <!-- ====================================================================== -->
 
 <!-- 3.3.2 mfrac -->
-<xsl:template match="m:mfrac">
+<xsl:template match="mfrac">
 	<xsl:choose>
 		<xsl:when test="@linethickness">
 			<xsl:text>\genfrac{}{}{</xsl:text>
@@ -58,7 +58,7 @@
 	<xsl:text>}</xsl:text>
 </xsl:template>
 
-<xsl:template match="m:mfrac[@bevelled='true']">
+<xsl:template match="mfrac[@bevelled='true']">
 	<xsl:text>\raisebox{1ex}{$</xsl:text>
 	<xsl:apply-templates select="./*[1]"/>
 	<xsl:text>$}\!\left/ \!\raisebox{-1ex}{$</xsl:text>
@@ -67,7 +67,7 @@
 </xsl:template>
 
 
-<xsl:template match="m:mroot">
+<xsl:template match="mroot">
 	<xsl:choose>
 		<xsl:when test="count(./*)=2">
 			<xsl:text>\sqrt[</xsl:text>
@@ -84,13 +84,13 @@
 	</xsl:choose>
 </xsl:template>
 
-<xsl:template match="m:msqrt">
+<xsl:template match="msqrt">
 	<xsl:text>\sqrt{</xsl:text>
 	<xsl:apply-templates/>
 	<xsl:text>}</xsl:text>
 </xsl:template>
 
-<xsl:template match="m:mfenced">
+<xsl:template match="mfenced">
 	<xsl:choose>
 		<xsl:when test="@open">
 			<xsl:if test="translate(@open,'{}[]()|','{{{{{{{')='{'">
@@ -144,13 +144,13 @@
 	</xsl:choose>	
 </xsl:template>
 
-<xsl:template match="m:mphantom">
+<xsl:template match="mphantom">
 	<xsl:text>\phantom{</xsl:text>
 	<xsl:apply-templates/>
 	<xsl:text>}</xsl:text>
 </xsl:template>
 
-<xsl:template match="m:menclose">
+<xsl:template match="menclose">
 	<xsl:choose>
 		<xsl:when test="@notation = 'actuarial'">
 			<xsl:text>\overline{</xsl:text>
@@ -170,11 +170,11 @@
 	</xsl:choose>
 </xsl:template>
 
-<xsl:template match="m:mrow">
+<xsl:template match="mrow">
 	<xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="m:mstyle">
+<xsl:template match="mstyle">
 	<xsl:if test="@displaystyle='true'">
 		<xsl:text>{\displaystyle </xsl:text>
 	</xsl:if>
@@ -215,7 +215,7 @@
 	</xsl:if>
 </xsl:template>
 
-<xsl:template match="m:merror">
+<xsl:template match="merror">
 	<xsl:apply-templates/>
 </xsl:template>
 
