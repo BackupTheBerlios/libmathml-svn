@@ -1343,7 +1343,6 @@ libmathml/testsuite/Presentation/TablesAndMatrices/mtable/mtableAspacing4.mml \
 libmathml/testsuite/Presentation/TablesAndMatrices/mtable/mtableAspacing4.png \
 libmathml/testsuite/Presentation/TablesAndMatrices/mtable/maligngroup1.mml \
 libmathml/testsuite/Presentation/TablesAndMatrices/mtable/maligngroup1.png \
-libmathml/testsuite/Presentation/TablesAndMatrices/mtable/mtableaalign3.png \
 libmathml/testsuite/Presentation/TablesAndMatrices/mtable/mtableBsize1.mml \
 libmathml/testsuite/Presentation/TablesAndMatrices/mtable/mtableBsize1.png \
 libmathml/testsuite/Presentation/TablesAndMatrices/mtable/mtableBsize2.mml \
