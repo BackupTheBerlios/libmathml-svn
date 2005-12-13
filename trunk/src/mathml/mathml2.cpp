@@ -143,7 +143,6 @@ Attributes::Attributes() {
     ps->setPainter(0);
 }
 Attributes::~Attributes() {
-    printf("~Attributes()\n");
     setPainter(0);
     restore();
     assert(changes.empty());

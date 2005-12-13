@@ -19,6 +19,9 @@ using std::vector;
 #include "mmlmroot.h"
 #include "mmlmfenced.h"
 #include "mmlmphantom.h"
+#include "mmlmtable.h"
+#include "mmlmtr.h"
+#include "mmlmtd.h"
 #include "attributes.h"
 #include "mmlpainter.h"
 #include "mathcursor.h"
@@ -87,6 +90,12 @@ MMLDocument::createElement(const DOMString &tagName) {
         mmle = new MMLmath(this);
     } else if (tagName == "merror") {
         mmle = new MMLmerror(this);
+    } else if (tagName == "mtable") {
+        mmle = new MMLmtable(this);
+    } else if (tagName == "mtr") {
+        mmle = new MMLmtr(this);
+    } else if (tagName == "mtd") {
+        mmle = new MMLmtd(this);
     } else {
         bool allowed = false;
         for (uint i=0; !allowed && i<MML::numElements; ++i) {
@@ -220,9 +229,9 @@ MMLDocument::layout() const {
 bool
 MMLDocument::setMaxViewWidth(float maxwidth) const {
     v->curview->setMaxWidth(maxwidth);
-    MMLNode *n = v->curview->getBegin().rightNode();
+    //MMLNode *n = v->curview->getBegin().rightNode();
     // walk tree until width is overrun
-    float width = 0;
+    //float width = 0;
 /*    do {
     } while (width < maxwidth);
     if (width > maxwidth) {

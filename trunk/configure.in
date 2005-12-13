@@ -34,8 +34,8 @@ if test "$with_wx" = "yes" -o "$enable_wx" = "yes" ; then
 fi
 
 # use the wx macro for checking the wxwidgets install
-AM_OPTIONS_WXCONFIG
-AM_PATH_WXCONFIG(2.8.0, wxWin=1)
+#AM_OPTIONS_WXCONFIG
+#AM_PATH_WXCONFIG(2.8.0, wxWin=1)
 AM_CONDITIONAL(HAVE_WX, test "$with_wx" = "yes" -a "$wxWin" == 1)
 
 # check if Qt gui should be used

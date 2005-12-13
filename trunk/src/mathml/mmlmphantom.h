@@ -4,7 +4,7 @@
 #include "mmlmrow.h"
 
 class MMLmphantom : public MMLmrow {
-friend    MMLElement *MMLDocument::createElement(const DOMString &);
+friend MMLElement *MMLDocument::createElement(const DOMString &);
 public:
     void doPaint(MML::Attributes *) const;
 private:

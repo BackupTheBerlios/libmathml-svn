@@ -67,4 +67,12 @@ envatt[MathML::attListLen[e]]
 
 
 
+Special attributes
 
+Some attributes have more than one definitions. These attributes require special attention and are listed here. (The list is not yet guaranteed to be complete.)
+
+width
+occurs in:
+mtable as "auto | number h-unit"
+mspace as "number h-unit | namedspace"
+mpadded as "[ + | - ] unsigned-number ( % [ pseudo-unit ] | pseudo-unit | h-unit | namedspace )"
