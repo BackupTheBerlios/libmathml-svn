@@ -5,7 +5,8 @@ libmmlreader_la_LIBADD = -lQtCore -lQtXml \
 libmmlreader_la_SOURCES = mmlreader.cpp mmlcontenthandler.cpp qdomstring.cpp
 libmmlreader_la_CXXFLAGS = $(QT_CXXFLAGS) -I$(top_srcdir)/src
 
-libpainter_la_LIBADD = -lQtCore -lQtXml
+libpainter_la_LIBADD = $(QT_LIBS) \
+	$(top_builddir)/src/mathml/libmathml.la
 libpainter_la_SOURCES = mmlpixmap.cpp qmmlpainter.cpp
 libpainter_la_CXXFLAGS = $(QT_CXXFLAGS) -I$(top_srcdir)/src	
 
@@ -21,7 +22,7 @@ qmathml_SOURCES += mathmlview2.cpp
 nodist_qmathml_SOURCES += mathmlview2_moc.cpp
 endif
 qmathml_LDFLAGS = 
-qmathml_LDADD = $(QT_LIBS) $(top_builddir)/src/mathml/libmathml.la \
+qmathml_LDADD = $(top_builddir)/src/mathml/libmathml.la \
 	libmmlreader.la $(top_builddir)/src/cairomathml/libcairomml.la \
 	libpainter.la
 qmathml_CXXFLAGS = $(QT_CXXFLAGS) -I$(top_srcdir)/src \
@@ -29,6 +30,7 @@ qmathml_CXXFLAGS = $(QT_CXXFLAGS) -I$(top_srcdir)/src \
 
 gallerycreator_SOURCES = gallerycreator.cpp
 gallerycreator_LDADD = libpainter.la libmmlreader.la
+gallerycreator_CXXFLAGS = $(QT_CXXFLAGS) -I$(top_srcdir)/src	
 
 if HAVE_CAIRO
 CAIRO_SUBDIR=cairowidget
