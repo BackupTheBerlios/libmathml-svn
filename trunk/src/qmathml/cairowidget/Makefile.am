@@ -1,5 +1,5 @@
 
-bin_PROGRAMS = cairotest
+noinst_PROGRAMS = cairotest
 
 cairotest_SOURCES = program.cpp cairotest.cpp
 
