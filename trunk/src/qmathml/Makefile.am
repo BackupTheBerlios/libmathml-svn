@@ -30,7 +30,8 @@ qmathml_CXXFLAGS = $(QT_CXXFLAGS) -I$(top_srcdir)/src \
 
 gallerycreator_SOURCES = gallerycreator.cpp
 gallerycreator_LDADD = libpainter.la libmmlreader.la
-gallerycreator_CXXFLAGS = $(QT_CXXFLAGS) -I$(top_srcdir)/src	
+gallerycreator_CXXFLAGS = $(QT_CXXFLAGS) -I$(top_srcdir)/src \
+	-DSRCDIR="\"$(top_srcdir)\""
 
 if HAVE_CAIRO
 CAIRO_SUBDIR=cairowidget

@@ -16,6 +16,9 @@ MMLmtd::MMLmtd(MMLDocument *o)
         using namespace MML;
         createAttribute(ROWSPAN, "1", id, da);
         createAttribute(COLUMNSPAN, "1", id, da);
+        createAttribute(ROWALIGN, "", id, da); // should be inherited...
+        createAttribute(COLUMNALIGN, "", id, da); // should be inherited...
+        createAttribute(GROUPALIGN, "", id, da); // should be inherited...
     }
 }
 bool

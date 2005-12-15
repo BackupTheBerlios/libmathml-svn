@@ -31,9 +31,9 @@ public:
     // test
     void testSetGetString()
     {
-    QString dir(SRCDIR);
+        QString dir(SRCDIR);
         QDir d(dir+"/share/libmathml/testsuite");
-    printf("%s\n", (const char*)d.absolutePath().toUtf8());
+        printf("%s\n", (const char*)d.absolutePath().toUtf8());
         processDir(d);
         CPPUNIT_ASSERT(VALGRIND_COUNT_ERRORS == 0);
     }

@@ -2,33 +2,103 @@
 #include "mmlreader.h"
 #include "mathml/mmldocument.h"
 #include <QFile>
+#include <QDir>
+#include <QTextStream>
 #include <QApplication>
 
+MMLReader r;
+MMLPixmap *pix;
+const QString srcdirpath(SRCDIR);
+const QDir srcdir(srcdirpath);
+const QDir suitedir(SRCDIR"/share/libmathml/testsuite");
+const QDir baseout(QDir::currentPath() + QDir::separator() + "libmathml");
+const QDir testout(QDir::currentPath() + QDir::separator() + "testsuite");
+QTextStream out;
+
 MMLDocument *
-parse(MMLReader *r, QString filepath) {
+parse(QString filepath) {
         QFile f(filepath);
         f.open(QIODevice::ReadOnly);
-        r->parse(f);
+        r.parse(f);
         f.close();
-        return r->document();
+        return r.document();
 }
 
+void
+renderFile(QString &path) {
+    static QString lastdir;
+    QFileInfo f(path);
+    QString outputdir = suitedir.relativeFilePath(f.absolutePath());
+    if (outputdir != lastdir) {
+        out << "<tr><td colspan='2' style='border-top: 1px solid black;border-bottom: 1px solid black'>"
+            << outputdir << "</td></tr>" << endl;
+        lastdir = outputdir;
+        baseout.mkpath(outputdir);
+        testout.mkpath(outputdir);
+    }
+    QString outputfile = outputdir+"/"+f.baseName()+".png";
+    MMLDocument *doc = parse(path);
+    out << "<tr><td>" << f.baseName() << "</td><td>";
+    if (doc->validate()) {
+        pix->setDocument(doc);
+        QPixmap p = pix->getPixmap();
+        if (!p.save("libmathml/"+outputfile, "PNG")) {
+            printf("could not save\n");
+        } else {
+            out << "<img src='libmathml/"+outputfile+"'/>";
+            QString orig = f.absolutePath() + QDir::separator() + f.baseName() + ".png";
+            if (QFile::copy(orig, "testsuite/" + outputfile)) {
+                out << " <img src='testsuite/" + outputfile + "'/>";
+            }
+        }
+    } else {
+        out << doc->errorMsg().utf8();
+    }
+    out << "</td></tr>" << endl;
+    delete doc;
+}
+bool processDir(QDir &dir) {
+    QFileInfoList list = dir.entryInfoList();
+    for (int i = 0; i < list.size(); ++i) {
+        QFileInfo fi = list.at(i);
+        if (fi.isDir() && fi.fileName() != "." && fi.fileName() != "..") {
+            QDir d(fi.absoluteFilePath());
+            if (processDir(d)) {
+                return true;
+            }
+        } else if (fi.fileName().endsWith(".mml")) {
+            QString path = fi.absoluteFilePath();
+            renderFile(path);
+        }
+    }
+    return false;
+}
+
+void renderTestSuite()
+{
+    QString dir(SRCDIR);
+    QDir d(srcdirpath+"/share/libmathml/testsuite");
+    printf("%s\n", (const char*)d.absolutePath().toUtf8());
+    processDir(d);
+}
 int
 main(int argc, char **argv) {
-        QApplication a( argc, argv );
+    QApplication a( argc, argv );
 
-	QString path = "/home/oever/cpp/libmathmlsvn/trunk/share/libmathml/testsuite/Presentation/GeneralLayout/msqrt-mroot/mrootB1.mml";
+    QFile htmloutput("gallery.html");
+    htmloutput.open(QIODevice::WriteOnly);
+    out.setDevice(&htmloutput);
+    out << "<html><body><table>";
 
-	MMLReader r;
-	MMLDocument *doc = parse(&r, path);
-	printf("validate: %i\n", doc->validate());
-	MMLPixmap pix;
-	pix.setDocument(doc);
-	QPixmap p = pix.getPixmap();
-	if (!p.save("/tmp/test.png", "PNG")) {
-		printf("could not save\n");
-	}
-	delete doc;
-	
-        return 0;
+    pix = new MMLPixmap();
+    pix->setFont(QFont("serif", 10));
+
+    renderTestSuite();
+
+    out << "</table></body></html>" << endl;
+    htmloutput.close();
+
+    delete pix;
+
+    return 0;
 }

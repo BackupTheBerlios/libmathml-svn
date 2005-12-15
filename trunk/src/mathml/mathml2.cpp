@@ -253,8 +253,11 @@ Attributes::setAttributes(const MMLElement *e) {
             if (ps) ps->set(a);
         }
         if (!att[a]
-            && a != MML::BACKGROUND
-            && a != MML::COLOR) {
+            && a != MML::BACKGROUND // inherited
+            && a != MML::COLOR // inherited
+            && a != MML::ROWALIGN // inherited
+            && a != MML::COLUMNALIGN // inherited
+            && a != MML::GROUPALIGN ) {
             cerr << "Attribute " << attributeTag[a]
                 << " has no value for element "
                 << elementTag[e->id] << "." << endl;
