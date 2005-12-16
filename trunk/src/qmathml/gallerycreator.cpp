@@ -45,8 +45,12 @@ renderFile(QString &path) {
         if (!p.save("libmathml/"+outputfile, "PNG")) {
             printf("could not save\n");
         } else {
-            out << "<img src='libmathml/"+outputfile+"'/>";
-            QString orig = f.absolutePath() + QDir::separator() + f.baseName() + ".png";
+            // calculate offset for the image, so that it aligns with the text
+            int valign = (int)-doc->getDescent()-4;
+            out << "_<img style='border:1px solid #EEEEEE;vertical-align:"
+                << valign << "px;' src='libmathml/" << outputfile << "' />_";
+            QString orig = f.absolutePath() + QDir::separator() + f.baseName()
+                + ".png";
             if (QFile::copy(orig, "testsuite/" + outputfile)) {
                 out << " <img src='testsuite/" + outputfile + "'/>";
             }
@@ -88,9 +92,12 @@ main(int argc, char **argv) {
     QFile htmloutput("gallery.html");
     htmloutput.open(QIODevice::WriteOnly);
     out.setDevice(&htmloutput);
-    out << "<html><body><table>";
+    out << "<html><body style='background:#FAFAFA;'><table>";
 
     pix = new MMLPixmap();
+    QPalette p;
+    p.setColor(QPalette::Background, QColor(255,255,255,0));
+    pix->setPalette(p);
     pix->setFont(QFont("serif", 10));
 
     renderTestSuite();

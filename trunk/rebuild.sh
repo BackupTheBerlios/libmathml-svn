@@ -25,5 +25,5 @@ if test "$TARGET" == "dist"; then
 	../configure && make dist-bzip2
 else
 	CXXFLAGS="-Wall -O0 -g3" ../configure --enable-debug=full \
-		--prefix=$HOME/testinstalls --with-qt && make && make check
+		--prefix=$HOME/testinstalls --with-qt && make -j2 && make check
 fi

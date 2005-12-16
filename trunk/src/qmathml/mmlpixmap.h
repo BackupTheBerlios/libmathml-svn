@@ -25,6 +25,7 @@ private:
     QMMLPainter m_painter;
     QPainter m_qpainter;
     QFont m_font;
+    QColor m_background;
 
     void layout();
 public:
@@ -40,6 +41,7 @@ public:
     void setPalette(const QPalette &p) {
         if (p != m_painter.getPalette()) {
             m_mustPaint = true;
+            m_background = p.background().color();
             m_painter.setPalette(p);
         }
     }

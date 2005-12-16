@@ -10,6 +10,7 @@ MMLPixmap::MMLPixmap() {
     m_doc = 0;
     m_buffer = QPixmap(1, 1);
     m_painter.setPainter(&m_qpainter);
+    m_background = m_qpainter.background().color();
 }
 void
 MMLPixmap::setDocument(const MMLDocument *doc) {
@@ -60,13 +61,14 @@ MMLPixmap::repaint() {
     }
 
     // initialize the buffer and painter
+    m_buffer.fill(m_background);
+    printf("%i\n", m_qpainter.background().color().alpha());
     m_qpainter.begin(&m_buffer);
     m_qpainter.setRenderHint(QPainter::Antialiasing);
     m_qpainter.setFont(m_font);
     m_qpainter.setBackground(m_painter.getPalette().background());
     int w = m_buffer.width();
     int h = m_buffer.height();
-    m_qpainter.eraseRect(0, 0, w, h);
     m_qpainter.translate(m_border, m_ascent + m_border);
 
     // paint all the views below each other
