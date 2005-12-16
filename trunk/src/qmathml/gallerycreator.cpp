@@ -44,10 +44,10 @@ renderFile(QString &path) {
         pix->setDocument(doc);
         pix->setOutline(false);
         QPixmap p = pix->getPixmap();
-        p.save("libmathml/"+outputfile, "PNG");
+        p.save("libmathml/"+outputfile, "PNG", 0);
         pix->setOutline(true);
         p = pix->getPixmap();
-        p.save("libmathml/"+outputoutlinefile, "PNG");
+        p.save("libmathml/"+outputoutlinefile, "PNG", 0);
 
         // calculate offset for the image, so that it aligns with the text
         int valign = (int)-doc->getDescent() - 4 - 2;
