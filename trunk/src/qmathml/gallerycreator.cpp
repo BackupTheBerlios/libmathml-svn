@@ -37,33 +37,39 @@ renderFile(QString &path) {
         testout.mkpath(outputdir);
     }
     QString outputfile = outputdir+"/"+f.baseName()+".png";
+    QString outputoutlinefile = outputdir+"/"+f.baseName()+"outline.png";
     MMLDocument *doc = parse(path);
     out << "<tr><td>" << f.baseName() << "</td><td>";
     if (doc->validate()) {
         pix->setDocument(doc);
+        pix->setOutline(false);
         QPixmap p = pix->getPixmap();
-        if (!p.save("libmathml/"+outputfile, "PNG")) {
-            printf("could not save\n");
-        } else {
-            // calculate offset for the image, so that it aligns with the text
-            int valign = (int)-doc->getDescent()-4;
-            out << "_<img style='border:1px solid #EEEEEE;vertical-align:"
-                << valign << "px;' src='libmathml/" << outputfile << "' />_";
-            QString orig = f.absolutePath() + QDir::separator() + f.baseName()
-                + ".png";
-            QString origcopy = "testsuite/" + outputfile;
-            QPixmap ref(origcopy);
-            if (!ref.isNull()) {
-                QFile::copy(orig, origcopy);
-                // open file to get sizes
-                int cvalign =
-                    -(int)(doc->getDescent()/doc->getHeight()*ref.height());
-                if (cvalign > 0 || cvalign < -1000) {
-                    cvalign = - ref.height()/2;
-                }
-                out << " <img style='border:1px solid #EEEEEE;vertical-align:"
-                    << cvalign << "px;' src='" << origcopy << "'/>";
+        p.save("libmathml/"+outputfile, "PNG");
+        pix->setOutline(true);
+        p = pix->getPixmap();
+        p.save("libmathml/"+outputoutlinefile, "PNG");
+
+        // calculate offset for the image, so that it aligns with the text
+        int valign = (int)-doc->getDescent() - 4 - 2;
+        out << "_<img style='border:1px solid #EEEEEE;vertical-align:"
+            << valign << "px;' src='libmathml/" << outputfile << "' "
+            << "onmouseover='this.src=\"libmathml/" << outputoutlinefile
+            << "\";' onmouseout='this.src=\"libmathml/" << outputfile
+            << "\";'/>_";
+        QString orig = f.absolutePath() + QDir::separator() + f.baseName()
+            + ".png";
+        QString origcopy = "testsuite/" + outputfile;
+        QPixmap ref(origcopy);
+        if (!ref.isNull()) {
+            QFile::copy(orig, origcopy);
+            // open file to get sizes
+            int cvalign =
+                -(int)(doc->getDescent()/doc->getHeight()*ref.height());
+            if (cvalign > 0 || cvalign < -1000) {
+                cvalign = - ref.height()/2;
             }
+            out << " <img style='border:1px solid #EEEEEE;vertical-align:"
+                << cvalign << "px;' src='" << origcopy << "'/>";
         }
     } else {
         out << doc->errorMsg().utf8();
