@@ -17,16 +17,17 @@ qmathml_SOURCES = program.cpp mathmledit.cpp mathmlview.cpp cursorinfo.cpp \
 	bpinfo.cpp latexloader.cpp
 nodist_qmathml_SOURCES = latexloader_moc.cpp cursorinfo_moc.cpp \
 	mathmlview_moc.cpp mathmledit_moc.cpp
+qmathml_LDADD = $(top_builddir)/src/mathml/libmathml.la \
+	libmmlreader.la \
+	libpainter.la
+qmathml_CXXFLAGS = $(QT_CXXFLAGS) -I$(top_srcdir)/src
+qmathml_LDFLAGS = 
 if HAVE_CAIRO
 qmathml_SOURCES += mathmlview2.cpp
 nodist_qmathml_SOURCES += mathmlview2_moc.cpp
+qmathml_LDADD += $(top_builddir)/src/cairomathml/libcairomml.la
+qmathml_CXXFLAGS += -I$(top_srcdir)/src/cairomathml $(CAIRO_CFLAGS)
 endif
-qmathml_LDFLAGS = 
-qmathml_LDADD = $(top_builddir)/src/mathml/libmathml.la \
-	libmmlreader.la $(top_builddir)/src/cairomathml/libcairomml.la \
-	libpainter.la
-qmathml_CXXFLAGS = $(QT_CXXFLAGS) -I$(top_srcdir)/src \
-	-I$(top_srcdir)/src/cairomathml $(CAIRO_CFLAGS)
 
 gallerycreator_SOURCES = gallerycreator.cpp
 gallerycreator_LDADD = libpainter.la libmmlreader.la
