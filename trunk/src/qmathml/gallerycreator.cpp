@@ -55,21 +55,23 @@ renderFile(QString &path) {
             << valign << "px;' src='libmathml/" << outputfile << "' "
             << "onmouseover='this.src=\"libmathml/" << outputoutlinefile
             << "\";' onmouseout='this.src=\"libmathml/" << outputfile
-            << "\";'/>_";
+            << "\";' width='" << p.width() << "px' height='" << p.height()
+            << "'/>_";
         QString orig = f.absolutePath() + QDir::separator() + f.baseName()
             + ".png";
         QString origcopy = "testsuite/" + outputfile;
-        QPixmap ref(origcopy);
+        // open file to get sizes
+        QPixmap ref(orig);
         if (!ref.isNull()) {
             QFile::copy(orig, origcopy);
-            // open file to get sizes
             int cvalign =
                 -(int)(doc->getDescent()/doc->getHeight()*ref.height());
             if (cvalign > 0 || cvalign < -1000) {
                 cvalign = - ref.height()/2;
             }
             out << " <img style='border:1px solid #EEEEEE;vertical-align:"
-                << cvalign << "px;' src='" << origcopy << "'/>";
+                << cvalign << "px;' src='" << origcopy << "' width='"
+                << ref.width() << "px' height='" << ref.height() << "'/>";
         }
     } else {
         out << doc->errorMsg().utf8();
