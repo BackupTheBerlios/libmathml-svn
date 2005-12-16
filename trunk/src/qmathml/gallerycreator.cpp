@@ -51,8 +51,18 @@ renderFile(QString &path) {
                 << valign << "px;' src='libmathml/" << outputfile << "' />_";
             QString orig = f.absolutePath() + QDir::separator() + f.baseName()
                 + ".png";
-            if (QFile::copy(orig, "testsuite/" + outputfile)) {
-                out << " <img src='testsuite/" + outputfile + "'/>";
+            QString origcopy = "testsuite/" + outputfile;
+            QPixmap ref(origcopy);
+            if (!ref.isNull()) {
+                QFile::copy(orig, origcopy);
+                // open file to get sizes
+                int cvalign =
+                    -(int)(doc->getDescent()/doc->getHeight()*ref.height());
+                if (cvalign > 0) {
+                    cvalign = - ref.height()/2;
+                }
+                out << " <img style='border:1px solid #EEEEEE;vertical-align:"
+                    << cvalign << "px;' src='" << origcopy << "'/>";
             }
         }
     } else {
