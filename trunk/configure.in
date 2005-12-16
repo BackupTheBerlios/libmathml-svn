@@ -104,6 +104,10 @@ AC_SUBST(GTKMM_CFLAGS)
 AC_SUBST(GTKMM_LIBS)
 AM_CONDITIONAL(HAVE_GTK, test "$have_gtk" = "yes")
 
+# check for unit test framework
+AC_CHECK_HEADER(cppunit/ui/text/TestRunner.h, have_cppunit="yes",
+	have_cppunit="no")
+AM_CONDITIONAL(HAVE_CPPUNIT, test "$have_cppunit" = "yes")
 
 AC_PROG_CXX
 

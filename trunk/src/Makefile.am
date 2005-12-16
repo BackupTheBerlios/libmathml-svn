@@ -1,5 +1,8 @@
 if HAVE_QT
-QT_SUBDIRS=qmathml XMLSchema tests
+QT_SUBDIRS=qmathml XMLSchema
+if HAVE_CPPUNIT
+TEST_SUBDIR=tests
+endif
 endif
 
 if HAVE_CAIRO
@@ -20,5 +23,5 @@ endif
 endif
 
 SUBDIRS = mathml $(CAIRO_SUBDIR) $(XML_SUBDIR) $(QT_SUBDIRS) $(WX_SUBDIR) \
-	$(GTK_SUBDIR)
+	$(GTK_SUBDIR) $(TEST_SUBDIR)
 
