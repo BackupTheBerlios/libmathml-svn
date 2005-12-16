@@ -57,12 +57,10 @@ MMLPixmap::repaint() {
 
     if (m_buffer.width() != m_w || m_buffer.height() != m_h) {
         m_buffer = QPixmap(m_w, m_h);
-        printf("resize: %i, %i\n", m_w, m_h);
     }
 
     // initialize the buffer and painter
     m_buffer.fill(m_background);
-    printf("%i\n", m_qpainter.background().color().alpha());
     m_qpainter.begin(&m_buffer);
     m_qpainter.setRenderHint(QPainter::Antialiasing);
     m_qpainter.setFont(m_font);

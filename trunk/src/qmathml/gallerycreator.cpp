@@ -58,7 +58,7 @@ renderFile(QString &path) {
                 // open file to get sizes
                 int cvalign =
                     -(int)(doc->getDescent()/doc->getHeight()*ref.height());
-                if (cvalign > 0) {
+                if (cvalign > 0 || cvalign < -1000) {
                     cvalign = - ref.height()/2;
                 }
                 out << " <img style='border:1px solid #EEEEEE;vertical-align:"
