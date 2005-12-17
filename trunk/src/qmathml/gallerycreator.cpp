@@ -14,6 +14,9 @@ const QDir suitedir(SRCDIR"/share/libmathml/testsuite");
 const QDir baseout(QDir::currentPath() + QDir::separator() + "libmathml");
 const QDir testout(QDir::currentPath() + QDir::separator() + "testsuite");
 QTextStream out;
+bool do_output = true;
+bool output_erroneous = false;
+
 
 MMLDocument *
 parse(QString filepath) {
@@ -23,35 +26,47 @@ parse(QString filepath) {
         f.close();
         return r.document();
 }
-
+void
+printhead(QString dir) {
+    static bool printedhead = true;
+    static QString lastdir;
+    if (dir != lastdir) {
+        lastdir = dir;
+        printedhead = false;
+    }
+    if (printedhead == false) {
+        out << "<tr><td colspan='2' style='border-top: 1px solid black;border-bottom: 1px solid black'>"
+            << dir << "</td></tr>" << endl;
+        printedhead = true;
+    }
+}
 void
 renderFile(QString &path) {
-    static QString lastdir;
     QFileInfo f(path);
     QString outputdir = suitedir.relativeFilePath(f.absolutePath());
-    if (outputdir != lastdir) {
-        out << "<tr><td colspan='2' style='border-top: 1px solid black;border-bottom: 1px solid black'>"
-            << outputdir << "</td></tr>" << endl;
-        lastdir = outputdir;
-        baseout.mkpath(outputdir);
-        testout.mkpath(outputdir);
-    }
+    baseout.mkpath(outputdir);
+    testout.mkpath(outputdir);
     QString outputfile = outputdir+"/"+f.baseName()+".png";
     QString outputoutlinefile = outputdir+"/"+f.baseName()+"outline.png";
     MMLDocument *doc = parse(path);
-    out << "<tr><td>" << f.baseName() << "</td><td>";
     if (doc->validate()) {
+        printhead(outputdir);
+        out << "<tr><td>" << f.baseName() << "</td><td>";
         pix->setDocument(doc);
         pix->setOutline(false);
         QPixmap p = pix->getPixmap();
-        p.save("libmathml/"+outputfile, "PNG", 0);
+        if (do_output) {
+            p.save("libmathml/"+outputfile, "PNG", 0);
+        }
         pix->setOutline(true);
         p = pix->getPixmap();
-        p.save("libmathml/"+outputoutlinefile, "PNG", 0);
+        if (do_output) {
+            p.save("libmathml/"+outputoutlinefile, "PNG", 0);
+        }
 
         // calculate offset for the image, so that it aligns with the text
         int valign = (int)-doc->getDescent() - 4 - 2;
-        out << "_<img style='border:1px solid #EEEEEE;vertical-align:"
+        out << "_<img style='border:1px solid #E0E0E0;vertical-align:"
             << valign << "px;' src='libmathml/" << outputfile << "' "
             << "onmouseover='this.src=\"libmathml/" << outputoutlinefile
             << "\";' onmouseout='this.src=\"libmathml/" << outputfile
@@ -62,21 +77,24 @@ renderFile(QString &path) {
         QString origcopy = "testsuite/" + outputfile;
         // open file to get sizes
         QPixmap ref(orig);
-        if (!ref.isNull()) {
+        if (do_output && !ref.isNull()) {
             QFile::copy(orig, origcopy);
             int cvalign =
                 -(int)(doc->getDescent()/doc->getHeight()*ref.height());
             if (cvalign > 0 || cvalign < -1000) {
                 cvalign = - ref.height()/2;
             }
-            out << " <img style='border:1px solid #EEEEEE;vertical-align:"
+            out << " <img style='border:1px solid #E0E0E0;vertical-align:"
                 << cvalign << "px;' src='" << origcopy << "' width='"
                 << ref.width() << "px' height='" << ref.height() << "'/>";
         }
-    } else {
+        out << "</td></tr>" << endl;
+    } else if (output_erroneous) {
+        printhead(outputdir);
+        out << "<tr><td>" << f.baseName() << "</td><td>";
         out << doc->errorMsg().utf8();
+        out << "</td></tr>" << endl;
     }
-    out << "</td></tr>" << endl;
     delete doc;
 }
 bool processDir(QDir &dir) {
