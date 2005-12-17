@@ -150,14 +150,18 @@ MMLReader::startElement() {
     if (openel) {
         cur->appendChild(openel);
         ok = true;
-        while (ok && xmlTextReaderMoveToNextAttribute(reader)) {
-            processNode();
-        }
-        if (openel->attributesValid()) {
+        int ret;
+        do {
+            ret = xmlTextReaderMoveToNextAttribute(reader);
+            if (ret == 1) {
+                processNode();
+            } else if (ret == -1) {
+                ok = false;
+            }
+        } while (ret == 1);
+        if (ok) {
             cur = openel;
-            ok = true;
         } else {
-            ok = false;
             err = openel->errorMsg();
             cur = NULL;
         }
@@ -186,8 +190,8 @@ MMLReader::endElement() {
 bool
 MMLReader::attribute() {
     DOMString ds = domstring(name);
-    openel->setAttribute(ds.utf8(), domstring(value));
-    return true;
+    bool ok = openel->setAttribute(ds.utf8(), domstring(value));
+    return ok;
 }
 bool
 MMLReader::text() {

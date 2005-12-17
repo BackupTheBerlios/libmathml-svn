@@ -14,8 +14,7 @@ public:
     bool isElement() const { return true; };
     const char *nodeName() const {return tagName();}
     const char *tagName() const;
-    bool attributesValid() const { return attributesvalid; }
-    virtual void setAttribute(const char *, const DOMString &v);
+    bool setAttribute(const char *, const DOMString &v);
     virtual void doLayout(MML::Attributes *a) const = 0;
     virtual void doPaint(MML::Attributes *a) const = 0;
     void normalize();
@@ -41,7 +40,6 @@ protected:
     void initAtts();
     void deleteAtts();
 private:
-    bool attributesvalid;
     static const char *mathvariantnames[14];
     void layout(MML::Attributes *a) const;
     void paint(MML::Attributes *a) const;

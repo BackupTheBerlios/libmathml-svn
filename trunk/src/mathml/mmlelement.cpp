@@ -15,7 +15,6 @@ uint MMLElement::count = 0;
 
 MMLElement::MMLElement(MML::Element e, MMLDocument *o)
     : MMLNode(o), id(e) {
-    attributesvalid = true;
     numAtts = MML::attListLen[id];
     initAtts();
     // allocate memory for pointers to default attribute values
@@ -76,19 +75,23 @@ MMLElement::deleteAtts() {
         delete [] tmpatt;
     }
 }
-void
+bool
 MMLElement::setAttribute(const char *name, const DOMString &value) {
     if (!strcmp(name, "color")) {
         name = "mathcolor";
     } else if (!strcmp(name, "background")) {
         name = "mathbackground";
     }
+    bool ok = true;
     int pos = MML::createAttribute(name, value, id, att);
     if (pos == -1) {
+        ok = false;
         invalidAttribute(name);
-    } else if (pos == -1) {
+    } else if (pos == -2) {
+        ok = false;
         invalidValue(name, value);
     }
+    return ok;
 }
 void
 MMLElement::invalidAttribute(const char *n) {
@@ -97,16 +100,14 @@ MMLElement::invalidAttribute(const char *n) {
     errmsg += "' not allowed in element ";
     errmsg += tagName();
     errmsg += ".";
-    attributesvalid = false;
 }
 void
 MMLElement::invalidValue(const char *name, const DOMString &value) {
     errmsg = "attribute '";
     errmsg += name;
-    errmsg += "' cannot have value '"+value+"' in element ";
+    errmsg += "' cannot have value '" + value + "' in element ";
     errmsg += tagName();
     errmsg += ".";
-    attributesvalid = false;
 }
 void
 MMLElement::layout(MML::Attributes *a) const {

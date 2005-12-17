@@ -18,6 +18,7 @@ public:
     }
     void setOutline(bool outline);
 
+    // functions required by libmathml
     float dpi(bool horizontal) const;
     float fontAscent() const;
     float fontDescent() const;
@@ -56,6 +57,10 @@ private:
     QPainter *p;
     QPalette palette;
     QFontMetricsF fontmetrics;
+    QFont seriffont;
+    QFont sansseriffont;
+    QFont scriptfont;
+    QFont monospacefont;
 
     float absx, absy;
     bool debugdrawtext;

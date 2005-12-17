@@ -43,6 +43,5 @@ MMLmtd::doLayout(MML::Attributes *a) const {
 }
 void
 MMLmtd::doPaint(MML::Attributes *a) const {
-    a->setAttribute(MML::MATHCOLOR, "red");
     first->paint(a);
 }

@@ -18,6 +18,13 @@ MMLPixmap::setDocument(const MMLDocument *doc) {
     m_mustLayout = true;
 }
 void
+MMLPixmap::setFont(const QFont &font) {
+    if (m_font != font) {
+        m_mustLayout = true;
+        m_font = font;
+    }
+}
+void
 MMLPixmap::layout() {
     m_qpainter.begin(&m_buffer);
     m_qpainter.setRenderHint(QPainter::Antialiasing);

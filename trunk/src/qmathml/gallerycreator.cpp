@@ -17,6 +17,21 @@ QTextStream out;
 bool do_output = true;
 bool output_erroneous = false;
 
+void
+initPixmap() {
+    pix = new MMLPixmap();
+    QPalette p;
+    p.setColor(QPalette::Background, QColor(255,255,255,0));
+    pix->setPalette(p);
+    QFont f("Times New Roman", 12);
+    f.setStyleHint(QFont::Serif);
+    f.setFamily(f.defaultFamily());
+    pix->setFont(f);
+}
+void
+deletePixmap() {
+    delete pix;
+}
 
 MMLDocument *
 parse(QString filepath) {
@@ -42,6 +57,8 @@ printhead(QString dir) {
 }
 void
 renderFile(QString &path) {
+    deletePixmap();
+    initPixmap();
     QFileInfo f(path);
     QString outputdir = suitedir.relativeFilePath(f.absolutePath());
     baseout.mkpath(outputdir);
@@ -130,18 +147,21 @@ main(int argc, char **argv) {
     out.setDevice(&htmloutput);
     out << "<html><body style='background:#FAFAFA;'><table>";
 
-    pix = new MMLPixmap();
-    QPalette p;
-    p.setColor(QPalette::Background, QColor(255,255,255,0));
-    pix->setPalette(p);
-    pix->setFont(QFont("serif", 10));
+    initPixmap();
 
-    renderTestSuite();
+    if (argc > 1) {
+        for (int i=1; i<argc; ++i) {
+            QString path(argv[i]);
+            renderFile(path);
+        }
+    } else {
+        renderTestSuite();
+    }
 
     out << "</table></body></html>" << endl;
     htmloutput.close();
 
-    delete pix;
+    deletePixmap();
 
     return 0;
 }

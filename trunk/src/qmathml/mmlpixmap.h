@@ -32,12 +32,7 @@ public:
     MMLPixmap();
     ~MMLPixmap() {}
     void setDocument(const MMLDocument *);
-    void setFont(const QFont &font) {
-        if (m_font != font) {
-            m_mustLayout = true;
-            m_font = font;
-        }
-    }
+    void setFont(const QFont &font);
     void setPalette(const QPalette &p) {
         if (p != m_painter.getPalette()) {
             m_mustPaint = true;

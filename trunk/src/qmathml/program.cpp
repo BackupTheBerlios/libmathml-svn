@@ -3,7 +3,7 @@
 
 int
 main(int argc, char **argv) {
-        QApplication a( argc, argv, false );
+        QApplication a( argc, argv );
 
 	MathMLEdit m;
 	m.show();

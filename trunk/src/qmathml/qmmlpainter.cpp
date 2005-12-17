@@ -16,11 +16,17 @@ QMMLPainter::QMMLPainter()
     cout << "----" << endl;
     debugdrawtext = false;
     fittext = true;
+
+    seriffont.setStyleHint(QFont::Serif);
+    seriffont.setFamily(seriffont.defaultFamily());
+    sansseriffont.setStyleHint(QFont::SansSerif);
+    sansseriffont.setFamily(sansseriffont.defaultFamily());
+    scriptfont.setFamily("URW Chancery L");
+    monospacefont.setFamily("Monospace");
 }
 void
 QMMLPainter::setPainter(QPainter *p) {
     this->p = p;
-    fontmetrics = QFontMetricsF(p->font());
 }
 void
 QMMLPainter::setOutline(bool outline) {
@@ -95,68 +101,74 @@ QMMLPainter::selectionColor() const {
 void
 QMMLPainter::setMathVariant(MathVariant mv) {
     QFont f = p->font();
+    float size = f.pointSize();
     switch (mv) {
     case (NORMAL):
-        f.setStyleHint(QFont::Serif);
+        f = seriffont;
         f.setBold(false);
         f.setItalic(false);
         break;
     case (BOLD):
-        f.setStyleHint(QFont::Serif);
+        f = seriffont;
         f.setBold(true);
         f.setItalic(false);
         break;
     case (ITALIC):
-        f.setStyleHint(QFont::Serif);
+        f = seriffont;
         f.setBold(false);
         f.setItalic(true);
         break;
     case (BOLD_ITALIC):
-        f.setStyleHint(QFont::Serif);
+        f = seriffont;
         f.setBold(true);
         f.setItalic(true);
         break;
     case (DOUBLE_STRUCK): break;
+        break;
     case (BOLD_FRAKTUR): break;
+        break;
     case (SCRIPT):
-        f.setStyleHint(QFont::OldEnglish);
+        f = scriptfont;
         f.setBold(false);
         f.setItalic(false);
         break;
     case (BOLD_SCRIPT):
-        f.setStyleHint(QFont::OldEnglish);
+        f = scriptfont;
         f.setBold(true);
         f.setItalic(false);
         break;
     case (FRAKTUR): break;
+        break;
     case (SANS_SERIF):
-        f.setStyleHint(QFont::SansSerif);
+        f = sansseriffont;
         f.setBold(false);
         f.setItalic(false);
         break;
     case (BOLD_SANS_SERIF):
-        f.setStyleHint(QFont::SansSerif);
+        f = sansseriffont;
         f.setBold(true);
         f.setItalic(false);
         break;
     case (SANS_SERIF_ITALIC):
-        f.setStyleHint(QFont::SansSerif);
+        f = sansseriffont;
         f.setBold(false);
         f.setItalic(true);
         break;
     case (SANS_SERIF_BOLD_ITALIC):
-        f.setStyleHint(QFont::SansSerif);
+        f = sansseriffont;
         f.setBold(true);
         f.setItalic(true);
         break;
     case (MONOSPACE):
-        f.setStyleHint(QFont::TypeWriter);
+        f = monospacefont;
         f.setBold(false);
         f.setItalic(false);
         break;
     }
+    f.setPointSizeF(size);
     p->setFont(f);
     fontmetrics = QFontMetricsF(f);
+    //printf("%s\n", (const char*)p->font().family().toUtf8());
 }
 void
 QMMLPainter::setMathColor(MathColor mc) {
@@ -279,6 +291,7 @@ QMMLPainter::drawPolygon(int n, float *x, float *y) {
 }
 void
 QMMLPainter::drawText(const DOMString &s) {
+    //printf("%s %s\n", (const char*)p->font().family().toUtf8(), (const char*)seriffont.family().toUtf8());
     QString qs = qstring(s);
     if (debugdrawtext) {
         QRectF rf = fontmetrics.boundingRect(qs);
@@ -318,7 +331,8 @@ QMMLPainter::drawOutline(float w) {
     float a = fontAscent();
     float d = fontDescent();
      // total character area
-    p->fillRect(QRectF(absx, absy-a, w, a), Qt::red); // ascent area
+    p->fillRect(QRectF(absx, absy-a, w, a), Qt::yellow); // ascent area
+    p->drawLine(QPointF(absx, 0), QPointF(w, 0));
     p->fillRect(QRectF(absx, absy, w, d), Qt::blue); // descent area
     //p->fillRect(QRectF(absx, absy-a, w, a+d), Qt::blue);
 }

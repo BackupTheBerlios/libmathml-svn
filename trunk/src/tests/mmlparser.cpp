@@ -24,6 +24,7 @@ int
 main(int argc, const char **argv) {
     MMLReader r;
     for (int i=1; i<argc; ++i) {
+        printf("%s\n", argv[i]);
         parse(&r, argv[i]);
     }
     return VALGRIND_COUNT_ERRORS;

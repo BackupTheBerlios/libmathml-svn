@@ -1,8 +1,11 @@
 #include "mmlcontenthandler.h"
 #include <mathml/mmldocument.h>
 #include <mathml/mmlelement.h>
+#include <mathml/mathml.h>
 #include <mathml/mmltext.h>
 #include "qdomstring.h"
+
+using namespace MML;
 
 MMLContentHandler::MMLContentHandler() {
     debug = false;
@@ -55,12 +58,14 @@ MMLContentHandler::startElement(const QString &/*namespaceURI*/,
     MMLElement *e = doc->createElement(domstring(localName));
     if (e) {
         cur->appendChild(e);
-        for (int i=0; e->attributesValid() && i<atts.length(); ++i) {
+        bool attsValid = true;
+        for (int i=0; attsValid && i<atts.length(); ++i) {
             QString v = atts.value(i).simplified();
-            e->setAttribute(atts.localName(i).toUtf8(),
-            domstring(v));
+            if (!e->setAttribute(atts.localName(i).toUtf8(), domstring(v))) {
+                attsValid = false;
+            }
         }
-        if (e->attributesValid()) {
+        if (attsValid) {
             cur = e;
             ok = true;
         } else {

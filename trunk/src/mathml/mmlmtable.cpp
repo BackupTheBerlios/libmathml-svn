@@ -23,7 +23,7 @@ MMLmtable::MMLmtable(MMLDocument *o)
         createAttribute(COLUMNWIDTH, "auto", id, da);
         createAttribute(WIDTH, "0", id, da); // this should be 'auto' but
 	// because we use a unified type for all width attributes this is not
-	// possible
+	// possible yet
         createAttribute(ROWSPACING, "1.0ex", id, da);
         createAttribute(COLUMNSPACING, "0.8em", id, da);
         createAttribute(ROWLINES, "none", id, da);
@@ -59,6 +59,7 @@ MMLmtable::validate() {
 void
 MMLmtable::doLayout(MML::Attributes *a) const {
     if (!first) return;
+
     float cw, ca, cd;
     cw = ca = cd = 0;
     MMLNode *n;
@@ -108,6 +109,7 @@ MMLmtable::doLayout(MML::Attributes *a) const {
 void
 MMLmtable::doPaint(MML::Attributes *a) const {
     if (!first) return;
+
     float cw, ca, cd;
     cw = ca = cd = 0;
     MMLNode *n;
