@@ -45,7 +45,7 @@ PainterSettings::set(MML::Attribute a) {
     if (!isPainterSetting(a)) return;
     switch (a) {
     case MML::MATHVARIANT:
-        p->setMathVariant(att->mathvariant());
+        p->setMathvariant(att->mathvariant());
         break;
     case MML::MATHCOLOR:
         p->setMathColor(att->mathcolor());

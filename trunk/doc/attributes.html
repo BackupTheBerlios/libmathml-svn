@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+
+<title>libmathml</title>
+</head>
+
+<body>
+
+<h1>attributes in libmathml</h1>
+
+<h2>attributes in MathML</h2>
+
+<p>In MathML attributes are generally inherited. This means that if an attribute was set in a parent, this value is also there for all child elements of the element in which the value was set. The description of inheritance behavior can be found <a href="http://www.w3.org/TR/MathML2/chapter3.html#presm.mstyle">here</a>.</p>
+
+<p>For some attributes, the inheritance rule does not apply. This means that if it's value was set in a parent that was not <tt>&lt;mstyle></tt>, the value does not affect the behavior of the child elements. An example for this is the attribute <tt>&lt;linethickness</tt> from the element <tt>&lt;mfrac></tt>.
+
+<h2>Implementation in libmathml</h2>
+
+<p>In libmathml, each document has an array with attributes. This array is stored in a private (for the library) class <tt>Attributes</tt>. It provides convenience functions such as <tt>background()</tt>, which return a reference to a MathColor object to the current value for the background color.</p>
+
+<p>When laying out or painting a document, the attributes object is passed to each child attribute. Each child has two arrays with element specific attributes. One of these arrays is the array with global defaults and the other array is a local array with parse values from the attributes in the current document.</p>
+
+
+
+</body>
+</html>

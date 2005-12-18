@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+
+<title>libmathml</title>
+</head>
+
+<body>
+
+<h1>libmathml</h1>
+
+<h2>Building a document</h2>
+
+<p>A libmathml document can be constructed with the DOM-like API. Here is a small example:</p>
+<pre>
+#include &lt;mathml/mmldocument.h>
+
+void
+createSimpleDocument() {
+    // create a the document
+    MMLDocument *d = new MMLDocument();
+
+    // create the root element &lt;math>
+    MMLElement *math = d->createElement("math");
+    d->appendChild(math);
+
+    // create a 'math identifier' element with text 'x'
+    MMLElement *mi = d->createElement("mi");
+    math->appendChild(mi);
+    MMLText *t = d->createTextNode("x");
+    mi->appendChild(t);
+}
+</pre>
+
+<p>In order to draw the document, you must first call <tt>validate</tt>, to check that the document is valid. Then, you must call <tt>layout</tt> to let the equation layout. After this call you can obtain the equations dimensions: height, width ascent and descent.</p>
+
+<h2>Validating an equation</h2>
+
+<p>An equation is validated with a call to <tt>doc->validate()</tt>. This function returns <tt>true</tt> if the equation is valid and <tt>false</tt> if it not. If the equation is not valid, a message describing the problem can be obtained with the function <tt>errMsg()</tt>. Just like the function <tt>validate()</tt>, this function can be called on any node in the document.</p>
+
+<p>The validate call is required, because some elements require a certain number of sub-elements. If these are not present, the element is invalid. What the validate function does is check if the child elements of the element are valid and if the child elements are allowed to be within the element.</p>
+
+<h2>Laying out an equation</h2>
+
+<p>
+
+</body>
+</html>

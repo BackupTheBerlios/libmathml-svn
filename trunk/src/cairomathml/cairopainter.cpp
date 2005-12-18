@@ -99,7 +99,8 @@ CairoPainter::selectionColor() const {
     return m_selection;
 }
 void
-CairoPainter::setMathVariant(MathVariant mv) {
+CairoPainter::setMathVariant(mathvariant::Mathvariant mv) {
+    using namespace mathvariant;
     switch (mv) {
     case (NORMAL):
         cairo_select_font_face(m_painter, m_seriffont.c_str(),

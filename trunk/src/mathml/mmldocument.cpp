@@ -34,7 +34,6 @@ using std::endl;
 
 MMLDocument::MMLDocument() : MMLNode(this) {
     root = 0;
-    border = 25;
     active = 0;
     mathcursor = new MathCursor(this);
     constmathcursor = new ConstMathCursor(mathcursor);
@@ -199,7 +198,7 @@ MMLDocument::validate() {
     return valid;
 }
 bool
-MMLDocument::validate() const {
+MMLDocument::isValid() const {
     return validated && valid;
 }
 void
@@ -217,7 +216,7 @@ MMLDocument::setPainter(MMLPainter *p) const {
 }
 void
 MMLDocument::layout() const {
-    if (a->p && validate()) {
+    if (a->p && isValid()) {
         layout(a);
         // initialize the viewport
         v->views.resize(1);
@@ -226,6 +225,7 @@ MMLDocument::layout() const {
         v->curview->setEnd();
     }
 }
+// the views functionality has not been implemented yet
 bool
 MMLDocument::setMaxViewWidth(float maxwidth) const {
     v->curview->setMaxWidth(maxwidth);
@@ -240,7 +240,7 @@ MMLDocument::setMaxViewWidth(float maxwidth) const {
 }
 void
 MMLDocument::paint() const {
-    if (a->p && validate()) {
+    if (a->p && isValid()) {
         float x = getX();
         float y = getY();
         a->p->translate(x,y);

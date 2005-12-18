@@ -42,7 +42,7 @@ macros	DOMString
 mathbackground	MathColor
 mathcolor	MathColor
 mathsize	v_unit
-mathvariant	MathVariant
+mathvariant	mathvariant::Mathvariant
 maxsize	h_unit
 mediummathspace	h_unit
 minlabelspacing	h_unit

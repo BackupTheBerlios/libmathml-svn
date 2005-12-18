@@ -18,7 +18,7 @@ public:
     ~MMLDocument();
     const char *nodeName() const { return "MMLDocument"; }
     bool validate();
-    bool validate() const;
+    bool isValid() const;
     void setPainter(MMLPainter *) const;
     void layout() const;
     void paint() const;
@@ -28,7 +28,6 @@ public:
     MMLmrow *createInferredmrow(MMLElement *);
     MMLmo *createInferredmo(const DOMString & ="");
     MMLText *createTextNode(const DOMString &);
-    DOMString createDOMString(const char * =0) const;
     MMLElement *documentElement();
     const MMLElement *documentElement() const;
 
@@ -40,7 +39,7 @@ public:
     MMLViewPort *currentView() const { return v->curview; }
     ushort currentViewNo() const { return v->cv; }
 
-    // overloaded functions from MMLNode: one must access the current view
+    // overloaded functions from MMLNode: they must access the current view
     void setX(float) const;
     void setY(float) const;
     float getX() const;
@@ -53,16 +52,15 @@ private:
     MML::Attributes *a;
     void layout(MML::Attributes *) const;
     void paint(MML::Attributes *) const {}
+    // copy of the node for quick access
     mutable MMLElement *root;
     MMLElement *active;
-    int border;
     MathCursor *mathcursor;
     ConstMathCursor *constmathcursor;
 
     // a list of all the nodes: these must be deleted when the document
     // is deleted
     std::list<MMLNode *> nodes;
-    // copy of the node for quick access
     void checkRoot();
 
     struct Views {

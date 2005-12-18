@@ -119,7 +119,7 @@ MMLAttribute *
 MML::createMATHVARIANT(const DOMString &v, Attribute) {
     for (uint i=0; i<14; ++i) {
         if (v == mathvariantnames[i]) {
-            return new MMLMathVariant(MathVariant(i));
+            return new MMLMathvariant(mathvariant::Mathvariant(i));
         }
     }
     return 0;
@@ -246,17 +246,19 @@ Attributes::setAttributes(const MMLElement *e) {
         MML::Attribute a = attlist[i];
         e->tmpatt[i] = att[a];
         if (e->att[i]) {
+            // if the attribute was specified in this element, set it
             att[a] = e->att[i];
             if (ps) ps->set(a);
         } else if (e->defatt[e->id][i]) {
+            // otherwise, set the default
             att[a] = e->defatt[e->id][i];
             if (ps) ps->set(a);
         }
+        // check that a value was specified
         if (!att[a]
             && a != MML::BACKGROUND // inherited
             && a != MML::COLOR // inherited
-            && a != MML::ROWALIGN // inherited
-            && a != MML::COLUMNALIGN // inherited
+            //&& a != MML::COLUMNALIGN // inherited
             && a != MML::GROUPALIGN ) {
             cerr << "Attribute " << attributeTag[a]
                 << " has no value for element "
@@ -287,10 +289,8 @@ Attributes::setAttribute(MML::Attribute a, const char *c) {
  * create a new AttributeChanges object in which we can store changes.
  * for each call to save, there must be one call to restore
  */
-int callcount=0;
 void
 Attributes::save() {
-//    printf("^^^^^^save() %i\n", ++callcount);
     cur = new AttributeChanges();
     changes.push(cur);
 }
@@ -300,7 +300,6 @@ Attributes::save() {
  */
 void
 Attributes::restore() {
-//    printf("^^^^^^restore() %i\n", callcount--);
     // revert all the changes
     while (!cur->empty()) {
         AttributeChange ac = cur->pop();

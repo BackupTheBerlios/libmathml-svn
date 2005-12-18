@@ -47,7 +47,7 @@ public:
     // if the font cannot be to fit the box exactly, use a smaller font
     // and centre the content in the specified direction
 protected:
-    virtual void setMathVariant(MathVariant) = 0;
+    virtual void setMathvariant(mathvariant::Mathvariant) = 0;
     virtual void setMathColor(MathColor c) = 0;
     virtual void setMathBackground(MathColor c) = 0;
     virtual void setFontSize(float f) = 0; // f in pt (point size)

@@ -35,6 +35,9 @@ public:
      * This function never returns an inferred node.
      */
     MMLNode *parentNode() { return parentNode_(); }
+    /**
+     * \sa MMLNode::parentNode()
+     */
     const MMLNode *parentNode() const { return parentNode_(); }
     /**
      * Returns a pointer to the first child node. If the direct first child
@@ -45,6 +48,9 @@ public:
      * are inferred, the function returns 0.
      */
     MMLNode *firstChild() { return firstChild_(); }
+    /**
+     * \sa MMLNode::firstChild()
+     */
     const MMLNode *firstChild() const { return firstChild_(); }
     /**
      * Returns a pointer to the last child node. If this is inferred, the
@@ -52,12 +58,35 @@ public:
      * This function never returns an inferred node.
      */
     MMLNode *lastChild() { return lastChild_(); }
+    /**
+     * \sa MMLNode::lastChild()
+     */
     const MMLNode *lastChild() const { return lastChild_(); }
+    /**
+     * Returns a pointer to the child node that follows this one in the parent node.
+     * If that child node is inferred, it is skipped.
+     */
     MMLNode *nextSibling() { return nextSibling_(); }
+    /**
+     * \sa MMLNode::nextSibling()
+     */
     const MMLNode *nextSibling() const { return nextSibling_(); }
+    /**
+     * Returns a pointer to the child node that precedes this one in the parent node.
+     * If that child node is inferred, it is skipped.
+     */
     MMLNode *previousSibling() { return previousSibling_(); }
+    /**
+     * \sa MMLNode::previousSibling()
+     */
     const MMLNode *previousSibling() const { return previousSibling_(); }
+    /**
+     * Returns a pointer to the document that owns this node.
+     */
     MMLDocument *ownerDocument() { return owner; }
+    /**
+     * \sa MMLNode::ownerDocument()
+     */
     const MMLDocument *ownerDocument() const { return owner; }
     MMLNode *insertBefore(MMLNode *, MMLNode *);
     MMLNode *removeChild(MMLNode *);
@@ -120,6 +149,8 @@ private:
 
     // helper functions. These functions are called by the constant and
     // non-constant versions. This saves implementation space.
+    // It is not possible to have the const version call the non-const version
+    // and vice-versa without casting away const at some point
     MMLNode *parentNode_() const;
     MMLNode *firstChild_() const;
     MMLNode *lastChild_() const;
