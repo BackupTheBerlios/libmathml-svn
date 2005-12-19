@@ -140,7 +140,7 @@ MMLImage::setBackgroundColor(float r , float g , float b) {
     m_background[0] = r;
     m_background[1] = g;
     m_background[2] = b;
-    m_painter.setBackground(r*256.0, g*256.0, b*256.0);
+    m_painter.setBackground((uint)(r*256.0), (uint)(g*256.0), (uint)(b*256.0));
 }
 void 
 MMLImage::setForeGroundColor(float r, float g, float b) {
@@ -148,3 +148,4 @@ MMLImage::setForeGroundColor(float r, float g, float b) {
     m_foreground[1] = g;
     m_foreground[2] = b;
 }
+

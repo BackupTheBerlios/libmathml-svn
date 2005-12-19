@@ -99,7 +99,7 @@ CairoPainter::selectionColor() const {
     return m_selection;
 }
 void
-CairoPainter::setMathVariant(mathvariant::Mathvariant mv) {
+CairoPainter::setMathvariant(mathvariant::Mathvariant mv) {
     using namespace mathvariant;
     switch (mv) {
     case (NORMAL):

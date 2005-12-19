@@ -32,7 +32,7 @@ public:
 
     // settings changes
     void translate(float x, float y);
-    void setMathVariant(MathVariant);
+    void setMathvariant(mathvariant::Mathvariant);
     void setMathColor(MathColor c);
     void setMathBackground(MathColor c);
     void setFontSize(float f); // f in pt (point size)

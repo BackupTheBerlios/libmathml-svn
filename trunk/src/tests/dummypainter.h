@@ -60,7 +60,7 @@ public:
     // if the font cannot be to fit the box exactly, use a smaller font
     // and centre the content in the specified direction
 protected:
-    void setMathVariant(MathVariant) {}
+    void setMathvariant(mathvariant::Mathvariant) {}
     void setMathColor(MathColor c) {}
     void setMathBackground(MathColor c) {}
     void setFontSize(float f) {} // f in pt (point size)

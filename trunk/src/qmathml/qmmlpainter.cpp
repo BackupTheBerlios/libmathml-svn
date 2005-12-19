@@ -99,67 +99,67 @@ QMMLPainter::selectionColor() const {
     return mathcolor(palette.highlight().color());
 }
 void
-QMMLPainter::setMathVariant(MathVariant mv) {
+QMMLPainter::setMathvariant(mathvariant::Mathvariant mv) {
     QFont f = p->font();
     float size = f.pointSize();
     switch (mv) {
-    case (NORMAL):
+    case (mathvariant::NORMAL):
         f = seriffont;
         f.setBold(false);
         f.setItalic(false);
         break;
-    case (BOLD):
+    case (mathvariant::BOLD):
         f = seriffont;
         f.setBold(true);
         f.setItalic(false);
         break;
-    case (ITALIC):
+    case (mathvariant::ITALIC):
         f = seriffont;
         f.setBold(false);
         f.setItalic(true);
         break;
-    case (BOLD_ITALIC):
+    case (mathvariant::BOLD_ITALIC):
         f = seriffont;
         f.setBold(true);
         f.setItalic(true);
         break;
-    case (DOUBLE_STRUCK): break;
+    case (mathvariant::DOUBLE_STRUCK): break;
         break;
-    case (BOLD_FRAKTUR): break;
+    case (mathvariant::BOLD_FRAKTUR): break;
         break;
-    case (SCRIPT):
+    case (mathvariant::SCRIPT):
         f = scriptfont;
         f.setBold(false);
         f.setItalic(false);
         break;
-    case (BOLD_SCRIPT):
+    case (mathvariant::BOLD_SCRIPT):
         f = scriptfont;
         f.setBold(true);
         f.setItalic(false);
         break;
-    case (FRAKTUR): break;
+    case (mathvariant::FRAKTUR): break;
         break;
-    case (SANS_SERIF):
+    case (mathvariant::SANS_SERIF):
         f = sansseriffont;
         f.setBold(false);
         f.setItalic(false);
         break;
-    case (BOLD_SANS_SERIF):
+    case (mathvariant::BOLD_SANS_SERIF):
         f = sansseriffont;
         f.setBold(true);
         f.setItalic(false);
         break;
-    case (SANS_SERIF_ITALIC):
+    case (mathvariant::SANS_SERIF_ITALIC):
         f = sansseriffont;
         f.setBold(false);
         f.setItalic(true);
         break;
-    case (SANS_SERIF_BOLD_ITALIC):
+    case (mathvariant::SANS_SERIF_BOLD_ITALIC):
         f = sansseriffont;
         f.setBold(true);
         f.setItalic(true);
         break;
-    case (MONOSPACE):
+    case (mathvariant::MONOSPACE):
         f = monospacefont;
         f.setBold(false);
         f.setItalic(false);
