@@ -48,7 +48,8 @@ print FH "\n#endif\n";
 close(FH);
 
 open (FH, "> mathenums.cpp");
-print FH "#include \"mathenums.h\"\n\n";
+print FH "#include \"mathenums.h\"\n";
+print FH "#include \"mathml.h\"\n\n";
 
 foreach (keys %enums) {
 	my $name = $_;
@@ -65,5 +66,18 @@ foreach (keys %enums) {
 		print FH "\"$_\"";
 	}
 	print FH "};\n";
+	my $uc = uc($name);
+	my $fuc = ucfirst($name);
+print FH <<THEEND;
+MMLAttribute *
+MML::create${uc}(const DOMString &v, Attribute) {
+    for (uint i=0; i<${size}; ++i) {
+        if (v == ${name}names[i]) {
+            return new MML${fuc}(${name}::${fuc}(i));
+        }
+    }
+    return 0;
+}
+THEEND
 }
 close(FH);

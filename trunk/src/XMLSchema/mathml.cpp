@@ -11,7 +11,25 @@ MMLMathColor::MMLMathColor(MathColor v, bool c)
 MMLbool::MMLbool(bool v, bool c)
 		: value(v) {cleanup=c;
 }
+MMLClosure::MMLClosure(closure::Closure v, bool c)
+		: value(v) {cleanup=c;
+}
+MMLDisplay::MMLDisplay(display::Display v, bool c)
+		: value(v) {cleanup=c;
+}
+MMLEdge::MMLEdge(edge::Edge v, bool c)
+		: value(v) {cleanup=c;
+}
 MMLfloat::MMLfloat(float v, bool c)
+		: value(v) {cleanup=c;
+}
+MMLForm::MMLForm(form::Form v, bool c)
+		: value(v) {cleanup=c;
+}
+MMLFrame::MMLFrame(frame::Frame v, bool c)
+		: value(v) {cleanup=c;
+}
+MMLGroupalign::MMLGroupalign(groupalign::Groupalign v, bool c)
 		: value(v) {cleanup=c;
 }
 MMLh_unit::MMLh_unit(h_unit v, bool c)
@@ -20,7 +38,28 @@ MMLh_unit::MMLh_unit(h_unit v, bool c)
 MMLint::MMLint(int v, bool c)
 		: value(v) {cleanup=c;
 }
+MMLLinebreak::MMLLinebreak(linebreak::Linebreak v, bool c)
+		: value(v) {cleanup=c;
+}
 MMLMathvariant::MMLMathvariant(mathvariant::Mathvariant v, bool c)
+		: value(v) {cleanup=c;
+}
+MMLNotation::MMLNotation(notation::Notation v, bool c)
+		: value(v) {cleanup=c;
+}
+MMLOccurrence::MMLOccurrence(occurrence::Occurrence v, bool c)
+		: value(v) {cleanup=c;
+}
+MMLOrder::MMLOrder(order::Order v, bool c)
+		: value(v) {cleanup=c;
+}
+MMLOverflow::MMLOverflow(overflow::Overflow v, bool c)
+		: value(v) {cleanup=c;
+}
+MMLSide::MMLSide(side::Side v, bool c)
+		: value(v) {cleanup=c;
+}
+MMLType::MMLType(type::Type v, bool c)
 		: value(v) {cleanup=c;
 }
 MMLv_unit::MMLv_unit(v_unit v, bool c)
@@ -79,20 +118,19 @@ const char * const MML::attributeTag[91] = {
 const AttributeType MML::attTypes[91] = {
 	BOOL_T, BOOL_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, 
 	DOMSTRING_T, DOMSTRING_T, MATHCOLOR_T, INT_T, DOMSTRING_T, BOOL_T, 
-	DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, MATHCOLOR_T, DOMSTRING_T, 
+	DOMSTRING_T, DOMSTRING_T, CLOSURE_T, MATHCOLOR_T, DOMSTRING_T, 
 	DOMSTRING_T, DOMSTRING_T, INT_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, 
-	H_UNIT_T, DOMSTRING_T, BOOL_T, DOMSTRING_T, DOMSTRING_T, BOOL_T, 
-	BOOL_T, BOOL_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, 
-	DOMSTRING_T, V_UNIT_T, DOMSTRING_T, INT_T, BOOL_T, DOMSTRING_T, 
-	V_UNIT_T, DOMSTRING_T, H_UNIT_T, DOMSTRING_T, MATHCOLOR_T, MATHCOLOR_T, 
-	V_UNIT_T, MATHVARIANT_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, 
-	BOOL_T, DOMSTRING_T, INT_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, 
-	DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, 
-	DOMSTRING_T, INT_T, DOMSTRING_T, H_UNIT_T, DOMSTRING_T, INT_T, 
-	V_UNIT_T, FLOAT_T, INT_T, BOOL_T, DOMSTRING_T, DOMSTRING_T, BOOL_T, 
-	DOMSTRING_T, H_UNIT_T, H_UNIT_T, BOOL_T, H_UNIT_T, H_UNIT_T, 
-	DOMSTRING_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, 
-	DOMSTRING_T, DOMSTRING_T
+	H_UNIT_T, DISPLAY_T, BOOL_T, EDGE_T, DOMSTRING_T, BOOL_T, BOOL_T, 
+	BOOL_T, DOMSTRING_T, FORM_T, FRAME_T, DOMSTRING_T, GROUPALIGN_T, 
+	V_UNIT_T, DOMSTRING_T, INT_T, BOOL_T, LINEBREAK_T, V_UNIT_T, 
+	DOMSTRING_T, H_UNIT_T, DOMSTRING_T, MATHCOLOR_T, MATHCOLOR_T, V_UNIT_T, 
+	MATHVARIANT_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, BOOL_T, 
+	DOMSTRING_T, INT_T, NOTATION_T, DOMSTRING_T, OCCURRENCE_T, DOMSTRING_T, 
+	ORDER_T, OVERFLOW_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, INT_T, 
+	DOMSTRING_T, H_UNIT_T, DOMSTRING_T, INT_T, V_UNIT_T, FLOAT_T, INT_T, 
+	BOOL_T, DOMSTRING_T, SIDE_T, BOOL_T, DOMSTRING_T, H_UNIT_T, H_UNIT_T, 
+	BOOL_T, H_UNIT_T, H_UNIT_T, TYPE_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, 
+	H_UNIT_T, H_UNIT_T, DOMSTRING_T, DOMSTRING_T
 };
 const Attribute MML::absAtts[7] = {
 	CLASS, DEFINITIONURL, ENCODING, ID, STYLE, XLINK_HREF, XREF
@@ -696,6 +734,9 @@ const uint MML::attListLen[numElements] = {
 	7, 7, 7, 7, 8, 7, 7, 7, 7, 7, 7, 5, 7, 7
 };
 MMLAttribute * (* const MML::attFunc[numAttTypes])(const DOMString &, Attribute) = {
-	createBOOL, createDOMSTRING, createFLOAT, createH_UNIT, createINT, 
-	createMATHCOLOR, createMATHVARIANT, createV_UNIT
+	createBOOL, createCLOSURE, createDISPLAY, createDOMSTRING, createEDGE, 
+	createFLOAT, createFORM, createFRAME, createGROUPALIGN, createH_UNIT, 
+	createINT, createLINEBREAK, createMATHCOLOR, createMATHVARIANT, 
+	createNOTATION, createOCCURRENCE, createORDER, createOVERFLOW, 
+	createSIDE, createTYPE, createV_UNIT
 };

@@ -116,15 +116,6 @@ MML::createINT(const DOMString &v, Attribute) {
     return i;
 }
 MMLAttribute *
-MML::createMATHVARIANT(const DOMString &v, Attribute) {
-    for (uint i=0; i<14; ++i) {
-        if (v == mathvariantnames[i]) {
-            return new MMLMathvariant(mathvariant::Mathvariant(i));
-        }
-    }
-    return 0;
-}
-MMLAttribute *
 MML::createMATHCOLOR(const DOMString &v, Attribute) {
     MathColor mc(v);
     if (mc.isValid()) {

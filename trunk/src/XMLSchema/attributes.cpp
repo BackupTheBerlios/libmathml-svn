@@ -66,9 +66,9 @@ const DOMString &
 Attributes::close() const {
 	return static_cast<const MMLDOMString*>(att[13])->value;
 }
-const DOMString &
+const closure::Closure &
 Attributes::closure() const {
-	return static_cast<const MMLDOMString*>(att[14])->value;
+	return static_cast<const MMLClosure*>(att[14])->value;
 }
 const MathColor &
 Attributes::color() const {
@@ -106,17 +106,17 @@ const h_unit &
 Attributes::depth() const {
 	return static_cast<const MMLh_unit*>(att[23])->value;
 }
-const DOMString &
+const display::Display &
 Attributes::display() const {
-	return static_cast<const MMLDOMString*>(att[24])->value;
+	return static_cast<const MMLDisplay*>(att[24])->value;
 }
 const bool &
 Attributes::displaystyle() const {
 	return static_cast<const MMLbool*>(att[25])->value;
 }
-const DOMString &
+const edge::Edge &
 Attributes::edge() const {
-	return static_cast<const MMLDOMString*>(att[26])->value;
+	return static_cast<const MMLEdge*>(att[26])->value;
 }
 const DOMString &
 Attributes::encoding() const {
@@ -138,21 +138,21 @@ const DOMString &
 Attributes::fontfamily() const {
 	return static_cast<const MMLDOMString*>(att[31])->value;
 }
-const DOMString &
+const form::Form &
 Attributes::form() const {
-	return static_cast<const MMLDOMString*>(att[32])->value;
+	return static_cast<const MMLForm*>(att[32])->value;
 }
-const DOMString &
+const frame::Frame &
 Attributes::frame() const {
-	return static_cast<const MMLDOMString*>(att[33])->value;
+	return static_cast<const MMLFrame*>(att[33])->value;
 }
 const DOMString &
 Attributes::framespacing() const {
 	return static_cast<const MMLDOMString*>(att[34])->value;
 }
-const DOMString &
+const groupalign::Groupalign &
 Attributes::groupalign() const {
-	return static_cast<const MMLDOMString*>(att[35])->value;
+	return static_cast<const MMLGroupalign*>(att[35])->value;
 }
 const v_unit &
 Attributes::height() const {
@@ -170,9 +170,9 @@ const bool &
 Attributes::largeop() const {
 	return static_cast<const MMLbool*>(att[39])->value;
 }
-const DOMString &
+const linebreak::Linebreak &
 Attributes::linebreak() const {
-	return static_cast<const MMLDOMString*>(att[40])->value;
+	return static_cast<const MMLLinebreak*>(att[40])->value;
 }
 const v_unit &
 Attributes::linethickness() const {
@@ -234,29 +234,29 @@ const int &
 Attributes::nargs() const {
 	return static_cast<const MMLint*>(att[55])->value;
 }
-const DOMString &
+const notation::Notation &
 Attributes::notation() const {
-	return static_cast<const MMLDOMString*>(att[56])->value;
+	return static_cast<const MMLNotation*>(att[56])->value;
 }
 const DOMString &
 Attributes::numalign() const {
 	return static_cast<const MMLDOMString*>(att[57])->value;
 }
-const DOMString &
+const occurrence::Occurrence &
 Attributes::occurrence() const {
-	return static_cast<const MMLDOMString*>(att[58])->value;
+	return static_cast<const MMLOccurrence*>(att[58])->value;
 }
 const DOMString &
 Attributes::open() const {
 	return static_cast<const MMLDOMString*>(att[59])->value;
 }
-const DOMString &
+const order::Order &
 Attributes::order() const {
-	return static_cast<const MMLDOMString*>(att[60])->value;
+	return static_cast<const MMLOrder*>(att[60])->value;
 }
-const DOMString &
+const overflow::Overflow &
 Attributes::overflow() const {
-	return static_cast<const MMLDOMString*>(att[61])->value;
+	return static_cast<const MMLOverflow*>(att[61])->value;
 }
 const DOMString &
 Attributes::rowalign() const {
@@ -310,9 +310,9 @@ const DOMString &
 Attributes::separators() const {
 	return static_cast<const MMLDOMString*>(att[74])->value;
 }
-const DOMString &
+const side::Side &
 Attributes::side() const {
-	return static_cast<const MMLDOMString*>(att[75])->value;
+	return static_cast<const MMLSide*>(att[75])->value;
 }
 const bool &
 Attributes::stretchy() const {
@@ -342,9 +342,9 @@ const h_unit &
 Attributes::thinmathspace() const {
 	return static_cast<const MMLh_unit*>(att[82])->value;
 }
-const DOMString &
+const type::Type &
 Attributes::type() const {
-	return static_cast<const MMLDOMString*>(att[83])->value;
+	return static_cast<const MMLType*>(att[83])->value;
 }
 const h_unit &
 Attributes::verythickmathspace() const {
@@ -425,6 +425,51 @@ Attributes::setAttribute(MML::Attribute a, const bool &value) {
 }
 
 void
+Attributes::setAttribute(MML::Attribute a, const closure::Closure &value) {
+	const MMLAttribute *newA;
+	if (attTypes[a] != CLOSURE_T) {
+		cerr << "Attribute " << attributeTag[a]
+			<< " is not of type closure::Closure." << endl;
+		exit(1);
+	} else {
+		newA = new MMLClosure(value);
+	}
+	cur->add(a, newA, att[a]);
+	att[a] = newA;
+	if (ps) ps->set(a);
+}
+
+void
+Attributes::setAttribute(MML::Attribute a, const display::Display &value) {
+	const MMLAttribute *newA;
+	if (attTypes[a] != DISPLAY_T) {
+		cerr << "Attribute " << attributeTag[a]
+			<< " is not of type display::Display." << endl;
+		exit(1);
+	} else {
+		newA = new MMLDisplay(value);
+	}
+	cur->add(a, newA, att[a]);
+	att[a] = newA;
+	if (ps) ps->set(a);
+}
+
+void
+Attributes::setAttribute(MML::Attribute a, const edge::Edge &value) {
+	const MMLAttribute *newA;
+	if (attTypes[a] != EDGE_T) {
+		cerr << "Attribute " << attributeTag[a]
+			<< " is not of type edge::Edge." << endl;
+		exit(1);
+	} else {
+		newA = new MMLEdge(value);
+	}
+	cur->add(a, newA, att[a]);
+	att[a] = newA;
+	if (ps) ps->set(a);
+}
+
+void
 Attributes::setAttribute(MML::Attribute a, const float &value) {
 	const MMLAttribute *newA;
 	if (attTypes[a] != FLOAT_T) {
@@ -433,6 +478,51 @@ Attributes::setAttribute(MML::Attribute a, const float &value) {
 		exit(1);
 	} else {
 		newA = new MMLfloat(value);
+	}
+	cur->add(a, newA, att[a]);
+	att[a] = newA;
+	if (ps) ps->set(a);
+}
+
+void
+Attributes::setAttribute(MML::Attribute a, const form::Form &value) {
+	const MMLAttribute *newA;
+	if (attTypes[a] != FORM_T) {
+		cerr << "Attribute " << attributeTag[a]
+			<< " is not of type form::Form." << endl;
+		exit(1);
+	} else {
+		newA = new MMLForm(value);
+	}
+	cur->add(a, newA, att[a]);
+	att[a] = newA;
+	if (ps) ps->set(a);
+}
+
+void
+Attributes::setAttribute(MML::Attribute a, const frame::Frame &value) {
+	const MMLAttribute *newA;
+	if (attTypes[a] != FRAME_T) {
+		cerr << "Attribute " << attributeTag[a]
+			<< " is not of type frame::Frame." << endl;
+		exit(1);
+	} else {
+		newA = new MMLFrame(value);
+	}
+	cur->add(a, newA, att[a]);
+	att[a] = newA;
+	if (ps) ps->set(a);
+}
+
+void
+Attributes::setAttribute(MML::Attribute a, const groupalign::Groupalign &value) {
+	const MMLAttribute *newA;
+	if (attTypes[a] != GROUPALIGN_T) {
+		cerr << "Attribute " << attributeTag[a]
+			<< " is not of type groupalign::Groupalign." << endl;
+		exit(1);
+	} else {
+		newA = new MMLGroupalign(value);
 	}
 	cur->add(a, newA, att[a]);
 	att[a] = newA;
@@ -470,6 +560,21 @@ Attributes::setAttribute(MML::Attribute a, const int &value) {
 }
 
 void
+Attributes::setAttribute(MML::Attribute a, const linebreak::Linebreak &value) {
+	const MMLAttribute *newA;
+	if (attTypes[a] != LINEBREAK_T) {
+		cerr << "Attribute " << attributeTag[a]
+			<< " is not of type linebreak::Linebreak." << endl;
+		exit(1);
+	} else {
+		newA = new MMLLinebreak(value);
+	}
+	cur->add(a, newA, att[a]);
+	att[a] = newA;
+	if (ps) ps->set(a);
+}
+
+void
 Attributes::setAttribute(MML::Attribute a, const mathvariant::Mathvariant &value) {
 	const MMLAttribute *newA;
 	if (attTypes[a] != MATHVARIANT_T) {
@@ -478,6 +583,96 @@ Attributes::setAttribute(MML::Attribute a, const mathvariant::Mathvariant &value
 		exit(1);
 	} else {
 		newA = new MMLMathvariant(value);
+	}
+	cur->add(a, newA, att[a]);
+	att[a] = newA;
+	if (ps) ps->set(a);
+}
+
+void
+Attributes::setAttribute(MML::Attribute a, const notation::Notation &value) {
+	const MMLAttribute *newA;
+	if (attTypes[a] != NOTATION_T) {
+		cerr << "Attribute " << attributeTag[a]
+			<< " is not of type notation::Notation." << endl;
+		exit(1);
+	} else {
+		newA = new MMLNotation(value);
+	}
+	cur->add(a, newA, att[a]);
+	att[a] = newA;
+	if (ps) ps->set(a);
+}
+
+void
+Attributes::setAttribute(MML::Attribute a, const occurrence::Occurrence &value) {
+	const MMLAttribute *newA;
+	if (attTypes[a] != OCCURRENCE_T) {
+		cerr << "Attribute " << attributeTag[a]
+			<< " is not of type occurrence::Occurrence." << endl;
+		exit(1);
+	} else {
+		newA = new MMLOccurrence(value);
+	}
+	cur->add(a, newA, att[a]);
+	att[a] = newA;
+	if (ps) ps->set(a);
+}
+
+void
+Attributes::setAttribute(MML::Attribute a, const order::Order &value) {
+	const MMLAttribute *newA;
+	if (attTypes[a] != ORDER_T) {
+		cerr << "Attribute " << attributeTag[a]
+			<< " is not of type order::Order." << endl;
+		exit(1);
+	} else {
+		newA = new MMLOrder(value);
+	}
+	cur->add(a, newA, att[a]);
+	att[a] = newA;
+	if (ps) ps->set(a);
+}
+
+void
+Attributes::setAttribute(MML::Attribute a, const overflow::Overflow &value) {
+	const MMLAttribute *newA;
+	if (attTypes[a] != OVERFLOW_T) {
+		cerr << "Attribute " << attributeTag[a]
+			<< " is not of type overflow::Overflow." << endl;
+		exit(1);
+	} else {
+		newA = new MMLOverflow(value);
+	}
+	cur->add(a, newA, att[a]);
+	att[a] = newA;
+	if (ps) ps->set(a);
+}
+
+void
+Attributes::setAttribute(MML::Attribute a, const side::Side &value) {
+	const MMLAttribute *newA;
+	if (attTypes[a] != SIDE_T) {
+		cerr << "Attribute " << attributeTag[a]
+			<< " is not of type side::Side." << endl;
+		exit(1);
+	} else {
+		newA = new MMLSide(value);
+	}
+	cur->add(a, newA, att[a]);
+	att[a] = newA;
+	if (ps) ps->set(a);
+}
+
+void
+Attributes::setAttribute(MML::Attribute a, const type::Type &value) {
+	const MMLAttribute *newA;
+	if (attTypes[a] != TYPE_T) {
+		cerr << "Attribute " << attributeTag[a]
+			<< " is not of type type::Type." << endl;
+		exit(1);
+	} else {
+		newA = new MMLType(value);
 	}
 	cur->add(a, newA, att[a]);
 	att[a] = newA;

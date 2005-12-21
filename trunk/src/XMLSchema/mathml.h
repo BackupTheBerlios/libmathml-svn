@@ -6,8 +6,10 @@ typedef unsigned int uint;
 #include "mathtypes.h"
 namespace MML {
 enum AttributeType {
-	BOOL_T, DOMSTRING_T, FLOAT_T, H_UNIT_T, INT_T, MATHCOLOR_T, 
-	MATHVARIANT_T, V_UNIT_T
+	BOOL_T, CLOSURE_T, DISPLAY_T, DOMSTRING_T, EDGE_T, FLOAT_T, FORM_T, 
+	FRAME_T, GROUPALIGN_T, H_UNIT_T, INT_T, LINEBREAK_T, MATHCOLOR_T, 
+	MATHVARIANT_T, NOTATION_T, OCCURRENCE_T, ORDER_T, OVERFLOW_T, SIDE_T, 
+	TYPE_T, V_UNIT_T
 };
 enum Attribute {
 	ACCENT, ACCENTUNDER, ACTIONTYPE, ALIGN, ALIGNMENTSCOPE, ALT, ALTIMG, 
@@ -47,10 +49,40 @@ public:
 	MMLbool(bool, bool c=true);
 	bool value;
 };
+class MMLClosure : public MMLAttribute {
+public:
+	MMLClosure(closure::Closure, bool c=true);
+	closure::Closure value;
+};
+class MMLDisplay : public MMLAttribute {
+public:
+	MMLDisplay(display::Display, bool c=true);
+	display::Display value;
+};
+class MMLEdge : public MMLAttribute {
+public:
+	MMLEdge(edge::Edge, bool c=true);
+	edge::Edge value;
+};
 class MMLfloat : public MMLAttribute {
 public:
 	MMLfloat(float, bool c=true);
 	float value;
+};
+class MMLForm : public MMLAttribute {
+public:
+	MMLForm(form::Form, bool c=true);
+	form::Form value;
+};
+class MMLFrame : public MMLAttribute {
+public:
+	MMLFrame(frame::Frame, bool c=true);
+	frame::Frame value;
+};
+class MMLGroupalign : public MMLAttribute {
+public:
+	MMLGroupalign(groupalign::Groupalign, bool c=true);
+	groupalign::Groupalign value;
 };
 class MMLh_unit : public MMLAttribute {
 public:
@@ -62,10 +94,45 @@ public:
 	MMLint(int, bool c=true);
 	int value;
 };
+class MMLLinebreak : public MMLAttribute {
+public:
+	MMLLinebreak(linebreak::Linebreak, bool c=true);
+	linebreak::Linebreak value;
+};
 class MMLMathvariant : public MMLAttribute {
 public:
 	MMLMathvariant(mathvariant::Mathvariant, bool c=true);
 	mathvariant::Mathvariant value;
+};
+class MMLNotation : public MMLAttribute {
+public:
+	MMLNotation(notation::Notation, bool c=true);
+	notation::Notation value;
+};
+class MMLOccurrence : public MMLAttribute {
+public:
+	MMLOccurrence(occurrence::Occurrence, bool c=true);
+	occurrence::Occurrence value;
+};
+class MMLOrder : public MMLAttribute {
+public:
+	MMLOrder(order::Order, bool c=true);
+	order::Order value;
+};
+class MMLOverflow : public MMLAttribute {
+public:
+	MMLOverflow(overflow::Overflow, bool c=true);
+	overflow::Overflow value;
+};
+class MMLSide : public MMLAttribute {
+public:
+	MMLSide(side::Side, bool c=true);
+	side::Side value;
+};
+class MMLType : public MMLAttribute {
+public:
+	MMLType(type::Type, bool c=true);
+	type::Type value;
 };
 class MMLv_unit : public MMLAttribute {
 public:
@@ -801,7 +868,7 @@ enum xorAtt {
 	xorCLASS, xorDEFINITIONURL, xorENCODING, xorID, xorSTYLE, 
 	xorXLINK_HREF, xorXREF
 };
-const uint numAttTypes = 8;
+const uint numAttTypes = 21;
 const uint numAttributes = 91;
 extern const char * const elementTag[numElements];
 extern const Attribute * const attList[numElements];
@@ -1170,12 +1237,25 @@ int createAttribute(const char *, const DOMString &value, Element e, const MMLAt
 int createAttribute(const Attribute, const DOMString &value, Element e, const MMLAttribute **att);
 MMLAttribute *createAttribute(const Attribute a, const DOMString &value);
 MMLAttribute *createBOOL(const DOMString &, Attribute);
+MMLAttribute *createCLOSURE(const DOMString &, Attribute);
+MMLAttribute *createDISPLAY(const DOMString &, Attribute);
 MMLAttribute *createDOMSTRING(const DOMString &, Attribute);
+MMLAttribute *createEDGE(const DOMString &, Attribute);
 MMLAttribute *createFLOAT(const DOMString &, Attribute);
+MMLAttribute *createFORM(const DOMString &, Attribute);
+MMLAttribute *createFRAME(const DOMString &, Attribute);
+MMLAttribute *createGROUPALIGN(const DOMString &, Attribute);
 MMLAttribute *createH_UNIT(const DOMString &, Attribute);
 MMLAttribute *createINT(const DOMString &, Attribute);
+MMLAttribute *createLINEBREAK(const DOMString &, Attribute);
 MMLAttribute *createMATHCOLOR(const DOMString &, Attribute);
 MMLAttribute *createMATHVARIANT(const DOMString &, Attribute);
+MMLAttribute *createNOTATION(const DOMString &, Attribute);
+MMLAttribute *createOCCURRENCE(const DOMString &, Attribute);
+MMLAttribute *createORDER(const DOMString &, Attribute);
+MMLAttribute *createOVERFLOW(const DOMString &, Attribute);
+MMLAttribute *createSIDE(const DOMString &, Attribute);
+MMLAttribute *createTYPE(const DOMString &, Attribute);
 MMLAttribute *createV_UNIT(const DOMString &, Attribute);
 extern MMLAttribute * (* const attFunc[numAttTypes])(const DOMString &, Attribute);
 }
