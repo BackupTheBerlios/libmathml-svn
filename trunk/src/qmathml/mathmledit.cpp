@@ -166,7 +166,7 @@ MathMLEdit::setMML() {
         cursorinfo->setDocument(0);
         mv->setDocument(0);
     }
-    latex->parseData(qte->toPlainText());
+    //latex->parseData(qte->toPlainText());
 }
 void
 MathMLEdit::setExamplesDir(const QString &dir) {

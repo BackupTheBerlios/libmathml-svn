@@ -80,7 +80,6 @@ superscriptshift	h_unit
 symmetric	bool
 thickmathspace	h_unit
 thinmathspace	h_unit
-type	type::Type
 verythickmathspace	h_unit
 verythinmathspace	h_unit
 veryverythickmathspace	h_unit

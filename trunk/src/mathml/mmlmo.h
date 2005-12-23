@@ -25,9 +25,9 @@ private:
     static bool madedict;
     static const char *rawopdict[351];
     static std::map<DOMString, const MMLAttribute **> dict;
-    void makedict();
-    void setAttribute(const char *op, const std::string &name,
-        const DOMString &v, const MMLAttribute **a);
+//    void makedict();
+//    void setAttribute(const char *op, const std::string &name,
+//        const DOMString &v, const MMLAttribute **a);
 
     MMLmo(MMLDocument *);
 };

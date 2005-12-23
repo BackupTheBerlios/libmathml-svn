@@ -9,14 +9,9 @@ using std::list;
 #include <iostream>
 using namespace std;
 
-bool MMLmo::madedict = false;
-map<DOMString, const MMLAttribute **> MMLmo::dict;
-
 MMLmo::MMLmo(MMLDocument *o)
     : MMLElement(MML::MO, o) {
-/*    if (!madedict) {
-        makedict();
-    }*/
+
     // initialize the default values for the attributes
     if (!defset[id]) {
         defset[id] = true;
@@ -143,7 +138,7 @@ MMLmo::setWidth(float sw) {
     setwidth = sw;
 }
 // static functions for initializing the operator dictionary
-void
+/*void
 MMLmo::makedict() {
     madedict = true;
     for (int i=0; i<351; ++i) {
@@ -184,9 +179,9 @@ MMLmo::makedict() {
                 (op, a));
 //        }
     }
-}
+}*/
 /* this function sets an attribute in a dictionary entry */
-void
+/*void
 MMLmo::setAttribute(const char *op, const std::string &name, const DOMString &v,
         const MMLAttribute **a) {
     int pos = createAttribute(name.c_str(), v, MML::MO, a);
@@ -196,4 +191,4 @@ MMLmo::setAttribute(const char *op, const std::string &name, const DOMString &v,
             << "' for operator '" << op << "'." << endl;
         exit(1);
     }
-}
+}*/

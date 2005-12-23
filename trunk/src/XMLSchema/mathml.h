@@ -9,7 +9,7 @@ enum AttributeType {
 	BOOL_T, CLOSURE_T, DISPLAY_T, DOMSTRING_T, EDGE_T, FLOAT_T, FORM_T, 
 	FRAME_T, GROUPALIGN_T, H_UNIT_T, INT_T, LINEBREAK_T, MATHCOLOR_T, 
 	MATHVARIANT_T, NOTATION_T, OCCURRENCE_T, ORDER_T, OVERFLOW_T, SIDE_T, 
-	TYPE_T, V_UNIT_T
+	V_UNIT_T
 };
 enum Attribute {
 	ACCENT, ACCENTUNDER, ACTIONTYPE, ALIGN, ALIGNMENTSCOPE, ALT, ALTIMG, 
@@ -128,11 +128,6 @@ class MMLSide : public MMLAttribute {
 public:
 	MMLSide(side::Side, bool c=true);
 	side::Side value;
-};
-class MMLType : public MMLAttribute {
-public:
-	MMLType(type::Type, bool c=true);
-	type::Type value;
 };
 class MMLv_unit : public MMLAttribute {
 public:
@@ -868,7 +863,7 @@ enum xorAtt {
 	xorCLASS, xorDEFINITIONURL, xorENCODING, xorID, xorSTYLE, 
 	xorXLINK_HREF, xorXREF
 };
-const uint numAttTypes = 21;
+const uint numAttTypes = 20;
 const uint numAttributes = 91;
 extern const char * const elementTag[numElements];
 extern const Attribute * const attList[numElements];
@@ -1255,7 +1250,6 @@ MMLAttribute *createOCCURRENCE(const DOMString &, Attribute);
 MMLAttribute *createORDER(const DOMString &, Attribute);
 MMLAttribute *createOVERFLOW(const DOMString &, Attribute);
 MMLAttribute *createSIDE(const DOMString &, Attribute);
-MMLAttribute *createTYPE(const DOMString &, Attribute);
 MMLAttribute *createV_UNIT(const DOMString &, Attribute);
 extern MMLAttribute * (* const attFunc[numAttTypes])(const DOMString &, Attribute);
 }

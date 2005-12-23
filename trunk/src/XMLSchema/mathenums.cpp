@@ -101,16 +101,6 @@ MML::createORDER(const DOMString &v, Attribute) {
     }
     return 0;
 }
-const char *typenames[6] = {"integer", "rational", "real", "complex_cartesian", "complex_polar", "constant"};
-MMLAttribute *
-MML::createTYPE(const DOMString &v, Attribute) {
-    for (uint i=0; i<6; ++i) {
-        if (v == typenames[i]) {
-            return new MMLType(type::Type(i));
-        }
-    }
-    return 0;
-}
 const char *edgenames[2] = {"left", "right"};
 MMLAttribute *
 MML::createEDGE(const DOMString &v, Attribute) {

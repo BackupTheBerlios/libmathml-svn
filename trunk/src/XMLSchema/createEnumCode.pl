@@ -6,10 +6,15 @@ my @list = `xsltproc enums.xsl mathml2/mathml2.xsd`;
 
 my %enums;
 
+my %abis = ( 'type'=>1 );
+
 # parse the input file
 foreach (@list) {
 	chomp;
 	my ($name, $value) = split('\t');
+	if ($abis{$name}) {
+		next;
+	}
 	if (!defined $enums{$name}) {
 		$enums{$name} = [];
 	}

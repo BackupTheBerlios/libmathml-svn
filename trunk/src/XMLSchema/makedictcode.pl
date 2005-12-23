@@ -66,9 +66,9 @@ print FH<<EOF;
 	static const MMLAttribute *const pre[$numpreops][$numpreatts];
 	static const MMLAttribute *const in[$numinops][$numinatts];
 	static const MMLAttribute *const post[$numpostops][$numpostatts];
-	static std::map<DOMString, short> prerefs;
-	static std::map<DOMString, short> inrefs;
-	static std::map<DOMString, short> postrefs;
+	static std::map<const char *, short> prerefs;
+	static std::map<const char *, short> inrefs;
+	static std::map<const char *, short> postrefs;
 	static void setPre(const MMLAttribute **a, short row);
 	static void setIn(const MMLAttribute **a, short row);
 	static void setPost(const MMLAttribute **a, short row);
@@ -134,19 +134,19 @@ void
 MMLmoDict::init() {
 	ready = true;
 	for (short i=0; i<$numpreops; ++i) {
-		DOMString op = presyms[i];
+		const char *op = presyms[i];
 		op.resolveEntities();
-		prerefs.insert(std::pair<DOMString, short>(op, i));
+		prerefs.insert(std::pair<const char *, short>(op, i));
 	}
 	for (short i=0; i<$numinops; ++i) {
-		DOMString op = insyms[i];
+		const char *op = insyms[i];
 		op.resolveEntities();
-		inrefs.insert(std::pair<DOMString, short>(op, i));
+		inrefs.insert(std::pair<const char *, short>(op, i));
 	}
 	for (short i=0; i<$numpostops; ++i) {
-		DOMString op = postsyms[i];
+		const char *op = postsyms[i];
 		op.resolveEntities();
-		postrefs.insert(std::pair<DOMString, short>(op, i));
+		postrefs.insert(std::pair<const char *, short>(op, i));
 	}
 }
 EOF

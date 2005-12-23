@@ -59,9 +59,6 @@ MMLOverflow::MMLOverflow(overflow::Overflow v, bool c)
 MMLSide::MMLSide(side::Side v, bool c)
 		: value(v) {cleanup=c;
 }
-MMLType::MMLType(type::Type v, bool c)
-		: value(v) {cleanup=c;
-}
 MMLv_unit::MMLv_unit(v_unit v, bool c)
 		: value(v) {cleanup=c;
 }
@@ -129,7 +126,7 @@ const AttributeType MML::attTypes[91] = {
 	ORDER_T, OVERFLOW_T, DOMSTRING_T, DOMSTRING_T, DOMSTRING_T, INT_T, 
 	DOMSTRING_T, H_UNIT_T, DOMSTRING_T, INT_T, V_UNIT_T, FLOAT_T, INT_T, 
 	BOOL_T, DOMSTRING_T, SIDE_T, BOOL_T, DOMSTRING_T, H_UNIT_T, H_UNIT_T, 
-	BOOL_T, H_UNIT_T, H_UNIT_T, TYPE_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, 
+	BOOL_T, H_UNIT_T, H_UNIT_T, DOMSTRING_T, H_UNIT_T, H_UNIT_T, H_UNIT_T, 
 	H_UNIT_T, H_UNIT_T, DOMSTRING_T, DOMSTRING_T
 };
 const Attribute MML::absAtts[7] = {
@@ -738,5 +735,5 @@ MMLAttribute * (* const MML::attFunc[numAttTypes])(const DOMString &, Attribute)
 	createFLOAT, createFORM, createFRAME, createGROUPALIGN, createH_UNIT, 
 	createINT, createLINEBREAK, createMATHCOLOR, createMATHVARIANT, 
 	createNOTATION, createOCCURRENCE, createORDER, createOVERFLOW, 
-	createSIDE, createTYPE, createV_UNIT
+	createSIDE, createV_UNIT
 };

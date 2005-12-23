@@ -7,14 +7,14 @@
 #include <QApplication>
 
 MMLReader r;
-MMLPixmap *pix;
+MMLPixmap* pix;
 const QString srcdirpath(SRCDIR);
 const QDir srcdir(srcdirpath);
 const QDir suitedir(SRCDIR"/share/libmathml/testsuite");
 const QDir baseout(QDir::currentPath() + QDir::separator() + "libmathml");
 const QDir testout(QDir::currentPath() + QDir::separator() + "testsuite");
 QTextStream out;
-bool do_output = true;
+bool do_output = false;
 bool output_erroneous = false;
 
 void
@@ -56,9 +56,9 @@ printhead(QString dir) {
     }
 }
 void
-renderFile(QString &path) {
-    deletePixmap();
-    initPixmap();
+renderFile(QString &path, QTextStream &out) {
+//    deletePixmap();
+//    initPixmap();
     QFileInfo f(path);
     QString outputdir = suitedir.relativeFilePath(f.absolutePath());
     baseout.mkpath(outputdir);
@@ -92,9 +92,10 @@ renderFile(QString &path) {
         QString orig = f.absolutePath() + QDir::separator() + f.baseName()
             + ".png";
         QString origcopy = "testsuite/" + outputfile;
-        // open file to get sizes
-        QPixmap ref(orig);
-        if (do_output && !ref.isNull()) {
+        if (do_output) {
+            // open file to get sizes
+            QPixmap ref(orig);
+            if (!ref.isNull()) {
             QFile::copy(orig, origcopy);
             int cvalign =
                 -(int)(doc->getDescent()/doc->getHeight()*ref.height());
@@ -104,6 +105,7 @@ renderFile(QString &path) {
             out << " <img style='border:1px solid #E0E0E0;vertical-align:"
                 << cvalign << "px;' src='" << origcopy << "' width='"
                 << ref.width() << "px' height='" << ref.height() << "'/>";
+            }
         }
         out << "</td></tr>" << endl;
     } else if (output_erroneous) {
@@ -125,7 +127,7 @@ bool processDir(QDir &dir) {
             }
         } else if (fi.fileName().endsWith(".mml")) {
             QString path = fi.absoluteFilePath();
-            renderFile(path);
+            renderFile(path, out);
         }
     }
     return false;
@@ -142,24 +144,35 @@ int
 main(int argc, char **argv) {
     QApplication a( argc, argv );
 
-    QFile htmloutput("gallery.html");
-    htmloutput.open(QIODevice::WriteOnly);
-    out.setDevice(&htmloutput);
-    out << "<html><body style='background:#FAFAFA;'><table>";
 
     initPixmap();
 
     if (argc > 1) {
         for (int i=1; i<argc; ++i) {
-            QString path(argv[i]);
-            renderFile(path);
+            QFileInfo path(argv[i]);
+/*            QString html;
+            QTextStream out;
+            out.setString(&html, QIODevice::ReadOnly);
+            renderFile(path, out);
+*/
+            MMLDocument *doc = parse(path.absoluteFilePath());
+            pix->setDocument(doc);
+            pix->setOutline(false);
+            QPixmap p = pix->getPixmap();
+            p.save(path.baseName()+".bmp", "BMP");
+            printf("%i, %i\n", p.width(), p.height());
+            delete doc;
         }
     } else {
+        QFile htmloutput("gallery.html");
+        htmloutput.open(QIODevice::WriteOnly);
+        out.setDevice(&htmloutput);
+        out << "<html><body style='background:#FAFAFA;'><table>";
         renderTestSuite();
+        out << "</table></body></html>" << endl;
+        htmloutput.close();
     }
 
-    out << "</table></body></html>" << endl;
-    htmloutput.close();
 
     deletePixmap();
 

@@ -98,7 +98,7 @@ public:
 	const bool &symmetric() const;
 	const h_unit &thickmathspace() const;
 	const h_unit &thinmathspace() const;
-	const type::Type &type() const;
+	const DOMString &type() const;
 	const h_unit &verythickmathspace() const;
 	const h_unit &verythinmathspace() const;
 	const h_unit &veryverythickmathspace() const;
@@ -125,7 +125,6 @@ public:
 	void setAttribute(MML::Attribute , const order::Order &);
 	void setAttribute(MML::Attribute , const overflow::Overflow &);
 	void setAttribute(MML::Attribute , const side::Side &);
-	void setAttribute(MML::Attribute , const type::Type &);
 	void setAttribute(MML::Attribute , const v_unit &);
 	void setAttribute(MML::Attribute, const char*);
 	MMLPainter *p;

@@ -95,17 +95,6 @@ namespace order {
 	};
 }
 extern const char *ordernames[2];
-namespace type {
-	enum Type {
-		INTEGER,
-		RATIONAL,
-		REAL,
-		COMPLEX_CARTESIAN,
-		COMPLEX_POLAR,
-		CONSTANT
-	};
-}
-extern const char *typenames[6];
 namespace edge {
 	enum Edge {
 		LEFT,

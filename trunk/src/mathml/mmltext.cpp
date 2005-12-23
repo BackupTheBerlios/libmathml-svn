@@ -25,6 +25,7 @@ MMLText::setData(const DOMString &s) {
     d = s;
     d.normalize();
     conv = d;
+    conv.resolveEntities();
 }
 void
 MMLText::normalize() {
@@ -34,8 +35,8 @@ MMLText::normalize() {
 void
 MMLText::layout(MML::Attributes *a) const {
     // check for entities
-/*    conv = d;
-    conv.resolveEntities();*/
+//    conv = d;
+//    conv.resolveEntities();
     gui->ascent = a->p->fontAscent();
     gui->descent = a->p->fontDescent();
     gui->width = a->p->stringWidth(conv);

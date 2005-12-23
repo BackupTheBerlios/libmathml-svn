@@ -342,9 +342,9 @@ const h_unit &
 Attributes::thinmathspace() const {
 	return static_cast<const MMLh_unit*>(att[82])->value;
 }
-const type::Type &
+const DOMString &
 Attributes::type() const {
-	return static_cast<const MMLType*>(att[83])->value;
+	return static_cast<const MMLDOMString*>(att[83])->value;
 }
 const h_unit &
 Attributes::verythickmathspace() const {
@@ -658,21 +658,6 @@ Attributes::setAttribute(MML::Attribute a, const side::Side &value) {
 		exit(1);
 	} else {
 		newA = new MMLSide(value);
-	}
-	cur->add(a, newA, att[a]);
-	att[a] = newA;
-	if (ps) ps->set(a);
-}
-
-void
-Attributes::setAttribute(MML::Attribute a, const type::Type &value) {
-	const MMLAttribute *newA;
-	if (attTypes[a] != TYPE_T) {
-		cerr << "Attribute " << attributeTag[a]
-			<< " is not of type type::Type." << endl;
-		exit(1);
-	} else {
-		newA = new MMLType(value);
 	}
 	cur->add(a, newA, att[a]);
 	att[a] = newA;
