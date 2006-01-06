@@ -14,7 +14,7 @@ const QDir suitedir(SRCDIR"/share/libmathml/testsuite");
 const QDir baseout(QDir::currentPath() + QDir::separator() + "libmathml");
 const QDir testout(QDir::currentPath() + QDir::separator() + "testsuite");
 QTextStream out;
-bool do_output = false;
+bool do_output = true;
 bool output_erroneous = false;
 
 void
@@ -57,8 +57,8 @@ printhead(QString dir) {
 }
 void
 renderFile(QString &path, QTextStream &out) {
-//    deletePixmap();
-//    initPixmap();
+    deletePixmap();
+    initPixmap();
     QFileInfo f(path);
     QString outputdir = suitedir.relativeFilePath(f.absolutePath());
     baseout.mkpath(outputdir);
@@ -149,17 +149,14 @@ main(int argc, char **argv) {
 
     if (argc > 1) {
         for (int i=1; i<argc; ++i) {
-            QFileInfo path(argv[i]);
-/*            QString html;
-            QTextStream out;
-            out.setString(&html, QIODevice::ReadOnly);
-            renderFile(path, out);
-*/
-            MMLDocument *doc = parse(path.absoluteFilePath());
+            QString path(argv[i]);
+            QFileInfo fileinfo(argv[i]);
+            MMLDocument *doc = parse(path);
+            doc->validate();
             pix->setDocument(doc);
             pix->setOutline(false);
             QPixmap p = pix->getPixmap();
-            p.save(path.baseName()+".bmp", "BMP");
+            p.save(fileinfo.baseName()+".png", "PNG");
             printf("%i, %i\n", p.width(), p.height());
             delete doc;
         }

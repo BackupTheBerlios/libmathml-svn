@@ -131,7 +131,6 @@ public:
 	MMLViewPort *view;
 private:
 	const MMLAttribute *att[MML::numAttributes];
-	static const char *defstr[MML::numAttributes];
 	static const MMLAttribute *defatt[MML::numAttributes];
 	AttributeChanges *cur;
 	std::stack<AttributeChanges *> changes;

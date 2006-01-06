@@ -111,17 +111,20 @@ MMLElement::invalidValue(const char *name, const DOMString &value) {
 }
 void
 MMLElement::layout(MML::Attributes *a) const {
+    printf("> layout %s\n", tagName());
     // reset the coordinates and dimensions
     gui->resetCoords();
     a->setAttributes(this);
     doLayout(a);
     a->unsetAttributes(this);
     gui->firstviewport = gui->lastviewport = -1;
+    printf("< layout %s\n", tagName());
 }
 void
 MMLElement::paint(MML::Attributes *a) const {
     // only draw if the element is present in the current viewport
     if (!drawInViewPort(owner->currentViewNo())) return;
+    printf("> paint %s\n", tagName());
     a->setAttributes(this);
     a->p->translate(gui->x, gui->y);
     int nearness = -1;
@@ -168,6 +171,7 @@ MMLElement::paint(MML::Attributes *a) const {
     }
     a->p->translate(-gui->x,-gui->y);
     a->unsetAttributes(this);
+    printf("< paint %s\n", tagName());
 }
 void
 MMLElement::normalize() {

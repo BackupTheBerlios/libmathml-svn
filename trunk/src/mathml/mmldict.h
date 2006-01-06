@@ -1,8 +1,8 @@
 #ifndef MMLDICT
 #define MMLDICT
 
-#include "domstring.h"
 #include <map>
+class DOMString;
 
 class MMLDict {
 public:

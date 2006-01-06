@@ -26,9 +26,10 @@ MMLPixmap::setFont(const QFont &font) {
 }
 void
 MMLPixmap::layout() {
+    printf("layout()\n");
     m_qpainter.begin(&m_buffer);
     m_qpainter.setRenderHint(QPainter::Antialiasing);
-    m_qpainter.setFont(m_font);
+    m_painter.initializePainter();
 
     m_doc->setPainter(&m_painter);
     m_doc->layout();
@@ -61,6 +62,7 @@ MMLPixmap::layout() {
 void
 MMLPixmap::repaint() {
     if (m_mustLayout) layout();
+    printf("paint()\n");
 
     if (m_buffer.width() != m_w || m_buffer.height() != m_h) {
         m_buffer = QPixmap(m_w, m_h);
@@ -68,10 +70,11 @@ MMLPixmap::repaint() {
 
     // initialize the buffer and painter
     m_buffer.fill(m_background);
+    m_painter.setMathColor(Qt::black);
+    m_painter.setMathBackground(m_background);
     m_qpainter.begin(&m_buffer);
     m_qpainter.setRenderHint(QPainter::Antialiasing);
-    m_qpainter.setFont(m_font);
-    m_qpainter.setBackground(m_painter.getPalette().background());
+    m_painter.initializePainter();
     int w = m_buffer.width();
     int h = m_buffer.height();
     m_qpainter.translate(m_border, m_ascent + m_border);

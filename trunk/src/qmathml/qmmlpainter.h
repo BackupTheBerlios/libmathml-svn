@@ -2,19 +2,28 @@
 #define QMMLPAINTER
 
 #include <mathml/mmlpainter.h>
-#include <QPalette>
 #include <QFontMetrics>
 
 class QPainter;
 class QString;
+class QColor;
 class QMMLPainter : public MMLPainter {
 public:
     QMMLPainter();
     virtual ~QMMLPainter() {};
     void setPainter(QPainter *);
-    void setPalette(const QPalette &);
-    const QPalette &getPalette() const {
-        return palette;
+    void initializePainter();
+    void setMathColor(const QColor &c) {
+        m_mathcolor = mathcolor(c);
+    }
+    void setMathBackground(const QColor &c) {
+        m_mathbackground = mathcolor(c);
+    }
+    void setHighlightColor(const QColor &c) {
+        m_highlightcolor = mathcolor(c);
+    }
+    void setSelectionColor(const QColor &c) {
+        m_selectioncolor = mathcolor(c);
     }
     void setOutline(bool outline);
 
@@ -25,10 +34,8 @@ public:
     float stringWidth(const DOMString &) const;
     float em() const;
     float ex() const;
-    MathColor mathColor() const;
     MathColor highlightColor(uchar level) const;
     MathColor selectionColor() const;
-    float fontSize() const;
 
     // settings changes
     void translate(float x, float y);
@@ -38,6 +45,21 @@ public:
     void setFontSize(float f); // f in pt (point size)
     void setLineThickness(float t); // thickness in px
 
+    mathvariant::Mathvariant getMathvariant() const {
+        return m_mathvariant;
+    }
+    MathColor getMathColor() const {
+        return m_mathcolor;
+    }
+    MathColor getMathBackground() const {
+        return m_mathbackground;
+    }
+    float getFontSize() const {
+        return m_fontsize;
+    }
+    float getLineThickness() const {
+        return m_linethickness;
+    }
     // drawing actions
     void drawLine(float x1, float y1, float x2, float y2,
         float linethickness=0);
@@ -51,16 +73,22 @@ public:
     void drawText(const DOMString &s, float w);
     void drawText(const DOMString &s, float a, float d);
     void drawText(const DOMString &s, float w, float a, float d);
-    QColor qcolor(const MathColor &) const;
-    MathColor mathcolor(const QColor &) const;
+    static QColor qcolor(const MathColor &);
+    static MathColor mathcolor(const QColor &);
 private:
     QPainter *p;
-    QPalette palette;
     QFontMetricsF fontmetrics;
     QFont seriffont;
     QFont sansseriffont;
     QFont scriptfont;
     QFont monospacefont;
+    MathColor m_mathcolor;
+    MathColor m_mathbackground;
+    MathColor m_highlightcolor;
+    MathColor m_selectioncolor;
+    mathvariant::Mathvariant m_mathvariant;
+    float m_linethickness;
+    float m_fontsize;
 
     float absx, absy;
     bool debugdrawtext;

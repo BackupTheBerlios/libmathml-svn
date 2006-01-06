@@ -27,7 +27,8 @@ const MathColor *MathColor::colortable[17] = {&aqua, &black, &blue, &fuchsia,
     &teal, &white, &yellow, &transparent};
 
 MathColor::MathColor() {
-    transp = valid = true;
+    valid = true;
+    rr = bb = gg = aa = 0; // transparent
 }
 MathColor::MathColor(const DOMString &d) {
     // check for a predefined color
@@ -44,7 +45,7 @@ MathColor::MathColor(const DOMString &d) {
         return;
     }
     valid = true;
-    transp = false;
+    aa = 255; // not transparent
     if (len == 4) {
         rr = 16*getValue(d[1]);
         gg = 16*getValue(d[2]);
@@ -59,9 +60,7 @@ bool
 MathColor::operator==(const MathColor &m) const {
     if (!valid && !m.valid) return true;
     if (!valid || !m.valid) return false;
-    if (transp && m.transp) return true;
-    if (transp || m.transp) return false;
-    return rr == m.rr && gg == m.gg && bb == m.bb;
+    return rr == m.rr && gg == m.gg && bb == m.bb && aa == m.aa;
 }
 bool
 MathColor::operator!=(const MathColor &m) const {
@@ -69,7 +68,7 @@ MathColor::operator!=(const MathColor &m) const {
 }
 bool
 MathColor::isTransparent() const {
-    return !valid || transp;
+    return !valid || aa == 0;
 }
 bool
 MathColor::isValid() const {
@@ -94,10 +93,9 @@ MathColor::getValue(ushort h1, ushort h2) {
     return 16*getValue(h1) + getValue(h2);
 }
 void
-MathColor::setRgb(uchar r, uchar g, uchar b) {
-    rr = r; gg = g; bb = b;
+MathColor::setRgb(uchar r, uchar g, uchar b, uchar a) {
+    rr = r; gg = g; bb = b; aa = a;
     valid = true;
-    transp = false;
 }
 uchar
 MathColor::r() const {
@@ -110,4 +108,8 @@ MathColor::g() const {
 uchar
 MathColor::b() const {
     return bb;
+}
+uchar
+MathColor::a() const {
+    return aa;
 }

@@ -14,17 +14,17 @@ public:
     MathColor(const DOMString &);
     bool operator==(const MathColor &) const;
     bool operator!=(const MathColor &) const;
-    void setRgb(uchar r, uchar g, uchar b);
+    void setRgb(uchar r, uchar g, uchar b, uchar a = 0);
     bool isTransparent() const;
     bool isValid() const;
     uchar r() const;
     uchar g() const;
     uchar b() const;
+    uchar a() const;
 private:
     static const MathColor *colortable[17];
     static const char *nametable[17];
-    uchar rr, gg, bb;
-    bool transp;
+    uchar rr, gg, bb, aa;
     bool valid;
 
     int getValue(ushort h1);

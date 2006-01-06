@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QPixmap>
 #include <QFont>
+#include <QPalette>
 
 class MMLDocument;
 
@@ -34,11 +35,10 @@ public:
     void setDocument(const MMLDocument *);
     void setFont(const QFont &font);
     void setPalette(const QPalette &p) {
-        if (p != m_painter.getPalette()) {
-            m_mustPaint = true;
-            m_background = p.background().color();
-            m_painter.setPalette(p);
-        }
+        m_mustPaint = true;
+        m_background = p.background().color();
+        m_painter.setHighlightColor(p.highlight().color());
+        m_painter.setSelectionColor(p.highlight().color());
     }
     void setOutline(bool outline) {
         if (m_outline != outline) {

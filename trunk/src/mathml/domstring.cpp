@@ -216,7 +216,7 @@ void
 DOMString::replace(DOMString d, wchar_t c) {
     int pos = find(d);
     uint dlen = d.data.size();
-    printf("pos: %i len: %i in:'%s' ", pos, dlen, utf8());
+    //printf("pos: %i len: %i in:'%s' ", pos, dlen, utf8());
     while (pos != -1) {
         DOMString nd = substr(0, pos);
         nd += c;
@@ -225,7 +225,7 @@ DOMString::replace(DOMString d, wchar_t c) {
         this->data = nd.data;
         pos = find(d);
     }
-    printf(" out '%s' ", utf8());
+    //printf(" out '%s' ", utf8());
 }
 /*In MathML, as in XML, "whitespace" means blanks, tabs, newlines, or carriage returns, i.e. characters with hexadecimal Unicode codes U+0020, U+0009, U+000a, or U+000d, respectively.
 All whitespace at the beginning and end is removed. All other whitespace

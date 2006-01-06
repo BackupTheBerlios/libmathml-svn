@@ -19,10 +19,10 @@ public:
 //        float &descent, float &width) const = 0;
     virtual float em() const = 0;
     virtual float ex() const = 0;
-    virtual MathColor mathColor() const = 0;
+//    virtual MathColor mathColor() const = 0;
     virtual MathColor highlightColor(uchar level) const = 0;
     virtual MathColor selectionColor() const = 0;
-    virtual float fontSize() const = 0;
+//    virtual float fontSize() const = 0;
 
     // settings changes
     virtual void translate(float x, float y) = 0;
@@ -46,12 +46,19 @@ public:
     // draw the text so that it fits exactly into the specified box
     // if the font cannot be to fit the box exactly, use a smaller font
     // and centre the content in the specified direction
+
+    virtual mathvariant::Mathvariant getMathvariant() const = 0;
+    virtual MathColor getMathColor() const = 0;
+    virtual MathColor getMathBackground() const = 0;
+    virtual float getFontSize() const = 0; // f in pt (point size)
+    virtual float getLineThickness() const = 0; // thickness in px
 protected:
     virtual void setMathvariant(mathvariant::Mathvariant) = 0;
     virtual void setMathColor(MathColor c) = 0;
     virtual void setMathBackground(MathColor c) = 0;
     virtual void setFontSize(float f) = 0; // f in pt (point size)
     virtual void setLineThickness(float t) = 0; // thickness in px
+
 };
 
 #endif

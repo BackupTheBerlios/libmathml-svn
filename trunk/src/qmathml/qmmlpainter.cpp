@@ -12,13 +12,17 @@ using std::endl;
 
 QMMLPainter::QMMLPainter()
     : fontmetrics(QFont()) {
+    p = 0;
     absx = absy = 0;
     cout << "----" << endl;
     debugdrawtext = false;
     fittext = true;
 
+    m_fontsize = 12;
+    m_mathvariant = mathvariant::NORMAL;
     seriffont.setStyleHint(QFont::Serif);
     seriffont.setFamily(seriffont.defaultFamily());
+    seriffont = QFont("Nimbus Roman No9 L");
     sansseriffont.setStyleHint(QFont::SansSerif);
     sansseriffont.setFamily(sansseriffont.defaultFamily());
     scriptfont.setFamily("URW Chancery L");
@@ -27,6 +31,15 @@ QMMLPainter::QMMLPainter()
 void
 QMMLPainter::setPainter(QPainter *p) {
     this->p = p;
+}
+void
+QMMLPainter::initializePainter() {
+    if (!p || !p->isActive()) return;
+    // adjust QPainter to setting of QMMLPainter
+    setMathColor(m_mathcolor);
+    setMathBackground(m_mathbackground);
+    setLineThickness(m_linethickness);
+    setMathvariant(mathvariant::NORMAL);
 }
 void
 QMMLPainter::setOutline(bool outline) {
@@ -46,13 +59,14 @@ QMMLPainter::fontAscent() const {
 }
 float
 QMMLPainter::fontDescent() const {
+    printf("fontDescent: %f, fontsize %f, fontname %s\n", fontmetrics.descent(), m_fontsize,
+        (const char *)p->font().family().toUtf8());
     return fontmetrics.descent();
 }
 float
 QMMLPainter::stringWidth(const DOMString &s) const {
-    QFontMetricsF f(p->font());
     QString qs = qstring(s);
-    QRectF r = f.boundingRect(qs);
+    QRectF r = fontmetrics.boundingRect(qs);
     float w = r.width();
     return w;
 }
@@ -73,35 +87,46 @@ float
 QMMLPainter::ex() const {
     return fontmetrics.boundingRect("x").height();
 }
-MathColor
+/*MathColor
 QMMLPainter::mathColor() const {
     MathColor mc;
     if (p->pen() != Qt::NoPen) {
         mc = mathcolor(p->pen().color());
     }
     return mc;
-}
+}*/
 MathColor
 QMMLPainter::highlightColor(uchar level) const {
+    if (m_highlightcolor.isTransparent()) {
+        return m_highlightcolor;
+    }
     MathColor mc;
-    QColor hl = palette.highlight().color();
-    QColor bg = palette.background().color();
-    int r, g, b;
     int lm = int(pow(2,level));
-    r = (hl.red() - bg.red())/lm + bg.red();
-    g = (hl.green() - bg.green())/lm + bg.green();
-    b = (hl.blue() - bg.blue())/lm + bg.blue();
-    mc.setRgb(r, g, b);
+    if (m_mathbackground.isTransparent()) {
+        mc.setRgb(m_highlightcolor.r(), m_highlightcolor.g(),
+            m_highlightcolor.b(), 255/lm);
+    } else {
+        uchar r = m_mathbackground.r();
+        uchar g = m_mathbackground.g();
+        uchar b = m_mathbackground.b();
+        uchar a = m_mathbackground.a();
+        r += (m_highlightcolor.r() - r)/lm;
+        g += (m_highlightcolor.g() - g)/lm;
+        b += (m_highlightcolor.b() - b)/lm;
+        a += (m_highlightcolor.a() - a)/lm;
+        mc.setRgb(r, g, b, a);
+    }
     return mc;
 }
 MathColor
 QMMLPainter::selectionColor() const {
-    return mathcolor(palette.highlight().color());
+    return m_selectioncolor;
 }
 void
 QMMLPainter::setMathvariant(mathvariant::Mathvariant mv) {
-    QFont f = p->font();
-    float size = f.pointSize();
+    m_mathvariant = mv;
+    printf("setMathvariant %i (fontsize: %f)\n", mv, m_fontsize);
+    QFont f;
     switch (mv) {
     case (mathvariant::NORMAL):
         f = seriffont;
@@ -165,22 +190,26 @@ QMMLPainter::setMathvariant(mathvariant::Mathvariant mv) {
         f.setItalic(false);
         break;
     }
-    f.setPointSizeF(size);
+    if (f.pointSize() == -1) {
+        int newsize = (int)(m_fontsize*dpi(false)/72);
+        f.setPixelSize(newsize);
+    } else {
+        f.setPointSizeF(m_fontsize);
+    }
     p->setFont(f);
     fontmetrics = QFontMetricsF(f);
+    printf("result %s italic: %i\n", (const char*)p->font().family().toUtf8(),
+        p->font().italic());
     //printf("%s\n", (const char*)p->font().family().toUtf8());
 }
 void
 QMMLPainter::setMathColor(MathColor mc) {
-    if (mc.isTransparent()) {
-        // mathcolor cannot be transparent, only background can
-        p->setPen(Qt::NoPen);
-    } else {
-        p->setPen(qcolor(mc));
-    }
+    m_mathcolor = mc;
+    p->setPen(qcolor(mc));
 }
 void
 QMMLPainter::setMathBackground(MathColor mc) {
+    m_mathbackground = mc;
     if (mc.isTransparent()) {
         p->setBrush(Qt::NoBrush);
     } else {
@@ -189,7 +218,10 @@ QMMLPainter::setMathBackground(MathColor mc) {
 }
 void
 QMMLPainter::setFontSize(float pt) {
-    QFont f = p->font();
+    printf("setFontSize\n");
+    m_fontsize = pt;
+    setMathvariant(m_mathvariant);
+/*    QFont f = p->font();
     if (f.pointSize() == -1) {
         int newsize = (int)(pt*dpi(false)/72);
         f.setPixelSize(newsize);
@@ -197,24 +229,14 @@ QMMLPainter::setFontSize(float pt) {
         f.setPointSizeF(pt);
     }
     p->setFont(f);
-    fontmetrics = QFontMetricsF(f);
+    printf("setFontSize: %f\n", m_fontsize);
+    fontmetrics = QFontMetricsF(f); */
 }
 void
 QMMLPainter::setLineThickness(float t) { // thickness in px
     QPen pen = p->pen();
     pen.setWidthF(t);
     p->setPen(pen);
-}
-float
-QMMLPainter::fontSize() const {
-    QFont f = p->font();
-    float size;
-    if (f.pointSize() == -1) {
-        size = f.pixelSize()*72/dpi(false);
-    } else {
-        size = f.pointSizeF();
-    }
-    return size;
 }
 void
 QMMLPainter::drawLine(float x1, float y1, float x2, float y2,
@@ -292,6 +314,8 @@ QMMLPainter::drawPolygon(int n, float *x, float *y) {
 void
 QMMLPainter::drawText(const DOMString &s) {
     //printf("%s %s\n", (const char*)p->font().family().toUtf8(), (const char*)seriffont.family().toUtf8());
+    printf("'%s' in %s italic: %i\n", s.utf8(), (const char*)p->font().family().toUtf8(),
+        p->font().italic());
     QString qs = qstring(s);
     if (debugdrawtext) {
         QRectF rf = fontmetrics.boundingRect(qs);
@@ -316,6 +340,7 @@ QMMLPainter::drawText(const DOMString &s, float a, float d) {
     float fd = fontDescent();
     // get the height of the string in the unmodified font
     float realf = (a + d)/(fontAscent()+fd);
+    printf("scaling factor: %f, fd: %f, a: %f, d: %f\n", realf, fd, a, d);
     p->save();
     p->translate(0, - realf*fd + d);
     p->scale(1, realf);
@@ -350,23 +375,18 @@ QMMLPainter::translate(float x, float y) {
     absx += x;
     absy += y;
 }
-void
-QMMLPainter::setPalette(const QPalette &cg) {
-    palette = cg;
-}
 QColor
-QMMLPainter::qcolor(const MathColor &mc) const {
-    QColor qc;
-    if (!mc.isTransparent()) {
-        qc.setRgb(mc.r(), mc.g(), mc.b());
+QMMLPainter::qcolor(const MathColor &mc) {
+    if (mc.isValid()) {
+        return QColor(mc.r(), mc.g(), mc.b(), mc.a());
     }
-    return qc;
+    return QColor::Invalid;
 }
 MathColor
-QMMLPainter::mathcolor(const QColor &qc) const {
+QMMLPainter::mathcolor(const QColor &qc) {
     MathColor mc;
     if (qc.isValid()) {
-        mc.setRgb(qc.red(), qc.green(), qc.blue());
+        mc.setRgb(qc.red(), qc.green(), qc.blue(), qc.alpha());
     }
     return mc;
 }

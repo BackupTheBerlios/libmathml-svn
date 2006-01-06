@@ -2,7 +2,6 @@
 #include "mmlmodict.h"
 #include "nodegui.h"
 using std::map;
-using std::list;
 #include "mmltext.h"
 #include "attributes.h"
 #include "mmlpainter.h"
@@ -60,15 +59,6 @@ MMLmo::validate() {
 void
 MMLmo::lookupOperator(const DOMString &op) {
     MMLmoDict::lookupOperator(op, att);
-/*    map<DOMString, const MMLAttribute **>::const_iterator i;
-    i = dict.find(op);
-    if (i != dict.end()) {
-        for (uint j=0; j<MML::moNumAtts; ++j) {
-            if (!att[j] && i->second[j]) {
-                att[j] = i->second[j];
-            }
-        }
-    }*/
 }
 void
 MMLmo::doLayout(MML::Attributes *a) const {

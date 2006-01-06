@@ -1,6 +1,6 @@
 #include "mmldict.h"
+#include "domstring.h"
 using std::map;
-#include "mmlmo.h"
 using std::pair;
 
 bool MMLDict::done = false;

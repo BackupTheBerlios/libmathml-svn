@@ -16,11 +16,10 @@ class MMLPainter;
 class PainterSettings {
 public:
     PainterSettings(MML::Attributes *);
-    bool isPainterSetting(MML::Attribute) const;
     void setPainter(MMLPainter *p);
     void set(MML::Attribute);
 private:
-    bool changeMMLPainter[MML::numAttributes];
+    bool isPainterSetting[MML::numAttributes];
     MMLPainter *p;
     const MML::Attributes *att;
 

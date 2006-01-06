@@ -175,10 +175,10 @@ Attributes::initDefaults() {
     setAttribute(XREF, "");
 
     // Mathematics style attributes common to token elements
-    setAttribute(MATHCOLOR, p->mathColor());
+    setAttribute(MATHCOLOR, p->getMathColor());
     setAttribute(MATHBACKGROUND, "transparent");
     v_unit ms;
-    ms.set(p->fontSize(), l_unit::pt);
+    ms.set(p->getFontSize(), l_unit::pt);
     setAttribute(MATHSIZE, ms);
 
     // defaults for mo element

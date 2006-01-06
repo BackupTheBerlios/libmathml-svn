@@ -17,16 +17,16 @@ using std::endl;
 PainterSettings::PainterSettings(MML::Attributes *a)
         : att(a) {
     for (uint i=0; i<MML::numAttributes; ++i) {
-        changeMMLPainter[i] = false;
+        isPainterSetting[i] = false;
     }
-    changeMMLPainter[MML::MATHVARIANT] = true;
-    changeMMLPainter[MML::MATHCOLOR] = true;
-    changeMMLPainter[MML::MATHBACKGROUND] = true;
-    changeMMLPainter[MML::SCRIPTLEVEL] = true;
-    changeMMLPainter[MML::MATHSIZE] = true;
-    changeMMLPainter[MML::SCRIPTMINSIZE] = true;
-    changeMMLPainter[MML::SCRIPTSIZEMULTIPLIER] = true;
-    changeMMLPainter[MML::LINETHICKNESS] = true;
+    isPainterSetting[MML::MATHVARIANT] = true;
+    isPainterSetting[MML::MATHCOLOR] = true;
+    isPainterSetting[MML::MATHBACKGROUND] = true;
+    isPainterSetting[MML::SCRIPTLEVEL] = true;
+    isPainterSetting[MML::MATHSIZE] = true;
+    isPainterSetting[MML::SCRIPTMINSIZE] = true;
+    isPainterSetting[MML::SCRIPTSIZEMULTIPLIER] = true;
+    isPainterSetting[MML::LINETHICKNESS] = true;
 
     fontmultiplier = 1;
     oldscriptlevel = 0;
@@ -35,23 +35,22 @@ void
 PainterSettings::setPainter(MMLPainter *p) {
     this->p = p;
 }
-bool
-PainterSettings::isPainterSetting(MML::Attribute a) const {
-    return changeMMLPainter[a];
-}
 void
 PainterSettings::set(MML::Attribute a) {
     assert(p);
-    if (!isPainterSetting(a)) return;
+    if (!isPainterSetting[a]) return;
     switch (a) {
     case MML::MATHVARIANT:
-        p->setMathvariant(att->mathvariant());
+        if (att->mathvariant() != p->getMathvariant())
+            p->setMathvariant(att->mathvariant());
         break;
     case MML::MATHCOLOR:
-        p->setMathColor(att->mathcolor());
+        if (att->mathcolor() != p->getMathColor())
+            p->setMathColor(att->mathcolor());
         break;
     case MML::MATHBACKGROUND:
-        p->setMathBackground(att->mathbackground());
+        if (att->mathbackground() != p->getMathBackground())
+            p->setMathBackground(att->mathbackground());
         break;
     case MML::SCRIPTLEVEL:
         setScriptLevel();
@@ -61,8 +60,9 @@ PainterSettings::set(MML::Attribute a) {
         setFontSize();
         break;
     case MML::LINETHICKNESS:
-        p->setLineThickness(att->linethickness().get(att,
-            MMLmfrac::defLineThickness));
+        float th = att->linethickness().get(att, MMLmfrac::defLineThickness);
+        if (th != p->getLineThickness())
+            p->setLineThickness(th);
         break;
     default:
         cerr << "setting of attribute '" << MML::attributeTag[a]
