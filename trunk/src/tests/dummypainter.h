@@ -65,6 +65,31 @@ protected:
     void setMathBackground(MathColor c) {}
     void setFontSize(float f) {} // f in pt (point size)
     void setLineThickness(float t) {} // thickness in px
+
+
+    mathvariant::Mathvariant getMathvariant() const {
+        return m_mathvariant;
+    }
+    MathColor getMathColor() const {
+        return m_mathcolor;
+    }
+    MathColor getMathBackground() const {
+        return m_mathbackground;
+    }
+    float getFontSize() const {
+        return m_fontsize;
+    }
+    float getLineThickness() const {
+        return m_linethickness;
+    }
+private:
+    MathColor m_mathcolor;
+    MathColor m_mathbackground;
+    MathColor m_highlightcolor;
+    MathColor m_selectioncolor;
+    mathvariant::Mathvariant m_mathvariant;
+    float m_linethickness;
+    float m_fontsize;
 };
 
 #endif

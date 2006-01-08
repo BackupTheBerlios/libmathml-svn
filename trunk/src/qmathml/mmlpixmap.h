@@ -25,7 +25,6 @@ private:
     QPixmap m_buffer;
     QMMLPainter m_painter;
     QPainter m_qpainter;
-    QFont m_font;
     QColor m_background;
 
     void layout();
@@ -53,6 +52,5 @@ public:
     void repaint();
     const QPixmap &getPixmap();
 };
-
 
 #endif

@@ -10,23 +10,77 @@
 using std::cout;
 using std::endl;
 
-QMMLPainter::QMMLPainter()
-    : fontmetrics(QFont()) {
+QMMLPainter::QMMLPainter() {
     p = 0;
     absx = absy = 0;
+    m_linethickness = 1;
     cout << "----" << endl;
     debugdrawtext = false;
     fittext = true;
 
     m_fontsize = 12;
     m_mathvariant = mathvariant::NORMAL;
-    seriffont.setStyleHint(QFont::Serif);
-    seriffont.setFamily(seriffont.defaultFamily());
-    seriffont = QFont("Nimbus Roman No9 L");
-    sansseriffont.setStyleHint(QFont::SansSerif);
-    sansseriffont.setFamily(sansseriffont.defaultFamily());
-    scriptfont.setFamily("URW Chancery L");
-    monospacefont.setFamily("Monospace");
+
+    QFont f;
+    f.setStyleHint(QFont::Serif);
+    f.setFamily(f.defaultFamily());
+    //setSerifFont(QFont("Nimbus Roman No9 L"));
+    setSerifFont(f);
+    f.setStyleHint(QFont::SansSerif);
+    f.setFamily(f.defaultFamily());
+    setSansSerifFont(f);
+    f.setStyleHint(QFont::OldEnglish);
+    f.setFamily(f.defaultFamily());
+    setScriptFont(f);
+    f.setStyleHint(QFont::TypeWriter);
+    f.setFamily(f.defaultFamily());
+    setMonoSpaceFont(f);
+}
+void
+QMMLPainter::setSerifFont(QFont font) {
+    font.setBold(false);
+    font.setItalic(false);
+    m_font.setFontType(mathvariant::NORMAL, font);
+    font.setBold(true);
+    m_font.setFontType(mathvariant::BOLD, font);
+    font.setItalic(true);
+    m_font.setFontType(mathvariant::BOLD_ITALIC, font);
+    font.setBold(false);
+    m_font.setFontType(mathvariant::ITALIC, font);
+}
+void
+QMMLPainter::setSansSerifFont(QFont font) {
+    font.setBold(false);
+    font.setItalic(false);
+    m_font.setFontType(mathvariant::SANS_SERIF, font);
+    font.setBold(true);
+    m_font.setFontType(mathvariant::BOLD_SANS_SERIF, font);
+    font.setItalic(true);
+    m_font.setFontType(mathvariant::SANS_SERIF_BOLD_ITALIC, font);
+    font.setBold(false);
+    m_font.setFontType(mathvariant::SANS_SERIF_ITALIC, font);
+}
+void
+QMMLPainter::setMonoSpaceFont(QFont font) {
+    m_font.setFontType(mathvariant::MONOSPACE, font);
+}
+void
+QMMLPainter::setScriptFont(QFont font) {
+    font.setBold(false);
+    m_font.setFontType(mathvariant::SCRIPT, font);
+    font.setBold(true);
+    m_font.setFontType(mathvariant::BOLD_SCRIPT, font);
+}
+void
+QMMLPainter::setFrakturFont(QFont font) {
+    font.setBold(false);
+    m_font.setFontType(mathvariant::FRAKTUR, font);
+    font.setBold(true);
+    m_font.setFontType(mathvariant::BOLD_FRAKTUR, font);
+}
+void
+QMMLPainter::setDoubleStruckFont(QFont font) {
+    m_font.setFontType(mathvariant::DOUBLE_STRUCK, font);
 }
 void
 QMMLPainter::setPainter(QPainter *p) {
@@ -55,18 +109,18 @@ QMMLPainter::dpi(bool horizontal) const {
 }
 float
 QMMLPainter::fontAscent() const {
-    return fontmetrics.ascent();
+    return m_font.ascent();
 }
 float
 QMMLPainter::fontDescent() const {
-    printf("fontDescent: %f, fontsize %f, fontname %s\n", fontmetrics.descent(), m_fontsize,
-        (const char *)p->font().family().toUtf8());
-    return fontmetrics.descent();
+//    printf("fontDescent: %f, fontsize %f, fontname %s\n", fontmetrics.descent(), m_fontsize,
+//        (const char *)p->font().family().toUtf8());
+    return m_font.descent();
 }
 float
 QMMLPainter::stringWidth(const DOMString &s) const {
     QString qs = qstring(s);
-    QRectF r = fontmetrics.boundingRect(qs);
+    QRectF r = m_font.boundingRect(qs);
     float w = r.width();
     return w;
 }
@@ -78,23 +132,15 @@ QMMLPainter::stringWidth(const DOMString &s) const {
  * horizontal sizes. */
 float
 QMMLPainter::em() const {
-    return fontmetrics.height();
+    return m_font.em();
 }
 /* Ex
  * A font-relative measure that is the height of an "x" in the font. "ex"s are
  * typically used for font-relative vertical sizes. */
 float
 QMMLPainter::ex() const {
-    return fontmetrics.boundingRect("x").height();
+    return m_font.ex();
 }
-/*MathColor
-QMMLPainter::mathColor() const {
-    MathColor mc;
-    if (p->pen() != Qt::NoPen) {
-        mc = mathcolor(p->pen().color());
-    }
-    return mc;
-}*/
 MathColor
 QMMLPainter::highlightColor(uchar level) const {
     if (m_highlightcolor.isTransparent()) {
@@ -126,81 +172,8 @@ void
 QMMLPainter::setMathvariant(mathvariant::Mathvariant mv) {
     m_mathvariant = mv;
     printf("setMathvariant %i (fontsize: %f)\n", mv, m_fontsize);
-    QFont f;
-    switch (mv) {
-    case (mathvariant::NORMAL):
-        f = seriffont;
-        f.setBold(false);
-        f.setItalic(false);
-        break;
-    case (mathvariant::BOLD):
-        f = seriffont;
-        f.setBold(true);
-        f.setItalic(false);
-        break;
-    case (mathvariant::ITALIC):
-        f = seriffont;
-        f.setBold(false);
-        f.setItalic(true);
-        break;
-    case (mathvariant::BOLD_ITALIC):
-        f = seriffont;
-        f.setBold(true);
-        f.setItalic(true);
-        break;
-    case (mathvariant::DOUBLE_STRUCK): break;
-        break;
-    case (mathvariant::BOLD_FRAKTUR): break;
-        break;
-    case (mathvariant::SCRIPT):
-        f = scriptfont;
-        f.setBold(false);
-        f.setItalic(false);
-        break;
-    case (mathvariant::BOLD_SCRIPT):
-        f = scriptfont;
-        f.setBold(true);
-        f.setItalic(false);
-        break;
-    case (mathvariant::FRAKTUR): break;
-        break;
-    case (mathvariant::SANS_SERIF):
-        f = sansseriffont;
-        f.setBold(false);
-        f.setItalic(false);
-        break;
-    case (mathvariant::BOLD_SANS_SERIF):
-        f = sansseriffont;
-        f.setBold(true);
-        f.setItalic(false);
-        break;
-    case (mathvariant::SANS_SERIF_ITALIC):
-        f = sansseriffont;
-        f.setBold(false);
-        f.setItalic(true);
-        break;
-    case (mathvariant::SANS_SERIF_BOLD_ITALIC):
-        f = sansseriffont;
-        f.setBold(true);
-        f.setItalic(true);
-        break;
-    case (mathvariant::MONOSPACE):
-        f = monospacefont;
-        f.setBold(false);
-        f.setItalic(false);
-        break;
-    }
-    if (f.pointSize() == -1) {
-        int newsize = (int)(m_fontsize*dpi(false)/72);
-        f.setPixelSize(newsize);
-    } else {
-        f.setPointSizeF(m_fontsize);
-    }
-    p->setFont(f);
-    fontmetrics = QFontMetricsF(f);
-    printf("result %s italic: %i\n", (const char*)p->font().family().toUtf8(),
-        p->font().italic());
-    //printf("%s\n", (const char*)p->font().family().toUtf8());
+    m_font.setFont(m_mathvariant, m_fontsize);
+    p->setFont(m_font.font());
 }
 void
 QMMLPainter::setMathColor(MathColor mc) {
@@ -221,16 +194,6 @@ QMMLPainter::setFontSize(float pt) {
     printf("setFontSize\n");
     m_fontsize = pt;
     setMathvariant(m_mathvariant);
-/*    QFont f = p->font();
-    if (f.pointSize() == -1) {
-        int newsize = (int)(pt*dpi(false)/72);
-        f.setPixelSize(newsize);
-    } else {
-        f.setPointSizeF(pt);
-    }
-    p->setFont(f);
-    printf("setFontSize: %f\n", m_fontsize);
-    fontmetrics = QFontMetricsF(f); */
 }
 void
 QMMLPainter::setLineThickness(float t) { // thickness in px
@@ -318,7 +281,7 @@ QMMLPainter::drawText(const DOMString &s) {
         p->font().italic());
     QString qs = qstring(s);
     if (debugdrawtext) {
-        QRectF rf = fontmetrics.boundingRect(qs);
+        QRectF rf = m_font.boundingRect(qs);
         drawOutline(rf.width());
     }
     p->drawText(QPointF(absx, absy), qs);
@@ -345,7 +308,7 @@ QMMLPainter::drawText(const DOMString &s, float a, float d) {
     p->translate(0, - realf*fd + d);
     p->scale(1, realf);
     if (debugdrawtext) {
-        QRectF rf = fontmetrics.boundingRect(qs);
+        QRectF rf = m_font.boundingRect(qs);
         drawOutline(rf.width());
     }
     p->drawText(QPointF(absx, absy), qs);

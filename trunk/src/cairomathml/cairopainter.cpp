@@ -14,11 +14,12 @@ CairoPainter::CairoPainter() {
     m_sansseriffont = "sans-serif";
     m_scriptfont = "script";
     m_monofont = "monospace";
-    m_foreground.setRgb(0,0,0);
-    m_background.setRgb(255,255,255);
-    m_highlight.setRgb(255,0,0);
-    m_selection.setRgb(0,255,0);
-    m_fontsize = 12;
+    m_mathcolor.setRgb(0,0,0);
+    m_mathbackground.setRgb(255,255,255);
+    m_highlightcolor.setRgb(255,0,0);
+    m_selectioncolor.setRgb(0,255,0);
+    m_fontsize = 16;//12;
+    m_mathvariant = mathvariant::NORMAL;
 }
 void
 CairoPainter::setPainter(cairo_t *p) {
@@ -41,8 +42,8 @@ CairoPainter::setOutline(bool outline) {
     debugdrawtext = outline;
 }
 void
-CairoPainter::setBackground(uint r, uint g, uint b) {
-    m_background.setRgb(r, g, b);
+CairoPainter::setBackground(uint r, uint g, uint b, uint a) {
+    m_mathbackground.setRgb(r, g, b, a);
 }
 float
 CairoPainter::dpi(bool /* horizontal */) const {
@@ -79,27 +80,41 @@ CairoPainter::ex() const {
     cairo_text_extents(m_painter, "x", &m_textsize);
     return m_textsize.height;
 }
-MathColor
+/*MathColor
 CairoPainter::mathColor() const {
-    return m_foreground;
-}
+    return m_mathcolor;
+}*/
 MathColor
 CairoPainter::highlightColor(uchar level) const {
+    if (m_highlightcolor.isTransparent()) {
+        return m_highlightcolor;
+    }
     MathColor mc;
-    int r, g, b;
     int lm = int(pow(2,level));
-    r = (m_highlight.r() - m_background.r())/lm + m_background.r();
-    g = (m_highlight.g() - m_background.g())/lm + m_background.g();
-    b = (m_highlight.b() - m_background.b())/lm + m_background.b();
-    mc.setRgb(r, g, b);
+    if (m_mathbackground.isTransparent()) {
+        printf("transparent background!");
+        mc.setRgb(m_highlightcolor.r(), m_highlightcolor.g(),
+            m_highlightcolor.b(), 255/lm);
+    } else {
+        uchar r = m_mathbackground.r();
+        uchar g = m_mathbackground.g();
+        uchar b = m_mathbackground.b();
+        uchar a = m_mathbackground.a();
+        r += (m_highlightcolor.r() - r)/lm;
+        g += (m_highlightcolor.g() - g)/lm;
+        b += (m_highlightcolor.b() - b)/lm;
+        a += (m_highlightcolor.a() - a)/lm;
+        mc.setRgb(r, g, b, a);
+    }
     return mc;
 }
 MathColor
 CairoPainter::selectionColor() const {
-    return m_selection;
+    return m_selectioncolor;
 }
 void
 CairoPainter::setMathvariant(mathvariant::Mathvariant mv) {
+    m_mathvariant = mv;
     using namespace mathvariant;
     switch (mv) {
     case (NORMAL):
@@ -154,6 +169,7 @@ CairoPainter::setMathvariant(mathvariant::Mathvariant mv) {
 }
 void
 CairoPainter::setMathColor(MathColor mc) {
+    m_mathcolor = mc;
     if (mc.isTransparent()) {
         // mathcolor cannot be transparent, only background can
         cairo_set_source_rgba(m_painter, 0, 0, 0, 1);
@@ -164,7 +180,7 @@ CairoPainter::setMathColor(MathColor mc) {
 }
 void
 CairoPainter::setMathBackground(MathColor mc) {
-//    m_background = mc;
+    m_mathbackground = mc;
 }
 void
 CairoPainter::setFontSize(float pt) {
@@ -174,11 +190,8 @@ CairoPainter::setFontSize(float pt) {
 }
 void
 CairoPainter::setLineThickness(float t) { // thickness in px
+    m_linethickness = t;
     cairo_set_line_width(m_painter, t);
-}
-float
-CairoPainter::fontSize() const {
-    return m_fontsize;
 }
 void
 CairoPainter::drawLine(float x1, float y1, float x2, float y2,

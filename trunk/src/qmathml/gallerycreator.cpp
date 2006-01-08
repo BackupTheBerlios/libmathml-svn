@@ -1,4 +1,7 @@
 #include "mmlpixmap.h"
+#ifdef HAVE_CAIRO
+#include "mmlimage.h"
+#endif
 #include "mmlreader.h"
 #include "mathml/mmldocument.h"
 #include <QFile>
@@ -8,6 +11,7 @@
 
 MMLReader r;
 MMLPixmap* pix;
+MMLImage* img;
 const QString srcdirpath(SRCDIR);
 const QDir srcdir(srcdirpath);
 const QDir suitedir(SRCDIR"/share/libmathml/testsuite");
@@ -15,6 +19,7 @@ const QDir baseout(QDir::currentPath() + QDir::separator() + "libmathml");
 const QDir testout(QDir::currentPath() + QDir::separator() + "testsuite");
 QTextStream out;
 bool do_output = true;
+bool do_q = false;
 bool output_erroneous = false;
 
 void
@@ -23,14 +28,19 @@ initPixmap() {
     QPalette p;
     p.setColor(QPalette::Background, QColor(255,255,255,0));
     pix->setPalette(p);
-    QFont f("Times New Roman", 12);
-    f.setStyleHint(QFont::Serif);
-    f.setFamily(f.defaultFamily());
-    pix->setFont(f);
+
+    pix->setFont(QFont("Nimbus Roman No9 L"));
+
+#ifdef HAVE_CAIRO
+    img = new MMLImage();
+#endif
 }
 void
 deletePixmap() {
     delete pix;
+#ifdef HAVE_CAIRO
+    delete img;
+#endif
 }
 
 MMLDocument *
@@ -50,48 +60,73 @@ printhead(QString dir) {
         printedhead = false;
     }
     if (printedhead == false) {
-        out << "<tr><td colspan='2' style='border-top: 1px solid black;border-bottom: 1px solid black'>"
-            << dir << "</td></tr>" << endl;
+        out << "<p style='border-top: 1px solid black;border-bottom: 1px solid black'>"<<dir<<"</p>"<<endl;
         printedhead = true;
     }
 }
 void
 renderFile(QString &path, QTextStream &out) {
-    deletePixmap();
-    initPixmap();
+//    deletePixmap();
+//    initPixmap();
     QFileInfo f(path);
     QString outputdir = suitedir.relativeFilePath(f.absolutePath());
     baseout.mkpath(outputdir);
     testout.mkpath(outputdir);
-    QString outputfile = outputdir+"/"+f.baseName()+".png";
-    QString outputoutlinefile = outputdir+"/"+f.baseName()+"outline.png";
+    QString coutputfile = outputdir+"/"+f.baseName()+"c.png";
+    QString coutputoutlinefile = outputdir+"/"+f.baseName()+"coutline.png";
     MMLDocument *doc = parse(path);
     if (doc->validate()) {
         printhead(outputdir);
-        out << "<tr><td>" << f.baseName() << "</td><td>";
-        pix->setDocument(doc);
-        pix->setOutline(false);
-        QPixmap p = pix->getPixmap();
-        if (do_output) {
-            p.save("libmathml/"+outputfile, "PNG", 0);
-        }
-        pix->setOutline(true);
-        p = pix->getPixmap();
-        if (do_output) {
-            p.save("libmathml/"+outputoutlinefile, "PNG", 0);
+        out << "<p>" << f.baseName();
+
+        int valign;
+        QString qoutputfile = outputdir+"/"+f.baseName()+"q.png";
+        if (do_q) {
+            QString qoutputoutlinefile = outputdir+"/"+f.baseName()+"qoutline.png";
+            pix->setDocument(doc);
+            pix->setOutline(false);
+            QPixmap p = pix->getPixmap();
+            if (do_output) {
+                p.save("libmathml/"+qoutputfile, "PNG", 0);
+            }
+            pix->setOutline(true);
+            p = pix->getPixmap();
+            if (do_output) {
+                p.save("libmathml/"+qoutputoutlinefile, "PNG", 0);
+            }
+
+            // calculate offset for the image, so that it aligns with the text
+            valign = (int)-doc->getDescent() - 4 - 2;
+            out << "_<img style='border:1px solid #E0E0E0;vertical-align:"
+                << valign << "px;' src='libmathml/" << qoutputfile << "' "
+                << "onmouseover='this.src=\"libmathml/" << qoutputoutlinefile
+                << "\";' onmouseout='this.src=\"libmathml/" << qoutputfile
+                << "\";' width='" << p.width() << "px' height='" << p.height()
+                << "'/>_";
         }
 
-        // calculate offset for the image, so that it aligns with the text
-        int valign = (int)-doc->getDescent() - 4 - 2;
-        out << "_<img style='border:1px solid #E0E0E0;vertical-align:"
-            << valign << "px;' src='libmathml/" << outputfile << "' "
-            << "onmouseover='this.src=\"libmathml/" << outputoutlinefile
-            << "\";' onmouseout='this.src=\"libmathml/" << outputfile
-            << "\";' width='" << p.width() << "px' height='" << p.height()
+#ifdef HAVE_CAIRO
+        img->setDocument(doc);
+        cairo_surface_t *surface = img->getSurface();
+        QString outpath = "libmathml/"+coutputfile;
+        cairo_surface_write_to_png(surface, outpath.toUtf8());
+        img->setOutline(true);
+        outpath = "libmathml/"+coutputoutlinefile;
+        cairo_surface_write_to_png(surface, outpath.toUtf8());
+
+        valign = (int)-doc->getDescent() - 4 - 2;
+
+        out << " _<img style='border:1px solid #E0E0E0;vertical-align:"
+            << valign << "px;' src='libmathml/" << coutputfile << "' "
+            << "onmouseover='this.src=\"libmathml/" << coutputoutlinefile
+            << "\";' onmouseout='this.src=\"libmathml/" << coutputfile
+            << "\";' width='" << img->getWidth() << "px' height='" << img->getHeight()
             << "'/>_";
+#endif
+
         QString orig = f.absolutePath() + QDir::separator() + f.baseName()
             + ".png";
-        QString origcopy = "testsuite/" + outputfile;
+        QString origcopy = "testsuite/" + qoutputfile;
         if (do_output) {
             // open file to get sizes
             QPixmap ref(orig);
@@ -102,17 +137,17 @@ renderFile(QString &path, QTextStream &out) {
             if (cvalign > 0 || cvalign < -1000) {
                 cvalign = - ref.height()/2;
             }
-            out << " <img style='border:1px solid #E0E0E0;vertical-align:"
+            out << " _<img style='border:1px solid #E0E0E0;vertical-align:"
                 << cvalign << "px;' src='" << origcopy << "' width='"
                 << ref.width() << "px' height='" << ref.height() << "'/>";
             }
         }
-        out << "</td></tr>" << endl;
+        out << "</p>" << endl;
     } else if (output_erroneous) {
         printhead(outputdir);
-        out << "<tr><td>" << f.baseName() << "</td><td>";
+        out << "<p>" << f.baseName() << " ";
         out << doc->errorMsg().utf8();
-        out << "</td></tr>" << endl;
+        out << "</p>" << endl;
     }
     delete doc;
 }
@@ -144,7 +179,6 @@ int
 main(int argc, char **argv) {
     QApplication a( argc, argv );
 
-
     initPixmap();
 
     if (argc > 1) {
@@ -153,23 +187,34 @@ main(int argc, char **argv) {
             QFileInfo fileinfo(argv[i]);
             MMLDocument *doc = parse(path);
             doc->validate();
-            pix->setDocument(doc);
-            pix->setOutline(false);
-            QPixmap p = pix->getPixmap();
-            p.save(fileinfo.baseName()+".png", "PNG");
-            printf("%i, %i\n", p.width(), p.height());
+            if (do_q) {
+                pix->setDocument(doc);
+                pix->setOutline(false);
+                QPixmap p = pix->getPixmap();
+                if (do_output) {
+                    p.save(fileinfo.baseName()+"q.png", "PNG");
+                }
+                printf("%i, %i\n", p.width(), p.height());
+            }
+
+#ifdef HAVE_CAIRO
+            img->setDocument(doc);
+            cairo_surface_t *surface = img->getSurface();
+            QString filepath = fileinfo.baseName()+"c.png";
+            cairo_surface_write_to_png(surface, filepath.toUtf8());
+#endif
+
             delete doc;
         }
     } else {
         QFile htmloutput("gallery.html");
         htmloutput.open(QIODevice::WriteOnly);
         out.setDevice(&htmloutput);
-        out << "<html><body style='background:#FAFAFA;'><table>";
+        out << "<html><body style='background:#FAFAFA;'>";
         renderTestSuite();
-        out << "</table></body></html>" << endl;
+        out << "</body></html>" << endl;
         htmloutput.close();
     }
-
 
     deletePixmap();
 

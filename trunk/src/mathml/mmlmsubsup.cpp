@@ -37,7 +37,7 @@ MMLmsubsup::doLayout(MML::Attributes *a) const {
 
     float subshift = a->superscriptshift().get(a);
     if (subshift == 0) {
-        subshift = base->getDescent()-sub->getDescent();
+        subshift = base->getDescent() - sub->getDescent();
     }
     sub->setX(base->getWidth());
     sub->setY(subshift);
@@ -50,7 +50,8 @@ MMLmsubsup::doLayout(MML::Attributes *a) const {
 
     float subwidth = sub->getWidth();
     float supwidth = sup->getWidth();
-    gui->width = base->getWidth() + (subwidth>supwidth) ? subwidth : supwidth;
+    gui->width = base->getWidth()
+        + ((subwidth>supwidth) ? subwidth : supwidth);
     gui->ascent = base->getAscent();
     gui->descent = base->getDescent();
 }

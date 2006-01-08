@@ -19,10 +19,7 @@ MMLPixmap::setDocument(const MMLDocument *doc) {
 }
 void
 MMLPixmap::setFont(const QFont &font) {
-    if (m_font != font) {
-        m_mustLayout = true;
-        m_font = font;
-    }
+    m_painter.setSerifFont(font);
 }
 void
 MMLPixmap::layout() {

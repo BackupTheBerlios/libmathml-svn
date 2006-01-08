@@ -14,6 +14,7 @@ MMLImage::MMLImage() {
     m_background[0] = 1;
     m_background[1] = 1;
     m_background[2] = 1;
+    m_background[3] = 1;
 
     m_w = m_h = m_dataw = m_datah = 1;
     m_data = 0;
@@ -85,8 +86,8 @@ MMLImage::repaint() {
     }
 
     // initialize the buffer and painter
-    cairo_set_source_rgb(m_cpainter, m_background[0], m_background[1],
-        m_background[2]);
+    cairo_set_source_rgba(m_cpainter, m_background[0], m_background[1],
+        m_background[2], m_background[3]);
     cairo_rectangle(m_cpainter, 0, 0, m_w, m_h);
     cairo_fill(m_cpainter);
     cairo_set_line_width(m_cpainter, 1);
@@ -136,11 +137,13 @@ MMLImage::setFont(const std::string &name, float size) {
     }
 }
 void
-MMLImage::setBackgroundColor(float r , float g , float b) {
+MMLImage::setBackgroundColor(float r , float g , float b, float a) {
+    printf("setbackgroundcolor\n");
     m_background[0] = r;
     m_background[1] = g;
     m_background[2] = b;
-    m_painter.setBackground((uint)(r*256.0), (uint)(g*256.0), (uint)(b*256.0));
+    m_background[3] = a;
+    m_painter.setBackground((uint)(r*256.0), (uint)(g*256.0), (uint)(b*256.0), (uint)(a*256.0));
 }
 void 
 MMLImage::setForeGroundColor(float r, float g, float b) {

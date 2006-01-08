@@ -41,7 +41,8 @@ MMLmrow::doLayout(MML::Attributes *a) const {
         }
     }
     for (n = first; n; n = getNext(n)) {
-        if (n->nodeName() == MML::elementTag[MML::MO]) {
+        if ((ca != 0 || cd != 0)
+                && n->nodeName() == MML::elementTag[MML::MO]) {
             MMLmo *mo = static_cast<MMLmo *>(n);
             mo->setHeight(ca, cd);
             n->layout(a);

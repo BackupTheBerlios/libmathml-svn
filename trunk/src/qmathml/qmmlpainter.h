@@ -2,7 +2,7 @@
 #define QMMLPAINTER
 
 #include <mathml/mmlpainter.h>
-#include <QFontMetrics>
+#include "mathfont.h"
 
 class QPainter;
 class QString;
@@ -26,6 +26,12 @@ public:
         m_selectioncolor = mathcolor(c);
     }
     void setOutline(bool outline);
+    void setSerifFont(QFont font);
+    void setSansSerifFont(QFont font);
+    void setMonoSpaceFont(QFont font);
+    void setScriptFont(QFont font);
+    void setFrakturFont(QFont font);
+    void setDoubleStruckFont(QFont font);
 
     // functions required by libmathml
     float dpi(bool horizontal) const;
@@ -77,11 +83,7 @@ public:
     static MathColor mathcolor(const QColor &);
 private:
     QPainter *p;
-    QFontMetricsF fontmetrics;
-    QFont seriffont;
-    QFont sansseriffont;
-    QFont scriptfont;
-    QFont monospacefont;
+    MathFont m_font;
     MathColor m_mathcolor;
     MathColor m_mathbackground;
     MathColor m_highlightcolor;

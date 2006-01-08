@@ -19,7 +19,7 @@ private:
     int m_h;
     int m_border;
     float m_foreground[3];
-    float m_background[3];
+    float m_background[4];
     std::string m_fontname;
     float m_fontsize;
     unsigned char *m_data;
@@ -37,7 +37,7 @@ public:
     ~MMLImage();
     void setDocument(const MMLDocument *);
     void setFont(const std::string &name, float size);
-    void setBackgroundColor(float, float, float);
+    void setBackgroundColor(float, float, float, float a=0);
     void setForeGroundColor(float, float, float);
     void setOutline(bool outline) {
         if (m_outline != outline) {
@@ -60,6 +60,5 @@ public:
     uchar *getPixmap();
     cairo_surface_t* getSurface();
 };
-
 
 #endif

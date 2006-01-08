@@ -15,7 +15,7 @@ public:
     void setPainter(cairo_t *p);
     void setFont(const std::string &family, float size);
     void setOutline(bool outline);
-    void setBackground(uint r, uint g, uint b);
+    void setBackground(uint r, uint g, uint b, uint a=255);
 
 /** functions called by libmathml **/
 
@@ -25,10 +25,8 @@ public:
     float stringWidth(const DOMString &) const;
     float em() const;
     float ex() const;
-    MathColor mathColor() const;
     MathColor highlightColor(uchar level) const;
     MathColor selectionColor() const;
-    float fontSize() const;
 
     // settings changes
     void translate(float x, float y);
@@ -37,6 +35,22 @@ public:
     void setMathBackground(MathColor c);
     void setFontSize(float f); // f in pt (point size)
     void setLineThickness(float t); // thickness in px
+
+    mathvariant::Mathvariant getMathvariant() const {
+        return m_mathvariant;
+    }
+    MathColor getMathColor() const {
+        return m_mathcolor;
+    }
+    MathColor getMathBackground() const {
+        return m_mathbackground;
+    }
+    float getFontSize() const {
+        return m_fontsize;
+    }
+    float getLineThickness() const {
+        return m_linethickness;
+    }
 
     // drawing actions
     void drawLine(float x1, float y1, float x2, float y2,
@@ -56,8 +70,15 @@ private:
     std::string m_sansseriffont;
     std::string m_scriptfont;
     std::string m_monofont;
-    MathColor m_background, m_foreground, m_highlight, m_selection;
+
+    MathColor m_mathcolor;
+    MathColor m_mathbackground;
+    MathColor m_highlightcolor;
+    MathColor m_selectioncolor;
+    mathvariant::Mathvariant m_mathvariant;
+    float m_linethickness;
     float m_fontsize;
+
     cairo_t *m_painter;
     cairo_font_extents_t m_fontmetrics;
     mutable cairo_text_extents_t m_textsize;
